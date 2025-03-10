@@ -2,21 +2,21 @@
 
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import clsx from "clsx";
+import {cn} from "@/lib/utils"; // <-- Change this to use `cn`
 
 export const buttonVariants = cva(
-  "inline-flex cursor-pointer flex items-center rounded-lg border font-medium transition-colors",
+  "cursor-pointer flex items-center rounded-lg border font-medium transition-colors",
   {
     variants: {
       variant: {
         primary:
-          "bg-[var(--color-primary)] text-[var(--color-primary-foreground)] hover:bg-[var(--color-primary)]/90 focus:ring-[var(--color-primary)]",
+          "bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary",
         secondary:
-          "bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] hover:bg-[var(--color-secondary)]/90 focus:ring-[var(--color-secondary)]",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/90 focus:ring-secondary-foreground",
         outline:
           "border border-[var(--color-border)] hover:bg-[var(--color-muted)]/20 focus:ring-[var(--color-ring)]",
         none:
-          "bg-transparent border-0",
+          "bg-transparent border-0 hover:bg-gray-100 dark:hover:bg-gray-800",
       },
       size: {
         xs: "py-1 px-2 text-xs",
@@ -54,7 +54,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={clsx(buttonVariants({ variant, size }), className)}
+        className={cn(buttonVariants({ variant, size }), className)} // <-- Updated here
         {...props}
       />
     );

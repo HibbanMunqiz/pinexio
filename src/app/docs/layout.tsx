@@ -24,12 +24,13 @@ import {
   UserInfo,
   NestedLink,
 } from "@/components/sidebar/v0-claude-sidebar-1"
-import { Home, Users, Settings, FileText, BarChart, Mail, Bell, BookOpen, Component } from "lucide-react"
+import { Home, Users, Settings, FileText, BarChart, Mail, Bell, BookOpen, Component, Github } from "lucide-react"
+import { useRouter } from 'next/navigation'
 
 import Header from "@/components/header";
 import { ModeToggle } from "@/components/mode-toggle";
-import { useTheme } from "next-themes";
 import Divider from "@/components/divider";
+import { Button } from "@/components/button";
 
 // Group docs into top-level and nested by folder
 function groupDocs(docs: any[]) {
@@ -60,6 +61,8 @@ export default function DocsLayout({
 }) {
   // const { topDocs, folderGroups } = groupDocs(allDocs);
   // Destructure sidebarNav from configDocs
+  const router = useRouter()
+
   const { sidebarNav } = configDocs;
   console.log('layout is called')
   // Sample data structure
@@ -81,10 +84,11 @@ export default function DocsLayout({
       <SidebarProvider defaultOpen={true} defaultSide="left" defaultMaxWidth={280} showIconsOnCollapse={true}>
         <Sidebar>
           <SidebarHeader>
-            <SidebarHeaderLogo logo={<Image alt="logo" className={'h-auto w-aut dark:invert'} width={30} height={30} 
-            src={`/logos/pinedocs.png`} />} />
+            <SidebarHeaderLogo logo={<Image alt="logo" className={'h-auto w-aut dark:invert'} width={30} height={30}
+              src={`/logos/pinedocs.png`} />} />
 
-            <Title>PINE<span className="text-3xl">D</span>OCS</Title>
+            <Link href={"/"} className="flex flex-1 gap-3" ><Title>PINE<span className="text-3xl">D</span>OCS</Title>
+            </Link>
           </SidebarHeader>
           <SidebarContent>
             {sidebarNav.map((section) => (
@@ -165,16 +169,18 @@ export default function DocsLayout({
 
         {/* Main Content */}
         <MainContent>
-          <Header className="justify-between">
+          <Header className="justify-between py-2">
             <div className="flex items-center gap-4">
               <SidebarTrigger />
               <h1 className="text-xl font-bold">
-                My Documentation
+                Documentation
               </h1>
             </div>
-            <div className="flex gap-2">
-              <ModeToggle />
+            <div className="flex gap-2 items-center pr-0 lg:pr-8">
               <SearchDialog searchData={allDocs} />
+              <ModeToggle />
+              <Button onClick={() => router.push('https://github.com/sanjayc208/pinedocs')}>
+              <Github className="h-[1.2rem] w-[1.2rem] transition-all"/></Button>
             </div>
           </Header>
           <div className={`grid xl:grid xl:grid-cols-[1fr_270px]`}>
