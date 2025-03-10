@@ -9,7 +9,7 @@ interface PreviewProps {
 export function Preview({ children, className }: PreviewProps) {
   return (
     <div
-      className={`p-4 h-[330px] justify-items-center content-center rounded-lg shadow border border-[var(--color-border)] bg-[var(--preview-bg)] text-[var(--preview-text)] ${className}`}
+      className={`p-4 h-[330px] justify-items-center content-center rounded-lg border border-border bg-card text-card-foreground ${className}`}
     >
       {children}
     </div>

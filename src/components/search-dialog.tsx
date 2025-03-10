@@ -229,7 +229,7 @@ function getSnippet(
 
 // ForwardRef component so the parent can control open/close if needed.
 const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
-  ({ searchData }, ref) => {
+  ({ searchData, className }, ref) => {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
 
@@ -269,6 +269,7 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
             size="sm"
             onClick={() => setOpen(true)}
             placeholder="search documentation.."
+            className={"hidden md:block"}
           />
         </Dialog.Trigger>
         <Dialog.Portal>
@@ -284,7 +285,7 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
               "fixed z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
               "w-[90%] max-w-[500px] rounded-lg p-4 shadow-lg",
               // Use your existing CSS variables for dark/light mode.
-              "bg-[var(--preview-bg)] text-[var(--preview-text)] border border-[var(--color-border)]",
+              "bg-secondary border border-border",
               "transition-all duration-300 ease-out",
               "data-[state=open]:opacity-100 data-[state=open]:scale-100",
               "data-[state=closed]:opacity-0 data-[state=closed]:scale-95"

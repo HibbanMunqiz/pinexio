@@ -20,7 +20,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ path, separator = <ChevronRight
             <span
               className={`${
                 isLastItem
-                  ? "text-gray-400 dark:text-gray-500" // Last item color (light and dark)
+                  ? "text-gray-600 dark:text-gray-300 font-bold" // Last item color (light and dark)
                   : "text-gray-600 dark:text-gray-300" // Other items color (light and dark)
               } capitalize`} // Optionally capitalize the breadcrumb text
             >

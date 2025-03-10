@@ -176,7 +176,7 @@ export function Sidebar({ className , children }: { className? : string, childre
         sticky top-0 bottom-0 z-0 flex flex-col h-screen
         ${side === "left" ? "left-0 border-r" : "right-0 border-l"} dark:border-gray-800
         transition-all duration-300 ease-in-out
-        bg-[var(--sidebar-bg)]
+        bg-sidebar
       `, className)}
       style={{ 
         minWidth: isOpen 
@@ -294,7 +294,7 @@ export function SidebarMenuItem({
           </span>
         )}
         {isOpen && (
-          <span className={`${isActive ? "font-medium text-[var(--sidebar-active-text)]": "text-gray-700 dark:text-gray-300"}`}>
+          <span className={`${isActive ? "font-medium text-sidebar-active": "text-gray-700 dark:text-gray-300"}`}>
             {label}
           </span>
         )}
@@ -316,7 +316,7 @@ export function SidebarMenuItem({
             flex items-center justify-between w-full p-2 rounded-md
             ${
               isActive
-                ? "bg-[var(--sidebar-active-bg)] text-black-500"
+                ? "bg-sidebar-active text-black-500"
                 : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
             }
             ${!isOpen ? "justify-center" : ""}
@@ -331,7 +331,7 @@ export function SidebarMenuItem({
             flex items-center justify-between w-full p-2 rounded-md
             ${
               isActive
-                ? "bg-[var(--sidebar-bg)] text-blue-500"
+                ? "bg-sidebar text-blue-500"
                 : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
             }
             ${!isOpen ? "justify-center" : ""}
@@ -370,7 +370,7 @@ export function NestedLink({
         block py-1 px-2 rounded-md text-sm
         ${
           isActive
-            ? "bg-[var(--sidebar-active-bg)] text-[var(--sidebar-active-text)] font-bold"
+            ? "bg-sidebar-active text-sidebar-active-foreground font-bold"
             : "hover:bg-gray-100 dark:hover:bg-gray-800"
         }
       `}
@@ -412,7 +412,7 @@ export function SidebarHeaderLogo({ logo }: { logo?: React.ReactNode }) {
 }
 
 export function Title({ children }: { children: React.ReactNode }) {
-  return <h1 className="text-2xl font-sans font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">{children}</h1>
+  return <h1 className="text-2xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">{children}</h1>
 }
 
 export function UserAvatar() {

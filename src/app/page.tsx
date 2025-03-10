@@ -3,8 +3,7 @@ import Link from "next/link"
 import { Github } from 'lucide-react'
 import { ModeToggle } from "@/components/mode-toggle";
 import Image from "next/image";
-import { useTheme } from "next-themes";
-import {Button} from '@/components/button'
+import { Button } from '@/components/button'
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -20,8 +19,10 @@ export default function Home() {
           <nav className="flex-1 flex justify-center">
             {/* Navigation links can be added here */}
           </nav>
-          <div className="flex-1 flex justify-end">
+          <div className="flex-1 flex gap-2 justify-end">
             <ModeToggle />
+            <Button onClick={() => router.push('https://github.com/sanjayc208/pinedocs')}>
+              <Github className="h-[1.2rem] w-[1.2rem] transition-all" /></Button>
           </div>
         </div>
       </header>
@@ -32,19 +33,19 @@ export default function Home() {
           {/* Logo and Title */}
           <div className="text-center mb-8">
             <div className="flex gap-2 lg:gap-8 justify-center xs:px-2">
-              <Image 
-                alt="logo" 
-                className="h-auto w-auto dark:invert" 
-                width={100} 
-                height={100} 
-                src={`/logos/pinedocs.png`} 
+              <Image
+                alt="logo"
+                className="h-auto w-auto dark:invert"
+                width={100}
+                height={100}
+                src={`/logos/pinedocs.png`}
               />
-              <h1 className="text-4xl content-center md:text-7xl font-sans font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
+              <h1 className="text-4xl content-center md:text-7xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
                 PINE<span className="md:text-8xl">D</span>OCS
               </h1>
             </div>
             <p className="mt-6 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              A customizable open-source documentation template built with Next.js 15, 
+              A customizable open-source documentation template built with Next.js 15,
               Tailwind CSS 4, and Contentlayer for beautiful, fast, and flexible documentation.
             </p>
           </div>
@@ -52,9 +53,9 @@ export default function Home() {
           {/* Buttons */}
           <div className="flex flex-row sm:flex-row gap-4 mt-8">
             <Button className="px-6 py-3 text-md " variant={'primary'} onClick={() => router.push('/docs/getting-started/installation')}>Get Started</Button>
-            <Button className="px-6 py-3 text-md  " variant={'outline'} onClick={() => router.push('https://github.com/sanjayc208/pinedocs')}>
-            <Github size={20} />
-            GitHub
+            <Button className="px-6 py-3 text-md gap-2" variant={'outline'} onClick={() => router.push('https://github.com/sanjayc208/pinedocs')}>
+              <Github size={20} />
+              GitHub
             </Button>
           </div>
 
@@ -73,7 +74,18 @@ export default function Home() {
                 </div>
                 <span className="mt-2 text-sm">Next.js 15</span>
               </div>
-              
+
+              {/* Typescript */}
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <img
+                    src="/logos/ts.png"
+                    className="w-10 h-10 dark:invert"
+                  />
+                </div>
+                <span className="mt-2 text-sm">Typescript</span>
+              </div>
+
               {/* Tailwind CSS */}
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 flex items-center justify-center">
@@ -85,7 +97,7 @@ export default function Home() {
                 </div>
                 <span className="mt-2 text-sm">Tailwind CSS 4</span>
               </div>
-              
+
               {/* Contentlayer */}
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 flex items-center justify-center">
@@ -97,14 +109,14 @@ export default function Home() {
                 </div>
                 <span className="mt-2 text-sm">Contentlayer</span>
               </div>
-              
+
               {/* MDX */}
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 flex items-center justify-center">
                   <img
-                    src="https://mdxjs.com/favicon.ico"
+                    src="/logos/mdx.png"
                     alt="MDX Logo"
-                    className="w-10 h-10 dark:invert"
+                    className="w-30 h-5"
                   />
                 </div>
                 <span className="mt-2 text-sm">MDX</span>

@@ -7,7 +7,6 @@ import Preview from "@/components/preview";
 import { Tab, Tabs, TabsContent, TabsList } from "@/components/tabs";
 import Link from "next/link";
 import CustomSyntaxHighlighter from "@/components/syntax-highlighter";
-import { useTheme } from "next-themes";
 import Stepper from "@/components/vertical-stepper"
 import {Step, Steps, StepTitle, StepContent} from "@/components/step"
 import {CodeHighlighter, CodeTab} from "@/components/code-highlighter"
@@ -31,6 +30,7 @@ import {
 } from "@/components/sidebar/v0-claude-sidebar-1"
 import { Home, Users, Settings, FileText, BarChart, Mail, Bell, BookOpen, Component } from "lucide-react"
 import { Folder, FolderTree, File } from "@/components/folder-tree";
+import { Note } from "@/components/note";
 
 type MDXComponents = {
   [key: string]: React.ComponentType<any>
@@ -115,7 +115,6 @@ const components =  {
       />
     ),
     code: ({ className, children, ...props }: React.HTMLAttributes<HTMLElement>) => {
-      // const { theme } = useTheme(); // 🌙 Get current theme from next-themes
       const isLightMode = 'dark';
 
       // Extract language from className (e.g., `language-js` → `js`)
@@ -191,7 +190,8 @@ const components =  {
   UserInfo,
   NestedLink,
   Home, Users, Settings, FileText, BarChart, Mail, Bell, BookOpen, Component,
-  Folder, FolderTree, File
+  Folder, FolderTree, File,
+  Note
 }
 
 interface Mdxchildren {

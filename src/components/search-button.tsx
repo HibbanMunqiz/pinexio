@@ -3,6 +3,8 @@
 import * as React from "react";
 import clsx from "clsx";
 import { Command } from "lucide-react";
+import { Button } from "@/components/button";
+import { cn } from "@/lib/utils";
 
 export interface SearchButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -44,18 +46,12 @@ const SearchButton = React.forwardRef<HTMLButtonElement, SearchButtonProps>(
     ref
   ) => {
     const { button, icon, iconSize } = sizeMapping[size];
-
+    console.log('button className=>', className)
     return (
-      <button
+      <Button
         ref={ref}
-        className={clsx(
-          "border rounded-lg cursor-pointer flex items-center gap-2 transition-colors",
-          // Colors from CSS variables via arbitrary values:
-          "bg-[var(--search-button-bg)] border-[var(--search-button-border)] text-[var(--search-button-text)]",
-          "hover:bg-[var(--search-button-hover-bg)]",
-          button,
-          className
-        )}
+        variant={'secondary'}
+        className={className}
         {...props}
       >
         <span>{placeholder}</span>
@@ -69,7 +65,7 @@ const SearchButton = React.forwardRef<HTMLButtonElement, SearchButtonProps>(
           <Command size={iconSize} />
           <span>k</span>
         </span>
-      </button>
+      </Button>
     );
   }
 );

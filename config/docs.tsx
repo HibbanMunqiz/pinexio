@@ -67,6 +67,10 @@ export const configDocs = {
                     title: "Folder Tree",
                     href: "/docs/components/folder-tree",
                 },
+                {
+                    title: "Note",
+                    href: "/docs/components/note",
+                },
             ],
         }
     ]
