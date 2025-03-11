@@ -15,44 +15,41 @@ import {
   SidebarHeader,
   SidebarContent,
   SidebarFooter,
-  SidebarMenu,
   SidebarMenuItem,
   SidebarTrigger,
   SidebarHeaderLogo,
   Title,
   UserAvatar,
-  UserInfo,
   NestedLink,
-} from "@/components/sidebar/v0-claude-sidebar-1"
-import { Home, Users, Settings, FileText, BarChart, Mail, Bell, BookOpen, Component, Github } from "lucide-react"
+} from "@/components/sidebar"
+import { Github } from "lucide-react"
 import { useRouter } from 'next/navigation'
 
 import Header from "@/components/header";
 import { ModeToggle } from "@/components/mode-toggle";
-import Divider from "@/components/divider";
 import { Button } from "@/components/button";
-
+import { useIsMobile } from "@/hooks/use-mobile";
 // Group docs into top-level and nested by folder
-function groupDocs(docs: any[]) {
-  const topDocs: any[] = [];
-  const folderGroups: { [key: string]: any[] } = {};
+// function groupDocs(docs: any[]) {
+//   const topDocs: any[] = [];
+//   const folderGroups: { [key: string]: any[] } = {};
 
-  docs.forEach((doc) => {
-    // If the file is in the root, push to topDocs
-    if (doc._raw.sourceFileDir === ".") {
-      topDocs.push(doc);
-    } else {
-      // Use the folder name from sourceFileDir (e.g. "getting-started")
-      const folder = doc._raw.sourceFileDir;
-      if (!folderGroups[folder]) {
-        folderGroups[folder] = [];
-      }
-      folderGroups[folder].push(doc);
-    }
-  });
+//   docs.forEach((doc) => {
+//     // If the file is in the root, push to topDocs
+//     if (doc._raw.sourceFileDir === ".") {
+//       topDocs.push(doc);
+//     } else {
+//       // Use the folder name from sourceFileDir (e.g. "getting-started")
+//       const folder = doc._raw.sourceFileDir;
+//       if (!folderGroups[folder]) {
+//         folderGroups[folder] = [];
+//       }
+//       folderGroups[folder].push(doc);
+//     }
+//   });
 
-  return { topDocs, folderGroups };
-}
+//   return { topDocs, folderGroups };
+// }
 
 export default function DocsLayout({
   children,
@@ -62,29 +59,16 @@ export default function DocsLayout({
   // const { topDocs, folderGroups } = groupDocs(allDocs);
   // Destructure sidebarNav from configDocs
   const router = useRouter()
-
+  const isMobile = useIsMobile()
   const { sidebarNav } = configDocs;
   console.log('layout is called')
-  // Sample data structure
-  const quickReference = [
-    {
-      title: "Installation",
-      href: "docs/components/installation#installation-guide",
-      pages: [
-        {
-          title: "Props",
-          href: "/docs/getting-started/introduction",
-        },
-      ],
-    },
-  ]
   return (
     <SidebarLayout>
       {/* Left Sidebar Provider */}
-      <SidebarProvider defaultOpen={true} defaultSide="left" defaultMaxWidth={280} showIconsOnCollapse={true}>
+      <SidebarProvider defaultOpen={isMobile ? false: true} defaultSide="left" defaultMaxWidth={280} showIconsOnCollapse={true}>
         <Sidebar>
           <SidebarHeader>
-            <SidebarHeaderLogo logo={<Image alt="logo" className={'h-auto w-aut dark:invert'} width={30} height={30}
+            <SidebarHeaderLogo logo={<Image alt="logo" className={'h-auto w-aut dark:invert'} width={100} height={100}
               src={`/logos/pinedocs.png`} />} />
 
             <Link href={"/"} className="flex flex-1 gap-3" ><Title>PINE<span className="text-3xl">D</span>OCS</Title>
@@ -93,12 +77,14 @@ export default function DocsLayout({
           <SidebarContent>
             {sidebarNav.map((section) => (
               <SidebarMenuItem
+                isCollapsable={section.pages && section.pages.length > 0}
                 key={section.title}
                 label={section.title}
+                href={section.href}
                 icon={section.icon}
                 defaultOpen={true}
               >
-                {section.pages.map((page) => (
+                {section.pages?.map((page) => (
                   <NestedLink key={page.href} href={page.href}>
                     {page.title}
                   </NestedLink>
@@ -162,8 +148,12 @@ export default function DocsLayout({
           </SidebarContent>
 
           <SidebarFooter>
-            <UserAvatar />
-            <UserInfo />
+            <UserAvatar 
+            avatar={<Image alt="logo" src={"https://avatars.githubusercontent.com/u/24631970?v=4"} width={100} height={100}/>}/>
+            <div className="flex flex-col">
+              <span className="text-sm font-medium text-gray-900 dark:text-white">Sanjay Rajeev</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">sanjayc208@gmail.com</span>
+            </div>
           </SidebarFooter>
         </Sidebar>
 
@@ -183,46 +173,10 @@ export default function DocsLayout({
               <Github className="h-[1.2rem] w-[1.2rem] transition-all"/></Button>
             </div>
           </Header>
-          <div className={`grid xl:grid xl:grid-cols-[1fr_270px]`}>
+          {/* <div className={`grid xl:grid xl:grid-cols-[1fr_270px]`}> */}
             <main className="overflow-auto p-6">
               {children}
             </main>
-            {/* Quick Reference Aside (only visible on desktop) */}
-            <aside className="fixed right-0 hidden xl:block w-64 p-6 top-16 border-l border-[var(--color-border)] h-[calc(100vh-4rem)] overflow-y-auto">
-              <div className="sticky top-0 pb-2">
-                <h2 className="text-lg font-semibold text-[var(--color)]">Quick Reference</h2>
-              </div>
-              <nav className="mt-4">
-                <ul className="space-y-4">
-                  {quickReference.map((item, index) => (
-                    <li key={index} className="group">
-                      <Link
-                        href={item.href}
-                        className="text-gray-700 hover:text-blue-600 font-medium transition-colors flex items-center"
-                      >
-                        {item.title}
-                      </Link>
-
-                      {item.pages && item.pages.length > 0 && (
-                        <ul className="mt-2 ml-4 space-y-2 border-l-2 border-gray-100 pl-3">
-                          {item.pages.map((subItem, subIndex) => (
-                            <li key={subIndex} className="text-sm">
-                              <Link
-                                href={subItem.href}
-                                className="text-gray-600 hover:text-blue-600 transition-colors block py-1"
-                              >
-                                {subItem.title}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </aside>
-          </div>
         </MainContent>
 
       </SidebarProvider>

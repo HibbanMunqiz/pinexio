@@ -4,7 +4,6 @@ import * as React from "react";
 import clsx from "clsx";
 import { Command } from "lucide-react";
 import { Button } from "@/components/button";
-import { cn } from "@/lib/utils";
 
 export interface SearchButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -45,7 +44,7 @@ const SearchButton = React.forwardRef<HTMLButtonElement, SearchButtonProps>(
     { placeholder = "Search Documentation..", size = "md", className, ...props },
     ref
   ) => {
-    const { button, icon, iconSize } = sizeMapping[size];
+    const { icon, iconSize } = sizeMapping[size];
     console.log('button className=>', className)
     return (
       <Button

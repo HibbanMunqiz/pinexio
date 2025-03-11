@@ -1,5 +1,4 @@
 'use client';
-import Link from "next/link"
 import { Github } from 'lucide-react'
 import { ModeToggle } from "@/components/mode-toggle";
 import Image from "next/image";
@@ -52,7 +51,7 @@ export default function Home() {
 
           {/* Buttons */}
           <div className="flex flex-row sm:flex-row gap-4 mt-8">
-            <Button className="px-6 py-3 text-md " variant={'primary'} onClick={() => router.push('/docs/getting-started/installation')}>Get Started</Button>
+            <Button className="px-6 py-3 text-md " variant={'primary'} onClick={() => router.push('/docs/getting-started/introduction')}>Get Started</Button>
             <Button className="px-6 py-3 text-md gap-2" variant={'outline'} onClick={() => router.push('https://github.com/sanjayc208/pinedocs')}>
               <Github size={20} />
               GitHub
@@ -65,11 +64,13 @@ export default function Home() {
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {/* Next.js */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <img
-                    src="https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_dark_background.png"
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <Image
+                    width={100}
+                    height={100}
+                    src="/logos/next15.png"
                     alt="Next.js Logo"
-                    className="w-10 h-10 dark:invert"
+                    className="dark:invert"
                   />
                 </div>
                 <span className="mt-2 text-sm">Next.js 15</span>
@@ -77,10 +78,13 @@ export default function Home() {
 
               {/* Typescript */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <img
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <Image
+                    width={100}
+                    height={100}
+                    alt={'ts logo'}
                     src="/logos/ts.png"
-                    className="w-10 h-10 dark:invert"
+                    className="dark:invert"
                   />
                 </div>
                 <span className="mt-2 text-sm">Typescript</span>
@@ -88,8 +92,10 @@ export default function Home() {
 
               {/* Tailwind CSS */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <img
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <Image
+                    width={10}
+                    height={10}
                     src={`/logos/tailwindcss-light.png`}
                     alt="Tailwind CSS Logo"
                     className="w-10 h-10 dark:invert"
@@ -100,11 +106,13 @@ export default function Home() {
 
               {/* Contentlayer */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <img
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <Image
+                    width={100}
+                    height={100}
                     src="/logos/contentlayer.png"
                     alt="Contentlayer Logo"
-                    className="w-10 h-10 block"
+                    className="block"
                   />
                 </div>
                 <span className="mt-2 text-sm">Contentlayer</span>
@@ -112,11 +120,13 @@ export default function Home() {
 
               {/* MDX */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <img
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <Image
+                    width={100}
+                    height={100}
                     src="/logos/mdx.png"
                     alt="MDX Logo"
-                    className="w-30 h-5"
+                    className=""
                   />
                 </div>
                 <span className="mt-2 text-sm">MDX</span>
@@ -128,7 +138,7 @@ export default function Home() {
 
       {/* Sticky Footer */}
       <footer className="sticky bottom-0 z-10 bg-white/90 dark:bg-gray-950/90 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
-        <div className="container mx-auto px-4 py-3 text-center text-gray-600 dark:text-gray-400">
+        <div className="container text-sm mx-auto px-4 py-3 text-center text-gray-600 dark:text-gray-400">
           <p>PINEDOCS - Open Source Documentation Template</p>
         </div>
       </footer>

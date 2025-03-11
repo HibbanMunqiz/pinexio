@@ -1,16 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  headerTitle?: React.ReactNode;
-  description?: React.ReactNode;
-  actions?: React.ReactNode;
-}
-
-const Header: React.FC<HeaderProps> = ({
-  headerTitle: title,
-  description,
-  actions,
+const Header: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className,
   children,
   ...props
