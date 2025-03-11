@@ -64,13 +64,13 @@ export default function Home() {
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {/* Next.js */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
+                <div className="w-12 h-12 flex items-center justify-center">
                   <Image
-                    width={10}
-                    height={10}
-                    src="https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_dark_background.png"
+                    width={100}
+                    height={100}
+                    src="/logos/next15.png"
                     alt="Next.js Logo"
-                    className="w-10 h-10 dark:invert"
+                    className="dark:invert"
                   />
                 </div>
                 <span className="mt-2 text-sm">Next.js 15</span>
@@ -78,13 +78,13 @@ export default function Home() {
 
               {/* Typescript */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
+                <div className="w-12 h-12 flex items-center justify-center">
                   <Image
-                    width={10}
-                    height={10}
+                    width={100}
+                    height={100}
                     alt={'ts logo'}
                     src="/logos/ts.png"
-                    className="w-10 h-10 dark:invert"
+                    className="dark:invert"
                   />
                 </div>
                 <span className="mt-2 text-sm">Typescript</span>
@@ -92,7 +92,7 @@ export default function Home() {
 
               {/* Tailwind CSS */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
+                <div className="w-12 h-12 flex items-center justify-center">
                   <Image
                     width={10}
                     height={10}
@@ -106,13 +106,13 @@ export default function Home() {
 
               {/* Contentlayer */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
+                <div className="w-12 h-12 flex items-center justify-center">
                   <Image
-                    width={10}
-                    height={10}
+                    width={100}
+                    height={100}
                     src="/logos/contentlayer.png"
                     alt="Contentlayer Logo"
-                    className="w-10 h-10 block"
+                    className="block"
                   />
                 </div>
                 <span className="mt-2 text-sm">Contentlayer</span>
@@ -120,13 +120,13 @@ export default function Home() {
 
               {/* MDX */}
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 flex items-center justify-center">
+                <div className="w-12 h-12 flex items-center justify-center">
                   <Image
-                    width={10}
-                    height={10}
+                    width={100}
+                    height={100}
                     src="/logos/mdx.png"
                     alt="MDX Logo"
-                    className="w-30 h-5"
+                    className=""
                   />
                 </div>
                 <span className="mt-2 text-sm">MDX</span>
