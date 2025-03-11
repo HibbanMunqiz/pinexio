@@ -37,7 +37,6 @@ const CustomSyntaxHighlighter: React.FC<CustomSyntaxHighlighterProps> = ({
   const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
   const tabRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  console.log('className', className);
   useEffect(() => {
     const activeTab = tabRefs.current[activeTabKey];
     if (activeTab) {

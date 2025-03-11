@@ -45,7 +45,6 @@ const SearchButton = React.forwardRef<HTMLButtonElement, SearchButtonProps>(
     ref
   ) => {
     const { icon, iconSize } = sizeMapping[size];
-    console.log('button className=>', className)
     return (
       <Button
         ref={ref}

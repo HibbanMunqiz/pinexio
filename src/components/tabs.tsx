@@ -18,7 +18,7 @@ interface TabsContextType {
   onChange: (value: string) => void
   registerTab: (value: string, ref: React.RefObject<HTMLButtonElement>) => void
   size: Size
-  indicatorRef: React.RefObject<HTMLDivElement>
+  indicatorRef: React.RefObject<HTMLDivElement | null>
 }
 
 const TabsContext = React.createContext<TabsContextType>({
@@ -92,7 +92,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     )
 
     const registerTab = React.useCallback((value: string, ref: React.RefObject<HTMLButtonElement>) => {
-      setTabRefs((prev) => ({ ...prev, [value]: ref }))
+      setTabRefs((prev) => ({ ...prev, [value]: ref as any}))
     }, [])
 
     return (
@@ -141,7 +141,7 @@ interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Tab = React.forwardRef<HTMLButtonElement, TabProps>(({ className, value, ...props }, forwardedRef) => {
   const { value: selectedValue, onChange, registerTab, size } = React.useContext(TabsContext)
   const isSelected = selectedValue === value
-  const tabRef = React.useRef<HTMLButtonElement>(null)
+  const tabRef = React.useRef<any>(null)
 
   // Register the tab (we ignore the return value from useEffect)
   React.useEffect(() => {

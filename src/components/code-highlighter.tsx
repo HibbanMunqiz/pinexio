@@ -62,7 +62,7 @@ export const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
   // \`\`\`<language>\n<code>\n\`\`\`
   const tabs: Record<string, TabInfo> = {};
   tabElements.forEach((child, index) => {
-    const { name, children: tabContent } = child.props;
+    const { name, children: tabContent } = (child as React.ReactElement<TabProps>).props;
     const content = typeof tabContent === "string" ? tabContent.trim() : "";
     const codeRegex = /^```(\w+)\n([\s\S]+?)\n```$/;
     const match = content.match(codeRegex);

@@ -140,7 +140,7 @@ export function MainContent({ children }: { children: React.ReactNode }) {
 
 export function Sidebar({ className , children }: { className? : string, children: React.ReactNode }) {
   const { isOpen, side, isMobile, maxWidth, setIsOpen, showIconsOnCollapse } = useSidebar()
-  console.log('ClassName ===>', className)
+
   // For mobile: use a fixed overlay when sidebar is open
   if (isMobile) {
     return (

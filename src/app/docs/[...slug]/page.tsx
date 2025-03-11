@@ -5,6 +5,8 @@ import Breadcrumb from '@/components/bread-crumb'
 import { configDocs } from "config/docs";
 import Link from 'next/link'
 
+type tParams = Promise<{ slug: string[] }>;
+
 export const generateStaticParams = async () => {
   return allDocs.map((doc) => {
     // For a path like "getting-started/introduction", 
@@ -14,7 +16,7 @@ export const generateStaticParams = async () => {
   })
 }
 
-export const generateMetadata = async ({ params }: { params: { slug: string[] } }) => {
+export const generateMetadata = async ({ params }: { params: tParams }) => {
   // Join the slug array back into a path string
   const awaitedParams = await params
   const path = awaitedParams.slug.join('/')
@@ -24,14 +26,13 @@ export const generateMetadata = async ({ params }: { params: { slug: string[] } 
   return { title: doc.title }
 }
 
-const DocsPage = async ({ params }: { params: { slug: string[] } }) => {
+const DocsPage = async ({ params }: { params: tParams }) => {
   const awaitedParams = await params
   // Join the slug array back into a path string
   const path = awaitedParams.slug.join('/')
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === path)
   const { quickReference } = configDocs;
 
-  console.log(doc)
   if (!doc) notFound()
   return (
     <div className={`grid xl:grid xl:grid-cols-[1fr_270px]`}>

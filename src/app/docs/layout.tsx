@@ -61,7 +61,6 @@ export default function DocsLayout({
   const router = useRouter()
   const isMobile = useIsMobile()
   const { sidebarNav } = configDocs;
-  console.log('layout is called')
   return (
     <SidebarLayout>
       {/* Left Sidebar Provider */}
