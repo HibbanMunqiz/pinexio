@@ -27,7 +27,7 @@ export const generateMetadata = async ({ params }: { params: { slug: string[] } 
 const DocsPage = async ({ params }: { params: { slug: string[] } }) => {
   const awaitedParams = await params
   // Join the slug array back into a path string
-  const path = await awaitedParams.slug.join('/')
+  const path = awaitedParams.slug.join('/')
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === path)
   const { quickReference } = configDocs;
 
