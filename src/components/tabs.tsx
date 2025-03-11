@@ -155,7 +155,6 @@ const Tab = React.forwardRef<HTMLButtonElement, TabProps>(({ className, value, .
         if (typeof forwardedRef === "function") {
           forwardedRef(node)
         } else if (forwardedRef) {
-          // @ts-ignore
           forwardedRef.current = node
         }
       }}

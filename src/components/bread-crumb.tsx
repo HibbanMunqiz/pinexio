@@ -1,13 +1,14 @@
 import React from "react";
-import {ChevronRight} from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 interface BreadcrumbProps {
   path: string;
   separator?: React.ReactNode;
 }
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({ path, separator = <ChevronRight />}) => {
-  const breadcrumbArray = path.split("/");
+const Breadcrumb: React.FC<BreadcrumbProps> = ({ path, separator = <ChevronRight /> }) => {
+  // Remove the leading slash if it exists, then split the path
+  const breadcrumbArray = path.startsWith("/") ? path.slice(1).split("/") : path.split("/");
 
   return (
     <div className="flex items-center text-sm">

@@ -10,6 +10,14 @@ import { createContentlayerPlugin } from "next-contentlayer2"
 
 const nextConfig = {
   // pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+    ],
+  },
 };
 
 // export default withMDX(nextConfig);
