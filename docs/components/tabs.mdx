@@ -1,6 +1,7 @@
 ---
 title: "Tabs"
-date: 2021-12-24
+description: "The Tabs component provides a customizable and smooth tab navigation system, supporting multiple sizes and theme-aware applications, perfect for modern UIs with light and dark modes."
+date: 2025-03-12
 ---
 
 # Tabs Component Documentation
@@ -8,7 +9,7 @@ date: 2021-12-24
 The **Tabs** component is a customizable tab system that supports multiple sizes and provides a smooth transition effect. It is designed for modern, theme-aware applications that use CSS variables (defined in your global CSS) for light and dark modes.
 
 <Tabs defaultValue="preview" size="sm" className="w-full" onTabClick={(value) => console.log("Tab clicked:", value)}>
-  <TabsList className="grid w-[30%] grid-cols-2">
+  <TabsList className="grid w-full md:w-[30%] grid-cols-2">
     <Tab value="preview">Preview</Tab>
     <Tab value="code">Code</Tab>
   </TabsList>

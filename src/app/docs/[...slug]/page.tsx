@@ -23,7 +23,14 @@ export const generateMetadata = async ({ params }: { params: tParams }) => {
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === path)
 
   if (!doc) throw new Error(`Doc not found for slug: ${path}`)
-  return { title: doc.title }
+  return {
+    title: doc.title,
+    description: doc.description || 'A detailed guide to the topic.',
+    openGraph: {
+      title: doc.title,
+      description: doc.description || 'A detailed guide to the topic.',
+    },
+  };
 }
 
 const DocsPage = async ({ params }: { params: tParams }) => {
