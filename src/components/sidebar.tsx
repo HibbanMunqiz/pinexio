@@ -199,7 +199,7 @@ export function SidebarHeader({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`
-        flex items-center h-16 gap-3 border-b ${isOpen ? 'px-8' : ''} dark:border-gray-800
+        flex items-center h-16 gap-2 border-b ${isOpen ? 'px-8' : ''} dark:border-gray-800
         ${isOpen ? "" : "justify-center"}
       `}
     >
@@ -415,7 +415,7 @@ export function SidebarTrigger() {
 
 export function SidebarHeaderLogo({ logo }: { logo?: React.ReactNode }) {
   return (
-    <div className="h-8 w-8 flex items-center justify-center">
+    <div className="h-10 w-10 flex items-center justify-center">
       {logo}
     </div>
   )
