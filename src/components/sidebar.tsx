@@ -63,7 +63,10 @@ export function SidebarProvider({
   showIconsOnCollapse = true,
   mobileView = true
 }: SidebarProviderProps) {
-  const isMobile = mobileView ? useIsMobile() : false;
+  const useMobile = useIsMobile();
+
+  const isMobile = mobileView ? useMobile : false
+
   const [isOpen, setIsOpen] = React.useState(defaultOpen)
   const [side] = React.useState<"left" | "right">(defaultSide)
   const [maxWidth] = React.useState(defaultMaxWidth)

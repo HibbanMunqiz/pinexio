@@ -2,12 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { TocData } from "config/toc";
 
-interface TocItems {
-  title: string;
-  href: string;
-  pages?: TocItems[];
-}
-
 interface TocProps {
   doc: {
     title: string;
