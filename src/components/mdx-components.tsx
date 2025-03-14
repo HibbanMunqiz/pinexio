@@ -31,7 +31,7 @@ import { Folder, FolderTree, File } from "@/components/folder-tree";
 import { Note } from "@/components/note";
 
 const components = {
-  h1: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <h1 className={`text-4xl font-semibold mt-6 mb-3 ${className}`} {...children} />,
+  h1: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <h1 className={`text-3xl font-semibold mt-6 mb-3 ${className}`} {...children} />,
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
     return (
       <Link
@@ -39,15 +39,15 @@ const components = {
         className={"cursor-pointer group relative items-center w-fit"}
       >
 
-        <h1 className={`flex text-3xl hover:underline font-semibold mt-8 mb-4 gap-1 ${className}`} {...props} >
-          {props.children}<span className="text-3xl text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">
+        <h1 className={`flex text-2xl hover:underline font-semibold mt-8 mb-4 gap-1 ${className}`} {...props} >
+          {props.children}<span className="text-2xl text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">
             #
           </span>
         </h1>
       </Link>
     )
   },
-  h3: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <h3 className={`text-2xl font-semibold mt-6 mb-3 ${className}`} {...children} />,
+  h3: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <h3 className={`text-xl font-semibold mt-6 mb-3 ${className}`} {...children} />,
   p: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <p className={`my-4 leading-7 ${className}`} {...children} />,
   a: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => (<a className={`text-primary underline underline-offset-4 ${className}`} {...children} />),
   ul: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <ul className={`list-disc pl-6 my-4 ${className}`} {...children} />,

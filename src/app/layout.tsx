@@ -54,6 +54,7 @@ export default function RootLayout({
         className={`
           ${geistSans.className}
           ${geistMono.variable}
+          text-sm
           font-regular tracking-wide antialiased`}
       >
         <ThemeProvider

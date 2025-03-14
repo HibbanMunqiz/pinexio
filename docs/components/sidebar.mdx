@@ -8,6 +8,7 @@ date: 2025-03-12
 
 The **Sidebar** component is a flexible and customizable navigation panel. It supports collapsible menus, nested links, and icons, making it ideal for documentation sites, dashboards, and applications with structured navigation.
 
+## Preview and Code Snippet
 
 <Tabs defaultValue="preview" size="sm" className="w-full">
   <TabsList className="grid w-full md:w-[30%] grid-cols-2">
@@ -16,7 +17,7 @@ The **Sidebar** component is a flexible and customizable navigation panel. It su
   </TabsList>
   <TabsContent value="preview">
     <Preview >
-      <SidebarProvider defaultOpen={false} defaultSide="left" defaultMaxWidth={300} showIconsOnCollapse={true}>
+      <SidebarProvider mobileView={false} defaultOpen={false} defaultSide="left" defaultMaxWidth={300} showIconsOnCollapse={true}>
         <Sidebar className="!h-auto" >
           <SidebarHeader>
             <SidebarTrigger />

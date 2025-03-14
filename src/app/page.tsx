@@ -31,7 +31,7 @@ export default function Home() {
         <div className="container mx-auto flex flex-col items-center max-w-6xl">
           {/* Logo and Title */}
           <div className="text-center mb-8">
-            <div className="flex gap-2 lg:gap-8 justify-center xs:px-2">
+            <div className="flex gap-2 lg:gap-4 justify-center xs:px-2">
               <Image
                 alt="logo"
                 className="h-auto w-auto dark:invert"
@@ -39,11 +39,11 @@ export default function Home() {
                 height={100}
                 src={`/logos/pinedocs.png`}
               />
-              <h1 className="text-4xl content-center md:text-7xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
-                PINE<span className="md:text-8xl">D</span>OCS
+              <h1 className="text-3xl content-center md:text-6xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
+                PINE<span className="md:text-7xl">D</span>OCS
               </h1>
             </div>
-            <p className="mt-6 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               A customizable open-source documentation template built with Next.js 15,
               Tailwind CSS 4, and Contentlayer for beautiful, fast, and flexible documentation.
             </p>
@@ -60,7 +60,7 @@ export default function Home() {
 
           {/* Technology Logos */}
           <div className="mt-16 mb-6">
-            <p className="text-center mb-3 underline text-gray-600 dark:text-gray-400">Built with</p>
+            {/* <p className="text-center mb-3 underline text-gray-600 dark:text-gray-400">Built with</p> */}
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {/* Next.js */}
               <div className="flex flex-col items-center">

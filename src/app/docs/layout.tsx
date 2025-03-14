@@ -5,7 +5,7 @@ import React from "react";
 import Link from "next/link";
 import { allDocs } from "contentlayer/generated";
 import SearchDialog from "@/components/search-dialog";
-import { configDocs } from "config/docs";
+import { sidebarNav } from "config/sidebar";
 import Image from "next/image";
 import {
   SidebarProvider,
@@ -60,7 +60,6 @@ export default function DocsLayout({
   // Destructure sidebarNav from configDocs
   const router = useRouter()
   const isMobile = useIsMobile()
-  const { sidebarNav } = configDocs;
   return (
     <SidebarLayout>
       {/* Left Sidebar Provider */}
@@ -74,7 +73,7 @@ export default function DocsLayout({
             </Link>
           </SidebarHeader>
           <SidebarContent>
-            {sidebarNav.map((section) => (
+            {sidebarNav.map((section: any) => (
               <SidebarMenuItem
                 isCollapsable={section.pages && section.pages.length > 0}
                 key={section.title}
@@ -83,7 +82,7 @@ export default function DocsLayout({
                 icon={section.icon}
                 defaultOpen={true}
               >
-                {section.pages?.map((page) => (
+                {section.pages?.map((page: any) => (
                   <NestedLink key={page.href} href={page.href}>
                     {page.title}
                   </NestedLink>
