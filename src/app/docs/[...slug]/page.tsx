@@ -2,8 +2,7 @@ import { allDocs } from 'contentlayer/generated'
 import { notFound } from 'next/navigation'
 import { Mdx } from "@/components/mdx-components"
 import Breadcrumb from '@/components/bread-crumb'
-import { configDocs } from "config/docs";
-import Link from 'next/link'
+import Toc from '@/components/toc';
 
 type tParams = Promise<{ slug: string[] }>;
 
@@ -38,7 +37,6 @@ const DocsPage = async ({ params }: { params: tParams }) => {
   // Join the slug array back into a path string
   const path = awaitedParams.slug.join('/')
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === path)
-  const { quickReference } = configDocs;
 
   if (!doc) notFound()
   return (
@@ -56,40 +54,7 @@ const DocsPage = async ({ params }: { params: tParams }) => {
         <Mdx code={doc.body.code} />
       </article>
 
-      <aside className="fixed right-0 hidden xl:block w-64 p-6 top-16 border-l border-[var(--color-border)] h-[calc(100vh-4rem)] overflow-y-auto">
-        <div className="sticky top-0 pb-2">
-          <h2 className="text-lg font-semibold text-[var(--color)]">On this page</h2>
-        </div>
-        <nav className="mt-4">
-          <ul className="space-y-4">
-            {quickReference[doc.title as keyof typeof quickReference]?.map((item, index) => (
-              <li key={index} className="group">
-                <Link
-                  href={item.href}
-                  className="text-gray-700 dark:text-gray-200 font-medium transition-colors flex items-center"
-                >
-                  {item.title}
-                </Link>
-
-                {'pages' in item && item.pages.length > 0 && (
-                  <ul className="mt-2 ml-4 space-y-2 border-l-2 border-gray-300 pl-3">
-                    {item.pages.map((subItem, subIndex) => (
-                      <li key={subIndex} className="text-sm">
-                        <Link
-                          href={subItem.href}
-                          className="text-gray-600 font-regular dark:text-gray-200 transition-colors block py-1"
-                        >
-                          {subItem.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </aside>
+      <Toc doc={doc}/>
     </div>
   )
 }

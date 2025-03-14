@@ -159,7 +159,7 @@ const CustomSyntaxHighlighter: React.FC<CustomSyntaxHighlighterProps> = ({
           language={tabs[activeTabKey].language?.toLowerCase() || 'shell'}
           style={themeMode === 'light' ? lightTheme : darkTheme}
           customStyle={{
-            fontSize: '15px',
+            fontSize: '13px',
             margin: 0,
             borderRadius: '0 0 0.5rem 0.5rem',
           }}

@@ -17,7 +17,7 @@ Welcome to the installation guide for forking the application from GitHub and se
         Visit our GitHub repository and click the "Fork" button to create your own copy.
       </div>
         <a
-          href="https://github.com/your-repo/example"
+          href="https://github.com/sanjayc208/pinedocs"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -30,12 +30,10 @@ Welcome to the installation guide for forking the application from GitHub and se
     <StepTitle>Step 2: Clone Your Fork</StepTitle>
     <StepContent>
     <div>
-      <p>After forking, clone your repository to your local machine:</p>
-      <pre>
-        <code>
-          git clone https://github.com/your-username/example.git
-        </code>
-      </pre>
+      After forking, clone your repository to your local machine:
+  ```
+  git clone https://github.com/sanjayc208/pinedocs.git
+  ```
       </div>
     </StepContent>
   </Step>
@@ -43,7 +41,7 @@ Welcome to the installation guide for forking the application from GitHub and se
     <StepTitle>Step 3: Install Dependencies</StepTitle>
     <StepContent>
     <div>
-      <p>Install the project dependencies using your preferred package manager:</p>
+      Install the project dependencies using your preferred package manager:
        <CodeTabs tabs={{
         'npm':{
           syntax:'npm i'
@@ -62,7 +60,7 @@ Welcome to the installation guide for forking the application from GitHub and se
     <StepTitle>Step 4: Run the Development Server</StepTitle>
     <StepContent>
     <div>
-      <p>Start your development server with one of the following commands:</p>
+      Start your development server with one of the following commands:
       <CodeTabs tabs={{
         'npm':{
           syntax:'npm run dev'
@@ -82,15 +80,13 @@ Welcome to the installation guide for forking the application from GitHub and se
     <StepContent>
     <div>
       <p>If you want to make changes:</p>
-      <ul className="list-disc ml-4">
-        <li>
-          Edit files in the root directory <code>/</code> for global configurations.
-        </li>
-        <li>
-          Update or create MDX files in the <code>docs</code> directory to modify or add documentation.
+
+      1. Edit files in the root directory <code>/</code> for global configurations.
+      2. Update or create MDX files in the <code>docs</code> directory to modify or add documentation.
+      3. Update or create MDX files in the <code>docs</code> directory to modify or add documentation.
 
           <FolderTree className="overflow-hidden p-2">
-          <Folder element="docs" defaultOpen={true}>
+            <Folder element="docs" defaultOpen={true}>
               <File>
                 <p>page1.mdx</p>
               </File>
@@ -98,12 +94,9 @@ Welcome to the installation guide for forking the application from GitHub and se
                 <p>page2.mdx</p>
               </File>
             </Folder>
-        </FolderTree>
-        </li>
-        <li>
-          Refer to the existing documentation to see how things work.
-        </li>
-      </ul>
+          </FolderTree>
+      4. Refer to the existing documentation to see how things work.  
+      
       </div>
     </StepContent>
   </Step>
