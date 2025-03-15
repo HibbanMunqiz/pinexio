@@ -48,6 +48,7 @@ const components = {
     )
   },
   h3: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <h3 className={`text-xl font-semibold mt-6 mb-3 ${className}`} {...children} />,
+  h4: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <h4 className={`text-lg font-semibold mt-6 mb-3 ${className}`} {...children} />,
   p: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <p className={`my-4 leading-7 ${className}`} {...children} />,
   a: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => (<a className={`text-primary underline underline-offset-4 ${className}`} {...children} />),
   ul: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <ul className={`list-disc pl-6 my-4 ${className}`} {...children} />,

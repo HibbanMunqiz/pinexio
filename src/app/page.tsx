@@ -94,8 +94,8 @@ export default function Home() {
               <div className="flex flex-col items-center">
                 <div className="w-12 h-12 flex items-center justify-center">
                   <Image
-                    width={10}
-                    height={10}
+                    width={100}
+                    height={100}
                     src={`/logos/tailwindcss-light.png`}
                     alt="Tailwind CSS Logo"
                     className="w-10 h-10 dark:invert"
@@ -112,7 +112,7 @@ export default function Home() {
                     height={100}
                     src="/logos/contentlayer.png"
                     alt="Contentlayer Logo"
-                    className="block"
+                    className="h-12 block"
                   />
                 </div>
                 <span className="mt-2 text-sm">Contentlayer</span>
