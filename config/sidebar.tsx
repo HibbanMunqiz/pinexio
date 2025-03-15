@@ -1,4 +1,4 @@
-import { Component, Paintbrush, Rocket, Search } from "lucide-react"
+import { Component, Paintbrush, Rocket, Search, Wrench } from "lucide-react"
 
 export const sidebarNav = [
     {
@@ -52,6 +52,24 @@ export const sidebarNav = [
                 href: "/docs/components/note",
             },
         ],
+    },
+    {
+        title: "Customization",
+        icon: <Wrench className="h-5 w-5" />,
+        pages: [
+            {
+                title: "Sidebar",
+                href: "/docs/customization/sidebar",
+            },
+            {
+                title: "Toc",
+                href: "/docs/customization/toc",
+            },
+            {
+                title: "Font",
+                href: "/docs/customization/font",
+            },
+        ]
     },
     {
         title: "Theme",

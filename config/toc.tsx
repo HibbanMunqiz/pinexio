@@ -1,5 +1,5 @@
 export const TocData = {
-    'Introduction': [
+    'getting-started/introduction': [
         {
             title: "Welcome to Pinedocs",
             href: "/docs/getting-started/introduction#welcome-to-pinedocs",
@@ -16,13 +16,13 @@ export const TocData = {
             ],
         },
     ],
-    'Installation': [
+    'getting-started/installation': [
         {
             title: "Steps to install",
             href: "/docs/getting-started/installation",
         },
     ],
-    'Folder Tree': [
+    'components/folder-tree': [
         {
             title: "Preview & Code Snippet",
             href: "/docs/components/folder-tree#preview-and-code-snippet",
@@ -33,7 +33,7 @@ export const TocData = {
         },
         
     ],
-    'Button': [
+    'components/button': [
         {
             title: "Preview & Code Snippet",
             href: "/docs/components/button#preview-and-code-snippet",
@@ -44,7 +44,7 @@ export const TocData = {
         },
         
     ],
-    'Note': [
+    'components/note': [
         {
             title: "Preview & Code Snippet",
             href: "/docs/components/note#preview-and-code-snippet",
@@ -55,7 +55,7 @@ export const TocData = {
         },
         
     ],
-    'Search Button': [
+    'components/search-button': [
         {
             title: "Preview & Code Snippet",
             href: "/docs/components/search-button#preview-and-code-snippet",
@@ -66,7 +66,7 @@ export const TocData = {
         },
         
     ],
-    'Sidebar': [
+    'components/sidebar': [
         {
             title: "Preview & Code Snippet",
             href: "/docs/components/sidebar#preview-and-code-snippet",
@@ -77,7 +77,7 @@ export const TocData = {
         },
         
     ],
-    'Steps': [
+    'components/steps': [
         {
             title: "Preview & Code Snippet",
             href: "/docs/components/steps#preview-and-code-snippet",
@@ -88,7 +88,7 @@ export const TocData = {
         },
         
     ],
-    'Syntax Highlighter': [
+    'components/syntax-highlighter': [
         {
             title: "Preview & Code Snippet",
             href: "/docs/components/syntax-highlighter#preview-and-code-snippet",
@@ -99,7 +99,7 @@ export const TocData = {
         },
         
     ],
-    'Tabs': [
+    'components/tabs': [
         {
             title: "Preview & Code Snippet",
             href: "/docs/components/tabs#preview-and-code-snippet",
@@ -110,7 +110,7 @@ export const TocData = {
         },
         
     ],
-    'Theme': [
+    'theme': [
         {
             title: "Overview",
             href: "docs/theme#overview",
@@ -129,7 +129,7 @@ export const TocData = {
             href: "/docs/theme#where-to-modify-themes",
         }
     ],
-    'Search Bar': [
+    'search-bar': [
         {
             title: "How it works",
             href: "/docs/search-bar#-how-it-works",
@@ -154,6 +154,67 @@ export const TocData = {
             title: "Why this is cool",
             href: "/docs/search-bar#-why-this-is-cool",
         },
-    ]
+    ],
+    'customization/font': [
+        {
+            title: "Location of Font Definition",
+            href: "docs/customization/font#location-of-font-definition",
+        },
+        {
+            title: "Applying Font Globally",
+            href: "/docs/customization/font#applying-the-font-globally",
+        },
+        {
+            title: "Font Size & Config",
+            href: "/docs/customization/font#modifying-font-size--tailwind-config",
+        },
+        {
+            title: "Font Weight",
+            href: "/docs/customization/font#customizing-font-weight",
+        },
+        {
+            title: "Summary",
+            href: "/docs/customization/font#summary",
+        },
+        
+    ],
+    'customization/sidebar': [
+        {
+            title: "Folder Structure",
+            href: "/docs/customization/sidebar#folder-structure",
+        },
+        {
+            title: "How to make changes",
+            href: "/docs/customization/sidebar#editing-sidebar-navigation",
+        },
+        {
+            title: "Where is Sidebar Renderer?",
+            href: "/docs/customization/sidebar#where-is-the-sidebar-rendered",
+        },
+        {
+            title: "Summary",
+            href: "/docs/customization/sidebar#summary",
+        },
+        
+    ],
+    'customization/toc': [
+        {
+            title: "Folder Structure",
+            href: "/docs/customization/toc#folder-structure",
+        },
+        {
+            title: "How to make changes",
+            href: "/docs/customization/toc#editing-table-of-contents-toc",
+        },
+        {
+            title: "Where is Toc Renderer?",
+            href: "/docs/customization/toc#where-is-the-TOC-rendered",
+        },
+        {
+            title: "Summary",
+            href: "/docs/customization/toc#summary",
+        },
+        
+    ],
 
 }

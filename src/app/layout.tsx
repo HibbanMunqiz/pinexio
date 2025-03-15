@@ -1,15 +1,10 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -53,7 +48,6 @@ export default function RootLayout({
       <body
         className={`
           ${geistSans.className}
-          ${geistMono.variable}
           text-sm
           font-regular tracking-wide antialiased`}
       >

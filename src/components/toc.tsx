@@ -5,11 +5,11 @@ import { TocData } from "config/toc";
 interface TocProps {
   doc: {
     title: string;
+    slug:string;
   };
 }
 
 const Toc: React.FC<TocProps> = ({ doc }) => {
-
   return (
     <aside className="fixed right-0 hidden xl:block w-64 p-6 top-16 border-l border-[var(--color-border)] h-[calc(100vh-4rem)] overflow-y-auto">
       <div className="top-0 pb-2">
@@ -17,7 +17,7 @@ const Toc: React.FC<TocProps> = ({ doc }) => {
       </div>
       <nav className="mt-4">
         <ul className="space-y-3">
-          {TocData[doc.title as keyof typeof TocData]?.map((item: any, index: any) => (
+          {TocData[doc.slug as keyof typeof TocData]?.map((item: any, index: any) => (
             <li key={index} className="group">
               <Link
                 href={item.href}
