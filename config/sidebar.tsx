@@ -58,15 +58,15 @@ export const sidebarNav = [
         icon: <Wrench className="h-5 w-5" />,
         pages: [
             {
-                title: "Button",
+                title: "Sidevar",
                 href: "/docs/customization/sidebar",
             },
             {
-                title: "Search Button",
+                title: "Toc",
                 href: "/docs/customization/toc",
             },
             {
-                title: "Tabs",
+                title: "Font",
                 href: "/docs/customization/font",
             },
         ]
