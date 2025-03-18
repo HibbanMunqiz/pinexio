@@ -20,7 +20,7 @@ export default function Home() {
           </nav>
           <div className="flex-1 flex gap-2 justify-end">
             <ModeToggle />
-            <Button onClick={() => router.push('https://github.com/sanjayc208/pinedocs')}>
+            <Button onClick={() => router.push('https://github.com/sanjayc208/pinexio')}>
               <Github className="h-[1.2rem] w-[1.2rem] transition-all" /></Button>
           </div>
         </div>
@@ -39,8 +39,8 @@ export default function Home() {
                 height={100}
                 src={`/logos/pinedocs.png`}
               />
-              <h1 className="text-3xl content-center md:text-6xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
-                PINE<span className="md:text-7xl">D</span>OCS
+              <h1 className="text-5xl content-center md:text-7xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
+              PINE<span className="md:text-8xl">X</span>IO
               </h1>
             </div>
             <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -52,7 +52,7 @@ export default function Home() {
           {/* Buttons */}
           <div className="flex flex-row sm:flex-row gap-4 mt-8">
             <Button className="px-6 py-3 text-md " variant={'primary'} onClick={() => router.push('/docs/getting-started/introduction')}>Get Started</Button>
-            <Button className="px-6 py-3 text-md gap-2" variant={'outline'} onClick={() => router.push('https://github.com/sanjayc208/pinedocs')}>
+            <Button className="px-6 py-3 text-md gap-2" variant={'outline'} onClick={() => router.push('https://github.com/sanjayc208/pinexio')}>
               <Github size={20} />
               GitHub
             </Button>

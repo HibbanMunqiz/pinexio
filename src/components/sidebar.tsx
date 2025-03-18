@@ -427,7 +427,7 @@ export function SidebarHeaderLogo({ logo }: { logo?: React.ReactNode }) {
 }
 
 export function Title({ children }: { children: React.ReactNode }) {
-  return <h1 className="text-2xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">{children}</h1>
+  return <h1 className="text-3xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">{children}</h1>
 }
 
 export function UserAvatar({ avatar }: { avatar: React.ReactNode }) {

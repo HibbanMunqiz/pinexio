@@ -69,7 +69,7 @@ export default function DocsLayout({
             <SidebarHeaderLogo logo={<Image alt="logo" className={'h-auto w-aut dark:invert'} width={100} height={100}
               src={`/logos/pinedocs.png`} />} />
 
-            <Link href={"/"} className="flex flex-1 gap-3" ><Title>PINE<span className="text-3xl">D</span>OCS</Title>
+            <Link href={"/"} className="flex flex-1 gap-3" ><Title>PINE<span className="text-4xl">X</span>IO</Title>
             </Link>
           </SidebarHeader>
           <SidebarContent>
