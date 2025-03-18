@@ -40,7 +40,7 @@ export default function Home() {
                 src={`/logos/pinedocs.png`}
               />
               <h1 className="text-5xl content-center md:text-7xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
-              PINE<span className="md:text-8xl">X</span>IO
+                PINE<span className="md:text-8xl">X</span>IO
               </h1>
             </div>
             <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -138,10 +138,17 @@ export default function Home() {
 
       {/* Sticky Footer */}
       <footer className="sticky bottom-0 z-10 bg-white/90 dark:bg-gray-950/90 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
-        <div className="container text-sm mx-auto px-4 py-3 text-center text-gray-600 dark:text-gray-400">
-          <p>PINEDOCS - Open Source Documentation Template</p>
+        <div className="container mx-auto px-4 py-3 text-center text-gray-600 dark:text-gray-400">
+          <div className="flex justify-end items-center space-x-4">
+
+            {/* Author and Tagline */}
+            <div className="flex text-sm text-right gap-3">
+              <p>Built with ❤️ by <strong>Sanjay Rajeev</strong></p>
+            </div>
+          </div>
         </div>
       </footer>
+
     </div>
   )
 }
