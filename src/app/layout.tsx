@@ -9,31 +9,31 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://pinedocs-mu.vercel.app'),
-  title: "Pinedocs - Documentation template",
+  metadataBase: new URL('https://pinexio.vercel.app'),
+  title: "Pinexio - Documentation template",
   description: "A customizable Open Source documentation template built with Next.js",
   authors: [{ name: "Sanjay Rajeev" }],
-  keywords: ['PineDocs', 'documentation template', 'tempalte', 'Next.js', 'React', 'JavaScript'],
+  keywords: ['Pinexio', 'documentation template', 'tempalte', 'Next.js', 'React', 'JavaScript'],
   publisher: 'Sanjay Rajeev',
   creator: 'Sanjay Rajeev',
   openGraph: {
     type: "website",
-    title: "Pinedocs - Documentation Template",
+    title: "Pinexio - Documentation Template",
     description: "A customizable open-source documentation template built with Next.js.",
     images: [
       {
-        url: "/pinedocs_og.png",
+        url: "/og_image.png",
         width: 1200,
         height: 630,
-        alt: "Pinedocs Documentation Template",
+        alt: "Pinexio Documentation Template",
       },
     ],
   },
   twitter: {
     card: "summary_large_image", // Type of Twitter card
-    title: "Pinedocs - Documentation Template", // Twitter card title
+    title: "Pinexio - Documentation Template", // Twitter card title
     description: "A customizable open-source documentation template built with Next.js.", // Twitter card description
-    images: ["/pinedocs_og.png"], // Image used in the Twitter card
+    images: ["/og_image.png"], // Image used in the Twitter card
     creator: "@YourTwitterHandle", // Twitter handle of the content creator (optional)
   },
 };

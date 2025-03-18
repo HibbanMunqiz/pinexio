@@ -1,17 +1,17 @@
 export const TocData = {
     'getting-started/introduction': [
         {
-            title: "Welcome to Pinedocs",
-            href: "/docs/getting-started/introduction#welcome-to-pinedocs",
+            title: "Welcome to Pinexio",
+            href: "/docs/getting-started/introduction#welcome-to-pinexio",
             pages: [
                 {
-                    title: "Why Choose Pinedocs",
-                    href: "/docs/getting-started/introduction#why-choose-pinedocs",
+                    title: "Why Choose Pinexio",
+                    href: "/docs/getting-started/introduction#why-choose-pinexio",
                 },
 
                 {
-                    title: "What Makes Pinedocs Special",
-                    href: "/docs/getting-started/introduction#what-makes-pinedocs-special",
+                    title: "What Makes Pinexio Special",
+                    href: "/docs/getting-started/introduction#what-makes-pinexio-special",
                 },
             ],
         },
@@ -158,7 +158,7 @@ export const TocData = {
     'customization/font': [
         {
             title: "Location of Font Definition",
-            href: "docs/customization/font#location-of-font-definition",
+            href: "/docs/customization/font#location-of-font-definition",
         },
         {
             title: "Applying Font Globally",
