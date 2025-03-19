@@ -27,18 +27,14 @@ export const meta = {
     creator: "@sanjayrajeev", // Twitter handle of the content creator (optional)
   },
   // SEO Enhancements
-  canonical: "https://pinexio.vercel.app", // Set the canonical URL
+  alternates:{
+    canonical: "https://pinexio.vercel.app", // Set the canonical URL
+  },
   robots: "index, follow", // Allows search engines to index and follow links
   // Optional: Hreflang for multilingual content (if applicable)
   hreflang: {
     "en": "https://pinexio.vercel.app", // English version URL
     // Add more hreflang if you have other languages (example: Spanish)
     // "es": "https://pinexio.vercel.app/es",
-  },
-  // Other potential SEO enhancements can go here
-  alternates: {
-    types: {
-      "application/rss+xml": "/rss.xml", // Link to RSS feed if applicable
-    },
   },
 };
