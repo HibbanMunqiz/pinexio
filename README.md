@@ -1,7 +1,7 @@
 <a href="https://pinexio.vercel.app/">
 <p align="center">
   <img src="./public/logos/pinedocs.png"  align="center" alt="fox logo" width="200px">
-  <h1 align="center">🌲 PINEXIO 🌲</h1>
+  <h1 align="center"> PINEXIO </h1>
   <p align="center">
    Pinexio is a modern, customizable documentation template built for Next.js 15, Tailwind CSS 4, and MDX. It makes creating, managing, and presenting your project documentation effortless.
   </p>
