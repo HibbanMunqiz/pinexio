@@ -23,7 +23,7 @@ export function FolderTree({
 }) {
   return (
     <FolderTreeContext.Provider value={{ indentSize }}>
-      <div className={cn("text-sm border bg-sidebar-active rounded-lg broder-b", className)} {...props}>
+      <div className={cn("text-sm border rounded-lg broder-b", className)} {...props}>
         {children}
       </div>
     </FolderTreeContext.Provider>
@@ -33,7 +33,7 @@ export function FolderTree({
 export function Folder({
   children,
   element,
-  defaultOpen = false,
+  defaultOpen = true,
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & {

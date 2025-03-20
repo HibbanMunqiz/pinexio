@@ -55,7 +55,7 @@ export function Note({ children, type = "none", className, hideIcon = false }: N
       <div className="relative z-10">
         {!hideIcon && (
           <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 mt-1">{icons[type]}</div>
+            <div className="flex-shrink-0">{icons[type]}</div>
             <div className="flex-1">{children}</div>
           </div>
         )}

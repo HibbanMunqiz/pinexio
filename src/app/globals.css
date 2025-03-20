@@ -22,11 +22,11 @@ html {
   /* Map HSL variables to semantic color names */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
-  
+
   /* Borders */
   --color-border: hsl(var(--border));
   --color-border-header: hsl(var(--border-header));
-  
+
   /* UI Colors */
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
@@ -36,13 +36,13 @@ html {
   --color-muted-foreground: hsl(var(--muted-foreground));
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-  
+
   /* Component Colors */
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
-  
+
   /* Status Colors */
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
@@ -50,7 +50,7 @@ html {
   --color-success-foreground: hsl(var(--success-foreground));
   --color-warning: hsl(var(--warning));
   --color-warning-foreground: hsl(var(--warning-foreground));
-  
+
   /* Other UI Elements */
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
@@ -64,7 +64,7 @@ html {
   --color-button-hover: hsl(var(--button-hover));
   --color-button-secondary: hsl(var(--button-secondary));
   --color-button-secondary-foreground: hsl(var(--button-secondary-foreground));
-  
+
   /* Border Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -75,16 +75,16 @@ html {
   * {
     @apply border-border;
   }
-  
+
   :root {
     /* Base Theme - Light Mode */
     --background: 0 0% 100%;
     --foreground: 0 0% 9%;
-    
+
     /* Borders */
     --border: 0 0% 85%;
     --border-header: 0 0% 85%;
-    
+
     /* UI Colors */
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
@@ -94,13 +94,13 @@ html {
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-    
+
     /* Component Colors */
-    --card: 210 29% 96.1%;
-    --card-foreground: 215.4 16.3% 46.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 9%;
-    
+
     /* Status Colors */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -108,38 +108,48 @@ html {
     --success-foreground: 210 40% 98%;
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 9%;
-    
+
     /* Other UI Elements */
     --input: 220 13% 91%;
     --ring: 222.2 47.4% 11.2%;
-    
+
     /* Border Radius */
     --radius: 0.5rem;
 
     /* Sidebar Elements (using secondary as base) */
-    --sidebar: 210 40% 96.1%; /* Same as secondary */
-    --sidebar-foreground: 215.4 16.3% 46.9%; /* Same as muted-foreground */
-    --sidebar-active: 0 0% 92%; /* Light gray for active state */
-    --sidebar-active-foreground: 222.2 47.4% 11.2%; /* Same as primary */
+    --sidebar: 210 40% 96.1%;
+    /* Same as secondary */
+    --sidebar-foreground: 215.4 16.3% 46.9%;
+    /* Same as muted-foreground */
+    --sidebar-active: 0 0% 92%;
+    /* Light gray for active state */
+    --sidebar-active-foreground: 222.2 47.4% 11.2%;
+    /* Same as primary */
 
     /* Button Elements (consolidated from search-button) */
-    --button: 0 0% 100%; /* White background */
-    --button-border: 220 13% 91%; /* Light gray border */
-    --button-foreground: 215 14% 34%; /* Dark gray text */
-    --button-hover: 210 40% 98%; /* Light gray on hover */
-    --button-secondary: 220 14% 96%; /* Light gray for secondary buttons */
-    --button-secondary-foreground: 220 9% 65%; /* Medium gray text for secondary buttons */
+    --button: 0 0% 100%;
+    /* White background */
+    --button-border: 220 13% 91%;
+    /* Light gray border */
+    --button-foreground: 215 14% 34%;
+    /* Dark gray text */
+    --button-hover: 210 40% 98%;
+    /* Light gray on hover */
+    --button-secondary: 220 14% 96%;
+    /* Light gray for secondary buttons */
+    --button-secondary-foreground: 220 9% 65%;
+    /* Medium gray text for secondary buttons */
   }
 
   .dark {
     /* Base Theme - Dark Mode */
     --background: 0 0% 4%;
     --foreground: 0 0% 93%;
-    
+
     /* Borders */
     --border: 240 3.7% 25.9%;
     --border-header: 240 3.7% 15.9%;
-    
+
     /* UI Colors */
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
@@ -149,13 +159,13 @@ html {
     --muted-foreground: 215 20.2% 65.1%;
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-    
+
     /* Component Colors */
-    --card: 217.2 32.6% 17.5%;
-    --card-foreground: 215 20.2% 65.1%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
     --popover: 0 0% 6%;
     --popover-foreground: 0 0% 93%;
-    
+
     /* Status Colors */
     --destructive: 0 62.8% 50.6%;
     --destructive-foreground: 210 40% 98%;
@@ -163,24 +173,34 @@ html {
     --success-foreground: 210 40% 98%;
     --warning: 38 92% 45%;
     --warning-foreground: 0 0% 9%;
-    
+
     /* Other UI Elements */
     --input: 240 3.7% 15.9%;
     --ring: 210 40% 98%;
 
     /* Sidebar Elements (using muted as base) */
-    --sidebar: 217.2 32.6% 17.5%; /* Same as muted/secondary in dark mode */
-    --sidebar-foreground: 215 20.2% 65.1%; /* Same as muted-foreground */
-    --sidebar-active: 220 13% 31%; /* Darker gray for active state */
-    --sidebar-active-foreground: 210 40% 98%; /* Same as primary */
+    --sidebar: 217.2 32.6% 17.5%;
+    /* Same as muted/secondary in dark mode */
+    --sidebar-foreground: 215 20.2% 65.1%;
+    /* Same as muted-foreground */
+    --sidebar-active: 220 13% 31%;
+    /* Darker gray for active state */
+    --sidebar-active-foreground: 210 40% 98%;
+    /* Same as primary */
 
     /* Button Elements (consolidated from search-button) */
-    --button: 215 28% 17%; /* Dark gray background */
-    --button-border: 215 28% 32%; /* Medium gray border */
-    --button-foreground: 220 13% 82%; /* Light gray text */
-    --button-hover: 216 28% 24%; /* Slightly lighter on hover */
-    --button-secondary: 215 28% 26%; /* Medium gray for secondary buttons */
-    --button-secondary-foreground: 220 9% 65%; /* Medium gray text for secondary buttons */
+    --button: 215 28% 17%;
+    /* Dark gray background */
+    --button-border: 215 28% 32%;
+    /* Medium gray border */
+    --button-foreground: 220 13% 82%;
+    /* Light gray text */
+    --button-hover: 216 28% 24%;
+    /* Slightly lighter on hover */
+    --button-secondary: 215 28% 26%;
+    /* Medium gray for secondary buttons */
+    --button-secondary-foreground: 220 9% 65%;
+    /* Medium gray text for secondary buttons */
   }
 
   body {

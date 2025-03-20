@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: A guide to install Pinexio locally to your system and get it runing
+description: A guide to install Pinexio locally to your system and get it running
 date: 2025-03-12
 ---
 
@@ -31,7 +31,7 @@ Welcome to the installation guide for forking the application from GitHub and se
     <StepContent>
     <div>
       After forking, clone your repository to your local machine:
-  ```
+  ```sh
   git clone https://github.com/sanjayc208/pinexio.git
   ```
       </div>
@@ -96,8 +96,53 @@ Welcome to the installation guide for forking the application from GitHub and se
             </Folder>
           </FolderTree>
       4. Refer to the existing documentation to see how things work.  
-      
       </div>
     </StepContent>
   </Step>
 </Steps>
+
+## What is MDX?
+
+MDX is an extension of Markdown that allows you to write JSX (React components) inside your Markdown files. This means you can mix content with interactive components seamlessly.
+
+For example, in a normal Markdown file, you might write:
+```md
+# Welcome to My Docs
+
+This is a simple Markdown page.
+```
+But in MDX, you can add React components directly:
+```mdx
+import { Button } from '@/components/ui/button';
+
+# Welcome to My Docs
+
+This is a simple Markdown page with a button:
+<Button>Click Me</Button>
+```
+
+## Creating an MDX File
+
+To add a new documentation page, create a new `.mdx` file inside the `docs` directory:
+```sh
+echo "# My New Page" > docs/my-new-page.mdx
+```
+This file will automatically be picked up by the system and rendered as a new documentation page.
+
+Your folder structure should look like this:
+
+<FolderTree className="overflow-hidden p-2">
+  <Folder element="project-root" defaultOpen={true}>
+    <Folder element="docs" defaultOpen={true}>
+      <File>
+        <p>my-new-page.mdx</p>
+      </File>
+      <File>
+        <p>another-page.mdx</p>
+      </File>
+    </Folder>
+  </Folder>
+</FolderTree>
+
+🎉 That’s it! You now have a functional documentation site up and running with your first MDX page.
+
