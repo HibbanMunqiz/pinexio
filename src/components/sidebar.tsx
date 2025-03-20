@@ -385,7 +385,7 @@ export function NestedLink({
         block py-1 px-2 rounded-md text-sm
         ${
           isActive
-            ? "bg-sidebar-active text-sidebar-active-foreground font-bold"
+            ? "bg-sidebar-active text-primary font-bold"
             : "hover:bg-gray-100 dark:hover:bg-gray-800"
         }
       `}
