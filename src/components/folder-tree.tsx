@@ -23,7 +23,7 @@ export function FolderTree({
 }) {
   return (
     <FolderTreeContext.Provider value={{ indentSize }}>
-      <div className={cn("text-sm border bg-[var(--sidebar-bg)] hover:[var(--sidebar-active-bg)] hover:text-[var(--sidebar-active-text)] rounded-lg broder-b", className)} {...props}>
+      <div className={cn("text-sm border bg-sidebar-active rounded-lg broder-b", className)} {...props}>
         {children}
       </div>
     </FolderTreeContext.Provider>

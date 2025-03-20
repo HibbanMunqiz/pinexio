@@ -67,44 +67,41 @@ const components = {
     <div className="my-6 w-full overflow-x-auto">
       <table
         className={clsx(
-          "w-full text-sm border-collapse border --color-pr dark:border-gray-600",
+          "w-full text-sm border-collapse border rounded-lg outline-1 outline-border outline-offset-[-1px] overflow-hidden",
           className
         )}
         {...props}
       />
     </div>
   ),
-  // Use consistent border styling for rows
   tr: ({
     className,
     ...props
   }: React.HTMLAttributes<HTMLTableRowElement>) => (
     <tr
-      className={clsx("border border-[var(--color-border)]", className)}
+      className={clsx("border", className)}
       {...props}
     />
   ),
-  // Header cells with consistent padding and borders
   th: ({
     className,
     ...props
   }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <th
       className={clsx(
-        "border border-[var(--color-border)] px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
+        "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
         className
       )}
       {...props}
     />
   ),
-  // Data cells with consistent styling
   td: ({
     className,
     ...props
   }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <td
       className={clsx(
-        "border border-[var(--color-border)] px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
+        "border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
         className
       )}
       {...props}

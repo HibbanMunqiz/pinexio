@@ -18,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="google-site-verification" content="FbzCiOZJbHaT0wIWFrrHcj8kLY1Sf4S5d_jZP-K0loc" />
+      </head>
       <body
         className={`
           ${geistSans.className}
