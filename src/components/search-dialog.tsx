@@ -143,7 +143,7 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
             <div className="relative">
               <input type="text"
                 className={clsx("w-full pl-10 pr-4 py-2 border rounded-lg",
-                  "bg-[hsl(var(--input))] text-[var(--foreground)] border-[var(--color-border)]"
+                  "bg-input text-foreground border-border"
                 )}
 
                 placeholder="Search the docs..."
@@ -162,7 +162,7 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
                 {filteredDocs.map((doc) => (
                   <li
                     key={doc._raw.flattenedPath}
-                    className="gap-2 py-2 border-b border-[var(--color-border)]"
+                    className="gap-2 py-2 border-b border-border"
                   >
                     <Link href={`/docs/${doc._raw.flattenedPath}`} onClick={() => setOpen(false)}>
                     <div className="flex flex-col gap-3">

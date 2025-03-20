@@ -1,12 +1,14 @@
 'use client';
-import { Github } from 'lucide-react'
-import { ModeToggle } from "@/components/mode-toggle";
-import Image from "next/image";
-import { Button } from '@/components/button'
-import { useRouter } from "next/navigation";
+import { Github } from 'lucide-react';
+import { ModeToggle } from '@/components/mode-toggle';
+import Image from 'next/image';
+import { Button } from '@/components/button';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
+
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
       {/* Sticky Header */}
@@ -21,17 +23,26 @@ export default function Home() {
           <div className="flex-1 flex gap-2 justify-end">
             <ModeToggle />
             <Button onClick={() => router.push('https://github.com/sanjayc208/pinexio')}>
-              <Github className="h-[1.2rem] w-[1.2rem] transition-all" /></Button>
+              <Github className="h-[1.2rem] w-[1.2rem] transition-all" />
+            </Button>
           </div>
         </div>
       </header>
 
-      {/* Main Content - will flex-grow to fill available space */}
+      {/* Main Content */}
       <main className="flex-grow flex flex-col justify-center items-center px-4 py-4 md:py-8">
-        <div className="container mx-auto flex flex-col items-center max-w-6xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.6 }}
+          className="container mx-auto flex flex-col items-center max-w-6xl">
           {/* Logo and Title */}
           <div className="text-center mb-8">
-            <div className="flex gap-2 lg:gap-4 justify-center xs:px-2">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex gap-2 lg:gap-4 justify-center xs:px-2">
               <Image
                 alt="logo"
                 className="h-auto w-auto dark:invert"
@@ -42,113 +53,63 @@ export default function Home() {
               <h1 className="text-5xl content-center md:text-7xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
                 PINE<span className="md:text-8xl">X</span>IO
               </h1>
-            </div>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            </motion.div>
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               A customizable open-source documentation template built with Next.js 15,
               Tailwind CSS 4, and Contentlayer for beautiful, fast, and flexible documentation.
-            </p>
+            </motion.p>
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-row sm:flex-row gap-4 mt-8">
-            <Button className="px-6 py-3 text-md " variant={'primary'} onClick={() => router.push('/docs/getting-started/introduction')}>Get Started</Button>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex flex-row sm:flex-row gap-4 mt-8">
+            <Button className="px-6 py-3 text-md" variant={'primary'} onClick={() => router.push('/docs/getting-started/introduction')}>Get Started</Button>
             <Button className="px-6 py-3 text-md gap-2" variant={'outline'} onClick={() => router.push('https://github.com/sanjayc208/pinexio')}>
               <Github size={20} />
               GitHub
             </Button>
-          </div>
+          </motion.div>
+        </motion.div>
 
-          {/* Technology Logos */}
-          <div className="mt-16 mb-6">
-            {/* <p className="text-center mb-3 underline text-gray-600 dark:text-gray-400">Built with</p> */}
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-              {/* Next.js */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 flex items-center justify-center">
-                  <Image
-                    width={100}
-                    height={100}
-                    src="/logos/next15.png"
-                    alt="Next.js Logo"
-                    className="dark:invert"
-                  />
-                </div>
-                <span className="mt-2 text-sm">Next.js 15</span>
-              </div>
-
-              {/* Typescript */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 flex items-center justify-center">
-                  <Image
-                    width={100}
-                    height={100}
-                    alt={'ts logo'}
-                    src="/logos/ts.png"
-                    className="dark:invert"
-                  />
-                </div>
-                <span className="mt-2 text-sm">Typescript</span>
-              </div>
-
-              {/* Tailwind CSS */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 flex items-center justify-center">
-                  <Image
-                    width={100}
-                    height={100}
-                    src={`/logos/tailwindcss-light.png`}
-                    alt="Tailwind CSS Logo"
-                    className="w-10 h-10 dark:invert"
-                  />
-                </div>
-                <span className="mt-2 text-sm">Tailwind CSS 4</span>
-              </div>
-
-              {/* Contentlayer */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 flex items-center justify-center">
-                  <Image
-                    width={100}
-                    height={100}
-                    src="/logos/contentlayer.png"
-                    alt="Contentlayer Logo"
-                    className="h-12 block"
-                  />
-                </div>
-                <span className="mt-2 text-sm">Contentlayer</span>
-              </div>
-
-              {/* MDX */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 flex items-center justify-center">
-                  <Image
-                    width={100}
-                    height={100}
-                    src="/logos/mdx.png"
-                    alt="MDX Logo"
-                    className=""
-                  />
-                </div>
-                <span className="mt-2 text-sm">MDX</span>
-              </div>
+        <div className="mt-16 mb-6 flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              {[
+                { src: '/logos/next15.png', label: 'Next.js 15' },
+                { src: '/logos/ts.png', label: 'Typescript' },
+                { src: '/logos/tailwindcss-light.png', label: 'Tailwind CSS 4' },
+                { src: '/logos/contentlayer.png', label: 'Contentlayer' },
+                { src: '/logos/mdx.png', label: 'MDX' }
+              ].map(({ src, label }) => (
+                <motion.div 
+                initial={{ opacity: 0, y: 10 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.6, delay: 0.8 }}
+                 key={label} className="flex flex-col items-center">
+                  <div className="w-5 h-5 md:w-12 md:h-12 flex items-center justify-center">
+                    <Image width={100} height={100} src={src} alt={`${label} Logo`} className="dark:invert" />
+                  </div>
+                  <span className="mt-2 text-sm">{label}</span>
+                </motion.div>
+              ))}
             </div>
-          </div>
-        </div>
       </main>
 
       {/* Sticky Footer */}
       <footer className="sticky bottom-0 z-10 bg-white/90 dark:bg-gray-950/90 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-4 py-3 text-center text-gray-600 dark:text-gray-400">
           <div className="flex justify-end items-center space-x-4">
-
-            {/* Author and Tagline */}
             <div className="flex text-sm text-right gap-3">
               <p>Built with ❤️ by <strong>Sanjay Rajeev</strong></p>
             </div>
           </div>
         </div>
       </footer>
-
     </div>
-  )
+  );
 }

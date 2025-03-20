@@ -14,7 +14,7 @@ export const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/90 focus:ring-secondary-foreground",
         outline:
-          "border border-[var(--color-border)] hover:bg-[var(--color-muted)]/20 focus:ring-[var(--color-ring)]",
+          "border border-border hover:bg-muted/20 focus:ring-ring",
         none:
           "bg-transparent border-0 hover:bg-gray-100 dark:hover:bg-gray-800",
       },
