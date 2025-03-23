@@ -31,7 +31,7 @@ import { Folder, FolderTree, File } from "@/components/folder-tree";
 import { Note } from "@/components/note";
 
 const components = {
-  h1: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <h1 className={`text-3xl font-semibold mt-6 mb-3 ${className}`} {...children} />,
+  h1: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => <h1 className={`text-3xl font-semibold mt-3 mb-3 ${className}`} {...children} />,
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
     return (
       <Link

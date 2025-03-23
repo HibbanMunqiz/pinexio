@@ -10,7 +10,6 @@ import { createContentlayerPlugin } from "next-contentlayer2"
 
 const nextConfig = {
   // pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  webpack5: true,
   webpack: (config: any) => {
     config.cache=false
     return config

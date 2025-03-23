@@ -55,7 +55,7 @@ export function Step({
   return (
     <div
       className={clsx(
-        "relative pl-10 pb-8",
+        "relative pl-10",
         className,
         isHorizontal ? "flex items-center gap-4" : "flex flex-col"
       )}

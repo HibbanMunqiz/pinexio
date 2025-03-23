@@ -216,5 +216,15 @@ export const TocData = {
         },
         
     ],
+    'customization/seo-and-social-sharing': [
+        {
+            title: "Why metadata matters",
+            href: "/docs/customization/seo-and-social-sharing#why-metadata-matters",
+        },
+        {
+            title: "Configuring Metadata",
+            href: "/docs/customization/seo-and-social-sharing#configuring-metadata-in-nextjs",
+        },        
+    ],
 
 }

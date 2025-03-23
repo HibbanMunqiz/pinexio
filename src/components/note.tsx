@@ -23,7 +23,7 @@ export function Note({ children, type = "none", className, hideIcon = false }: N
   }
 
   // Base styles for all notes
-  const baseStyles = "my-6 rounded-xl border p-3 relative overflow-hidden shadow-sm"
+  const baseStyles = "mt-6 mb-3 rounded-xl border p-3 relative overflow-hidden shadow-sm"
 
   // Type-specific styles
   const typeStyles = {

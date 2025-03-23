@@ -130,7 +130,7 @@ const CustomSyntaxHighlighter: React.FC<CustomSyntaxHighlighterProps> = ({
             variant={'none'}
             onClick={copyToClipboard}
             className={
-              "w-8 h-8 relative focus:ring-0 focus:outline-none ml-auto"
+              "w-8 h-8 relative hover:bg-gray-700 focus:ring-0 focus:outline-none ml-auto"
               // themeMode === "light" ? "bg-gray-300 hover:bg-gray-400" : "bg-[#1F2937] hover:bg-[#374151]"
             }
           >

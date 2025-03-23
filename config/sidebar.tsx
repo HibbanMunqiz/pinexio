@@ -12,6 +12,10 @@ export const sidebarNav = [
             {
                 title: "Installation",
                 href: "/docs/getting-started/installation",
+            },
+            {
+                title: "Quick Start",
+                href: "/docs/getting-started/quick-start",
             }
         ],
     },
@@ -68,6 +72,10 @@ export const sidebarNav = [
             {
                 title: "Font",
                 href: "/docs/customization/font",
+            },
+            {
+                title: "SEO and Social Sharing",
+                href: "/docs/customization/seo-and-social-sharing",
             },
         ]
     },

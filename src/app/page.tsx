@@ -80,19 +80,19 @@ export default function Home() {
 
         <div className="mt-16 mb-6 flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {[
-                { src: '/logos/next15.png', label: 'Next.js 15' },
-                { src: '/logos/ts.png', label: 'Typescript' },
-                { src: '/logos/tailwindcss-light.png', label: 'Tailwind CSS 4' },
+                { src: '/logos/next15.png', label: 'Next.js 15', className: 'dark:invert' },
+                { src: '/logos/ts.png', label: 'Typescript', className: 'dark:invert' },
+                { src: '/logos/tailwindcss-light.png', label: 'Tailwind CSS 4', className: 'dark:invert' },
                 { src: '/logos/contentlayer.png', label: 'Contentlayer' },
                 { src: '/logos/mdx.png', label: 'MDX' }
-              ].map(({ src, label }) => (
+              ].map(({ src, label, className }) => (
                 <motion.div 
                 initial={{ opacity: 0, y: 10 }} 
                 animate={{ opacity: 1, y: 0 }} 
                 transition={{ duration: 0.6, delay: 0.8 }}
                  key={label} className="flex flex-col items-center">
                   <div className="w-5 h-5 md:w-12 md:h-12 flex items-center justify-center">
-                    <Image width={100} height={100} src={src} alt={`${label} Logo`} className="dark:invert" />
+                    <Image width={100} height={100} src={src} alt={`${label} Logo`} className={className} />
                   </div>
                   <span className="mt-2 text-sm">{label}</span>
                 </motion.div>
