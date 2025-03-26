@@ -3,7 +3,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/button';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import {
+  oneDark,
+  oneLight,
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Check, Copy } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -32,7 +35,9 @@ const CustomSyntaxHighlighter: React.FC<CustomSyntaxHighlighterProps> = ({
   darkTheme = oneDark,
   indicatorColor,
 }) => {
-  const [activeTabKey, setActiveTabKey] = useState<string>(Object.keys(tabs)[0]);
+  const [activeTabKey, setActiveTabKey] = useState<string>(
+    Object.keys(tabs)[0]
+  );
   const [copied, setCopied] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
   const tabRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -67,7 +72,9 @@ const CustomSyntaxHighlighter: React.FC<CustomSyntaxHighlighterProps> = ({
   const indicatorClass = isHexColor ? '' : indicatorColor || 'bg-yellow-500';
   const combinedIndicatorStyle = {
     ...indicatorStyle,
-    ...(isHexColor && indicatorColor ? { backgroundColor: indicatorColor } : {}),
+    ...(isHexColor && indicatorColor
+      ? { backgroundColor: indicatorColor }
+      : {}),
   };
 
   return (
@@ -75,8 +82,10 @@ const CustomSyntaxHighlighter: React.FC<CustomSyntaxHighlighterProps> = ({
       {/* Tab Container */}
       <div
         className={cn(
-          "p-2 rounded-t-lg",
-          themeMode === "light" ? "bg-gray-100 text-black" : "bg-[#1c1c1c] text-white"
+          'p-2 rounded-t-lg',
+          themeMode === 'light'
+            ? 'bg-gray-100 text-black'
+            : 'bg-[#1c1c1c] text-white'
         )}
       >
         <div className="flex items-center h-6">
@@ -99,16 +108,20 @@ const CustomSyntaxHighlighter: React.FC<CustomSyntaxHighlighterProps> = ({
                 className={cn(
                   'group relative flex items-center h-7 px-3 text-xs select-none cursor-pointer transition-all duration-200 mx-0.5 max-w-[200px] min-w-[60px]',
                   key === activeTabKey
-                    ? themeMode === "light" ? "text-black bg-white" : "text-white bg-[#2a2a2a]"
-                    : themeMode === "light" ? "text-gray-600 hover:bg-gray-200" : "text-gray-400 hover:bg-[#252525]"
+                    ? themeMode === 'light'
+                      ? 'text-black bg-white'
+                      : 'text-white bg-[#2a2a2a]'
+                    : themeMode === 'light'
+                      ? 'text-gray-600 hover:bg-gray-200'
+                      : 'text-gray-400 hover:bg-[#252525]'
                 )}
               >
                 {/* Active Tab Background */}
                 {key === activeTabKey && (
                   <div
                     className={cn(
-                      "absolute inset-0",
-                      themeMode === "light" ? "bg-white" : "bg-[#2a2a2a]"
+                      'absolute inset-0',
+                      themeMode === 'light' ? 'bg-white' : 'bg-[#2a2a2a]'
                     )}
                   ></div>
                 )}
@@ -130,7 +143,7 @@ const CustomSyntaxHighlighter: React.FC<CustomSyntaxHighlighterProps> = ({
             variant={'none'}
             onClick={copyToClipboard}
             className={
-              "w-8 h-8 relative hover:bg-gray-700 focus:ring-0 focus:outline-none ml-auto"
+              'w-8 h-8 relative hover:bg-gray-700 focus:ring-0 focus:outline-none ml-auto'
               // themeMode === "light" ? "bg-gray-300 hover:bg-gray-400" : "bg-[#1F2937] hover:bg-[#374151]"
             }
           >

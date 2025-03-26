@@ -8,14 +8,13 @@
 </p>
 </a>
 
-
 ## Why Pinexio?
 
 - **Customizable UI** 🌈: Tailor the design to your needs with light/dark themes and minimal UI libraries.
 - **MDX Support** 📚: Write rich, interactive documentation with JSX components.
 - **Automatic Content Indexing** 🔍: Thanks to Contentlayer, MDX pages are automatically indexed and searchable.
 - **Zero Setup Hassle** 🚀: Add an MDX file to `/docs`, and it’s instantly live.
-  
+
 ## Key Technologies
 
 - **Next.js 15** for SEO-friendly, performant documentation.
@@ -36,4 +35,4 @@
 
 ---
 
-*Pinexio is open-source and free to use. Happy documenting!* 🚀
+_Pinexio is open-source and free to use. Happy documenting!_ 🚀

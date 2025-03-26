@@ -49,6 +49,7 @@ The TOC configuration is stored in the `config` directory:
 The TOC is structured as an object where each key represents a unique `slug` corresponding to a documentation page. These keys map to an array of TOC sections.
 
 ### TOC Structure
+
 Each TOC entry follows this format:
 
 ```tsx
@@ -70,36 +71,37 @@ The `page-slug` is derived from the `slug` metadata of the respective documentat
 
 ```tsx
 export const TocData = {
-    'getting-started/introduction': [
+  'getting-started/introduction': [
+    {
+      title: 'Welcome to Pinexio',
+      href: '/docs/getting-started/introduction#welcome-to-pinexio',
+      pages: [
         {
-            title: "Welcome to Pinexio",
-            href: "/docs/getting-started/introduction#welcome-to-pinexio",
-            pages: [
-                {
-                    title: "Why Choose Pinexio",
-                    href: "/docs/getting-started/introduction#why-choose-pinexio",
-                },
-                {
-                    title: "What Makes Pinexio Special",
-                    href: "/docs/getting-started/introduction#what-makes-pinexio-special",
-                },
-            ],
-        },
-    ],
-    'components/button': [
-        {
-            title: "Preview & Code Snippet",
-            href: "/docs/components/button#preview-and-code-snippet",
+          title: 'Why Choose Pinexio',
+          href: '/docs/getting-started/introduction#why-choose-pinexio',
         },
         {
-            title: "Props",
-            href: "/docs/components/button#props",
+          title: 'What Makes Pinexio Special',
+          href: '/docs/getting-started/introduction#what-makes-pinexio-special',
         },
-    ],
+      ],
+    },
+  ],
+  'components/button': [
+    {
+      title: 'Preview & Code Snippet',
+      href: '/docs/components/button#preview-and-code-snippet',
+    },
+    {
+      title: 'Props',
+      href: '/docs/components/button#props',
+    },
+  ],
 };
 ```
 
 ### Adding a New TOC Entry
+
 To add a new TOC entry, insert a new key-value pair in `TocData`:
 
 ```tsx
@@ -112,12 +114,15 @@ To add a new TOC entry, insert a new key-value pair in `TocData`:
 ```
 
 ### Removing a TOC Entry
+
 Simply delete the corresponding key from `TocData`.
 
 ## Where is the TOC Rendered?
+
 The TOC is used in the `toc.tsx` component, which dynamically retrieves TOC data based on the `slug` value of the active page.
 
 #### TOC Component (`src/components/toc.tsx`)
+
 <FolderTree className="overflow-hidden p-2">
   <Folder element="project-root" defaultOpen={true}>
     <Folder element="src" defaultOpen={true}>
@@ -125,13 +130,13 @@ The TOC is used in the `toc.tsx` component, which dynamically retrieves TOC data
         <File>
           <p>toc.tsx</p>
         </File>
-      </Folder>  
+      </Folder>
     </Folder>
   </Folder>
-</FolderTree>  
-
+</FolderTree>
 
 ## Summary
+
 - The TOC structure is defined in `config/toc.tsx`.
 - Each TOC key corresponds to a unique `slug` for matching documentation pages.
 - TOC modifications update the right-side quick reference links.
@@ -139,4 +144,3 @@ The TOC is used in the `toc.tsx` component, which dynamically retrieves TOC data
 - Changes are simple and allow for easy customization.
 
 This guide ensures developers can efficiently modify and maintain the TOC structure for their documentation.
-

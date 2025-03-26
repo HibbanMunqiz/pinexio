@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   useState,
@@ -6,13 +6,13 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useEffect,
-} from "react";
-import * as Dialog from "@radix-ui/react-dialog";
-import clsx from "clsx";
-import SearchButton from "@/components/search-button";
-import { Text, Search } from "lucide-react"
-import Link from "next/link";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+} from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
+import clsx from 'clsx';
+import SearchButton from '@/components/search-button';
+import { Text, Search } from 'lucide-react';
+import Link from 'next/link';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 // Define a type for your document data.
 export interface DocType {
@@ -33,7 +33,7 @@ export interface SearchDialogHandle {
 // Helper function to highlight search text.
 function highlightText(text: string, searchTerm: string): React.ReactNode {
   if (!searchTerm) return text;
-  const regex = new RegExp(`(${searchTerm})`, "gi");
+  const regex = new RegExp(`(${searchTerm})`, 'gi');
   const parts = text.split(regex);
   return (
     <>
@@ -57,17 +57,20 @@ function getSnippet(
   contextLength: number = 40
 ): React.ReactNode {
   if (!searchTerm) return text;
-  const regex = new RegExp(searchTerm, "i");
+  const regex = new RegExp(searchTerm, 'i');
   const match = regex.exec(text);
   if (!match) return text;
   const start = Math.max(0, match.index - contextLength);
-  const end = Math.min(text.length, match.index + match[0].length + contextLength);
+  const end = Math.min(
+    text.length,
+    match.index + match[0].length + contextLength
+  );
   const snippet = text.substring(start, end);
   return (
     <>
-      {start > 0 && "…"}
+      {start > 0 && '…'}
       {highlightText(snippet, searchTerm)}
-      {end < text.length && "…"}
+      {end < text.length && '…'}
     </>
   );
 }
@@ -76,7 +79,7 @@ function getSnippet(
 const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
   ({ searchData }, ref) => {
     const [open, setOpen] = useState(false);
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState('');
 
     // Expose open and close functions via the ref.
     useImperativeHandle(ref, () => ({
@@ -87,13 +90,13 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
     // Listen for Command+K / Ctrl+K to open the dialog.
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
-        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
           e.preventDefault();
           setOpen(true);
         }
       };
-      document.addEventListener("keydown", handleKeyDown);
-      return () => document.removeEventListener("keydown", handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
     }, []);
 
     // Filter documents based on query.
@@ -102,7 +105,7 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
       const q = query.toLowerCase();
       return searchData.filter((doc) => {
         const title = doc.title.toLowerCase();
-        const description = (doc.body.raw || "").toLowerCase();
+        const description = (doc.body.raw || '').toLowerCase();
         return title.includes(q) || description.includes(q);
       });
     }, [query, searchData]);
@@ -114,26 +117,26 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
             size="sm"
             onClick={() => setOpen(true)}
             placeholder="search documentation.."
-            className={"hidden md:block"}
+            className={'hidden md:block'}
           />
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay
             className={clsx(
-              "fixed z-2 inset-0 bg-black/50 transition-opacity duration-300 ease-out",
-              "data-[state=open]:opacity-100",
-              "data-[state=closed]:opacity-0"
+              'fixed z-2 inset-0 bg-black/50 transition-opacity duration-300 ease-out',
+              'data-[state=open]:opacity-100',
+              'data-[state=closed]:opacity-0'
             )}
           />
           <Dialog.Content
             className={clsx(
-              "fixed z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
-              "w-[90%] max-w-[500px] rounded-lg p-4 shadow-lg",
+              'fixed z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
+              'w-[90%] max-w-[500px] rounded-lg p-4 shadow-lg',
               // Use your existing CSS variables for dark/light mode.
-              "bg-secondary border border-border",
-              "transition-all duration-300 ease-out",
-              "data-[state=open]:opacity-100 data-[state=open]:scale-100",
-              "data-[state=closed]:opacity-0 data-[state=closed]:scale-95"
+              'bg-secondary border border-border',
+              'transition-all duration-300 ease-out',
+              'data-[state=open]:opacity-100 data-[state=open]:scale-100',
+              'data-[state=closed]:opacity-0 data-[state=closed]:scale-95'
             )}
           >
             <VisuallyHidden>
@@ -141,18 +144,21 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
             </VisuallyHidden>
 
             <div className="relative">
-              <input type="text"
-                className={clsx("w-full pl-10 pr-4 py-2 border rounded-lg",
-                  "bg-input text-foreground border-border"
+              <input
+                type="text"
+                className={clsx(
+                  'w-full pl-10 pr-4 py-2 border rounded-lg',
+                  'bg-input text-foreground border-border'
                 )}
-
                 placeholder="Search the docs..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
-              <div className="absolute inset-y-0 left-0 pl-3 
+              <div
+                className="absolute inset-y-0 left-0 pl-3 
                                 flex items-center 
-                                pointer-events-none">
+                                pointer-events-none"
+              >
                 <Search />
               </div>
             </div>
@@ -164,21 +170,26 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
                     key={doc._raw.flattenedPath}
                     className="gap-2 py-2 border-b border-border"
                   >
-                    <Link href={`/docs/${doc._raw.flattenedPath}`} onClick={() => setOpen(false)}>
-                    <div className="flex flex-col gap-3">
-                      <div className="flex gap-2 font-bold">
-                        <Text /> <div>{highlightText(doc.title, query)}</div>
-                      </div>
-                      <div className="text-sm">
-                        {getSnippet(doc.body.raw || "No description", query)}
-                      </div>
+                    <Link
+                      href={`/docs/${doc._raw.flattenedPath}`}
+                      onClick={() => setOpen(false)}
+                    >
+                      <div className="flex flex-col gap-3">
+                        <div className="flex gap-2 font-bold">
+                          <Text /> <div>{highlightText(doc.title, query)}</div>
+                        </div>
+                        <div className="text-sm">
+                          {getSnippet(doc.body.raw || 'No description', query)}
+                        </div>
                       </div>
                     </Link>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="pt-2 text-sm justify-self-center">{query.length > 0 ? `No results found.` : `Type to search`}</p>
+              <p className="pt-2 text-sm justify-self-center">
+                {query.length > 0 ? `No results found.` : `Type to search`}
+              </p>
             )}
           </Dialog.Content>
         </Dialog.Portal>
@@ -187,6 +198,6 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
   }
 );
 
-SearchDialog.displayName = "SearchDialog";
+SearchDialog.displayName = 'SearchDialog';
 
 export default SearchDialog;

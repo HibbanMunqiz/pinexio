@@ -1,17 +1,17 @@
-"use client"
+'use client';
 
-import type React from "react"
-import { createContext, useContext, useState } from "react"
-import { cn } from "@/lib/utils"
-import {FolderClosed, FolderOpen, LucideFileText} from "lucide-react"
+import type React from 'react';
+import { createContext, useContext, useState } from 'react';
+import { cn } from '@/lib/utils';
+import { FolderClosed, FolderOpen, LucideFileText } from 'lucide-react';
 
 type FolderTreeContextType = {
-  indentSize: number
-}
+  indentSize: number;
+};
 
 const FolderTreeContext = createContext<FolderTreeContextType>({
   indentSize: 16,
-})
+});
 
 export function FolderTree({
   children,
@@ -19,15 +19,18 @@ export function FolderTree({
   indentSize = 16,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & {
-  indentSize?: number
+  indentSize?: number;
 }) {
   return (
     <FolderTreeContext.Provider value={{ indentSize }}>
-      <div className={cn("text-sm border rounded-lg broder-b", className)} {...props}>
+      <div
+        className={cn('text-sm border rounded-lg broder-b', className)}
+        {...props}
+      >
         {children}
       </div>
     </FolderTreeContext.Provider>
-  )
+  );
 }
 
 export function Folder({
@@ -37,15 +40,19 @@ export function Folder({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & {
-  element: string
-  defaultOpen?: boolean
+  element: string;
+  defaultOpen?: boolean;
 }) {
-  const [isOpen, setIsOpen] = useState(defaultOpen)
-  const { indentSize } = useContext(FolderTreeContext)
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const { indentSize } = useContext(FolderTreeContext);
 
   return (
-    <div className={cn("select-none", className)} {...props}>
-      <FolderLabel name={element} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+    <div className={cn('select-none', className)} {...props}>
+      <FolderLabel
+        name={element}
+        isOpen={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+      />
       {isOpen && (
         <div
           className="pl-4 border-l border-border dark:border-border ml-2 mt-1"
@@ -55,15 +62,19 @@ export function Folder({
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export function File({ children, className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function File({
+  children,
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("select-none", className)} {...props}>
+    <div className={cn('select-none', className)} {...props}>
       <FileLabel>{children}</FileLabel>
     </div>
-  )
+  );
 }
 
 function FolderLabel({
@@ -71,16 +82,19 @@ function FolderLabel({
   isOpen,
   onClick,
 }: {
-  name: string
-  isOpen: boolean
-  onClick: () => void
+  name: string;
+  isOpen: boolean;
+  onClick: () => void;
 }) {
   return (
-    <div className="flex items-center gap-1 py-1 px-2 rounded-md hover:bg-muted/50 cursor-pointer" onClick={onClick}>
+    <div
+      className="flex items-center gap-1 py-1 px-2 rounded-md hover:bg-muted/50 cursor-pointer"
+      onClick={onClick}
+    >
       <FolderIcon isOpen={isOpen} />
       <span className="text-sm font-medium">{name}</span>
     </div>
-  )
+  );
 }
 
 function FileLabel({ children }: { children: React.ReactNode }) {
@@ -89,7 +103,7 @@ function FileLabel({ children }: { children: React.ReactNode }) {
       <FileIcon />
       <span className="text-sm">{children}</span>
     </div>
-  )
+  );
 }
 
 function FolderIcon({ isOpen }: { isOpen: boolean }) {
@@ -130,7 +144,7 @@ function FolderIcon({ isOpen }: { isOpen: boolean }) {
         <FolderClosed />
       )}
     </div>
-  )
+  );
 }
 
 function FileIcon() {
@@ -153,6 +167,5 @@ function FileIcon() {
       </svg> */}
       <LucideFileText />
     </div>
-  )
+  );
 }
-

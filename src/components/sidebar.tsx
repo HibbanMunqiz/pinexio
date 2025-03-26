@@ -1,92 +1,93 @@
+'use client';
 
-"use client"
-
-import * as React from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { ChevronLeft, ChevronRight, Menu } from "lucide-react"
-import clsx from "clsx"
+import * as React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { ChevronLeft, ChevronRight, Menu } from 'lucide-react';
+import clsx from 'clsx';
 
 type SidebarContextType = {
-  isOpen: boolean
-  setIsOpen: (value: boolean) => void
-  side: "left" | "right"
-  isMobile: boolean
-  maxWidth: number
-  toggleSidebar: () => void
-  showIconsOnCollapse: boolean
-}
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
+  side: 'left' | 'right';
+  isMobile: boolean;
+  maxWidth: number;
+  toggleSidebar: () => void;
+  showIconsOnCollapse: boolean;
+};
 
-const SidebarContext = React.createContext<SidebarContextType | undefined>(undefined)
+const SidebarContext = React.createContext<SidebarContextType | undefined>(
+  undefined
+);
 
 function useSidebar() {
-  const context = React.useContext(SidebarContext)
+  const context = React.useContext(SidebarContext);
   if (!context) {
-    throw new Error("useSidebar must be used within a SidebarProvider")
+    throw new Error('useSidebar must be used within a SidebarProvider');
   }
-  return context
+  return context;
 }
 
 function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState(false)
+  const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
     const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
+      setIsMobile(window.innerWidth < 768);
+    };
 
-    checkIsMobile()
-    window.addEventListener("resize", checkIsMobile)
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
 
     return () => {
-      window.removeEventListener("resize", checkIsMobile)
-    }
-  }, [])
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
 
-  return isMobile
+  return isMobile;
 }
 
 interface SidebarProviderProps {
-  children: React.ReactNode
-  defaultOpen?: boolean
-  defaultSide?: "left" | "right"
-  defaultMaxWidth?: number
-  showIconsOnCollapse?: boolean
-  mobileView?: boolean
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+  defaultSide?: 'left' | 'right';
+  defaultMaxWidth?: number;
+  showIconsOnCollapse?: boolean;
+  mobileView?: boolean;
 }
 
 export function SidebarProvider({
   children,
   defaultOpen = true,
-  defaultSide = "left",
+  defaultSide = 'left',
   defaultMaxWidth = 280,
   showIconsOnCollapse = true,
-  mobileView = true
+  mobileView = true,
 }: SidebarProviderProps) {
   const useMobile = useIsMobile();
 
-  const isMobile = mobileView ? useMobile : false
+  const isMobile = mobileView ? useMobile : false;
 
-  const [isOpen, setIsOpen] = React.useState(defaultOpen)
-  const [side] = React.useState<"left" | "right">(defaultSide)
-  const [maxWidth] = React.useState(defaultMaxWidth)
+  const [isOpen, setIsOpen] = React.useState(defaultOpen);
+  const [side] = React.useState<'left' | 'right'>(defaultSide);
+  const [maxWidth] = React.useState(defaultMaxWidth);
 
   const toggleSidebar = React.useCallback(() => {
-    setIsOpen((prev) => !prev)
-  }, [])
+    setIsOpen((prev) => !prev);
+  }, []);
 
   // Add keyboard shortcut (Ctrl+B) to toggle sidebar
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === "b") {
-        e.preventDefault()
-        toggleSidebar()
+      if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+        e.preventDefault();
+        toggleSidebar();
       }
-    }
+    };
 
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [toggleSidebar])
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [toggleSidebar]);
 
   const contextValue = React.useMemo(
     () => ({
@@ -98,53 +99,63 @@ export function SidebarProvider({
       toggleSidebar,
       showIconsOnCollapse,
     }),
-    [isOpen, setIsOpen, side, isMobile, maxWidth, toggleSidebar, showIconsOnCollapse]
-  )
+    [
+      isOpen,
+      setIsOpen,
+      side,
+      isMobile,
+      maxWidth,
+      toggleSidebar,
+      showIconsOnCollapse,
+    ]
+  );
 
   return (
     <SidebarContext.Provider value={contextValue}>
       {children}
     </SidebarContext.Provider>
-  )
+  );
 }
 
 // For enabling multiple sidebars in a layout
 export function SidebarLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex min-h-screen w-full">
-      {children}
-    </div>
-  )
+  return <div className="flex min-h-screen w-full">{children}</div>;
 }
 
 // Component for main content between sidebars
 export function MainContent({ children }: { children: React.ReactNode }) {
-  
   // Calculate the margin based on sidebar state
   // const marginStyle = React.useMemo(() => {
   //   if (isMobile) return {}
-    
-  //   const sideMargin = isOpen 
-  //     ? `${maxWidth}px` 
+
+  //   const sideMargin = isOpen
+  //     ? `${maxWidth}px`
   //     : showIconsOnCollapse ? "4rem" : "0"
-    
+
   //   return {
   //     [side === "left" ? "marginLeft" : "marginRight"]: sideMargin
   //   }
   // }, [isOpen, side, isMobile, maxWidth, showIconsOnCollapse])
 
   return (
-    <div 
+    <div
       className="flex flex-col h-screen overflow-auto w-full"
       // style={marginStyle}
     >
       {children}
     </div>
-  )
+  );
 }
 
-export function Sidebar({ className , children }: { className? : string, children: React.ReactNode }) {
-  const { isOpen, side, isMobile, maxWidth, setIsOpen, showIconsOnCollapse } = useSidebar()
+export function Sidebar({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const { isOpen, side, isMobile, maxWidth, setIsOpen, showIconsOnCollapse } =
+    useSidebar();
 
   // For mobile: use a fixed overlay when sidebar is open
   if (isMobile) {
@@ -157,104 +168,120 @@ export function Sidebar({ className , children }: { className? : string, childre
           />
         )}
         <aside
-          className={clsx(`
+          className={clsx(
+            `
             fixed top-0 bottom-0 z-50 flex flex-col
-            ${side === "left" ? "left-0" : "right-0"}
-            ${isOpen ? "translate-x-0" : side === "left" ? "-translate-x-full" : "translate-x-full"}
+            ${side === 'left' ? 'left-0' : 'right-0'}
+            ${isOpen ? 'translate-x-0' : side === 'left' ? '-translate-x-full' : 'translate-x-full'}
             w-[85vw] max-w-[300px] bg-white dark:bg-gray-900 
-            ${side === "left" ? "border-r" : "border-l"} dark:border-gray-800
+            ${side === 'left' ? 'border-r' : 'border-l'} dark:border-gray-800
             transition-transform duration-300 ease-in-out
-          `, className)}
+          `,
+            className
+          )}
           style={{ maxWidth: `${maxWidth}px` }}
         >
           {children}
         </aside>
       </>
-    )
+    );
   }
 
   // For desktop: use a fixed sidebar
   return (
     <aside
-      className={clsx(`
+      className={clsx(
+        `
         sticky top-0 bottom-0 z-0 flex flex-col h-screen
-        ${side === "left" ? "left-0 border-r" : "right-0 border-l"} dark:border-gray-800
+        ${side === 'left' ? 'left-0 border-r' : 'right-0 border-l'} dark:border-gray-800
         transition-all duration-300 ease-in-out
         bg-sidebar
-      `, className)}
-      style={{ 
-        minWidth: isOpen 
-          ? `${maxWidth}px` 
-          : showIconsOnCollapse ? "4rem" : "0" ,
-        width: !isOpen ?  showIconsOnCollapse ? `${maxWidth/4}px` : "0" : "0px"  
+      `,
+        className
+      )}
+      style={{
+        minWidth: isOpen ? `${maxWidth}px` : showIconsOnCollapse ? '4rem' : '0',
+        width: !isOpen
+          ? showIconsOnCollapse
+            ? `${maxWidth / 4}px`
+            : '0'
+          : '0px',
       }}
     >
       {children}
     </aside>
-  )
+  );
 }
 
 export function SidebarHeader({ children }: { children: React.ReactNode }) {
-  const { isOpen, showIconsOnCollapse } = useSidebar()
+  const { isOpen, showIconsOnCollapse } = useSidebar();
 
   // Extract the first child to show as icon when collapsed
-  const childrenArray = React.Children.toArray(children)
-  const firstChild = childrenArray[0]
+  const childrenArray = React.Children.toArray(children);
+  const firstChild = childrenArray[0];
 
   return (
     <div
       className={`
         flex items-center h-16 gap-2 border-b ${isOpen ? 'px-8' : ''} dark:border-gray-800
-        ${isOpen ? "" : "justify-center"}
+        ${isOpen ? '' : 'justify-center'}
       `}
     >
-      {isOpen ? children : (showIconsOnCollapse && firstChild ? firstChild : null)}
+      {isOpen
+        ? children
+        : showIconsOnCollapse && firstChild
+          ? firstChild
+          : null}
     </div>
-  )
+  );
 }
 
 export function SidebarContent({ children }: { children: React.ReactNode }) {
-  const { isOpen, showIconsOnCollapse } = useSidebar()
+  const { isOpen, showIconsOnCollapse } = useSidebar();
   return isOpen || showIconsOnCollapse ? (
     <div className="flex-1 overflow-auto px-3 py-2">{children}</div>
-  ) : null
+  ) : null;
 }
 
 export function SidebarFooter({ children }: { children: React.ReactNode }) {
-  const { isOpen, showIconsOnCollapse } = useSidebar()
+  const { isOpen, showIconsOnCollapse } = useSidebar();
 
   // Extract the first child to show as icon when collapsed
-  const childrenArray = React.Children.toArray(children)
-  const firstChild = childrenArray[0]
+  const childrenArray = React.Children.toArray(children);
+  const firstChild = childrenArray[0];
 
   return (
     <div
       className={`
         flex items-center h-16 border-t gap-2 ${isOpen ? 'px-4' : ''} dark:border-gray-800
-        ${isOpen ? "" : "justify-center"}
+        ${isOpen ? '' : 'justify-center'}
       `}
     >
-      {isOpen ? children : (showIconsOnCollapse && firstChild ? firstChild : null)}
+      {isOpen
+        ? children
+        : showIconsOnCollapse && firstChild
+          ? firstChild
+          : null}
     </div>
-  )
+  );
 }
 
 export function SidebarMenu({ children }: { children: React.ReactNode }) {
-  const { isOpen, showIconsOnCollapse } = useSidebar()
+  const { isOpen, showIconsOnCollapse } = useSidebar();
   return isOpen || showIconsOnCollapse ? (
     <nav className="space-y-1 px-2">{children}</nav>
-  ) : null
+  ) : null;
 }
 
 interface SidebarMenuItemProps {
-  icon?: React.ReactNode
-  label: string
-  href?: string
-  children?: React.ReactNode
-  isActive?: boolean
-  defaultOpen?: boolean
-  alwaysOpen?: boolean
-  isCollapsable?: boolean
+  icon?: React.ReactNode;
+  label: string;
+  href?: string;
+  children?: React.ReactNode;
+  isActive?: boolean;
+  defaultOpen?: boolean;
+  alwaysOpen?: boolean;
+  isCollapsable?: boolean;
 }
 
 export function SidebarMenuItem({
@@ -267,54 +294,62 @@ export function SidebarMenuItem({
   alwaysOpen = false,
   isCollapsable = false,
 }: SidebarMenuItemProps) {
-  const { isOpen, isMobile, setIsOpen } = useSidebar()
-  const [isExpanded, setIsExpanded] = React.useState(defaultOpen || alwaysOpen)
-  const pathname = usePathname()
+  const { isOpen, isMobile, setIsOpen } = useSidebar();
+  const [isExpanded, setIsExpanded] = React.useState(defaultOpen || alwaysOpen);
+  const pathname = usePathname();
 
   // Determine if this item is active based on the current path
   const isActive =
-    propIsActive !== undefined ? propIsActive : href ? pathname === href || pathname.startsWith(href) : false
+    propIsActive !== undefined
+      ? propIsActive
+      : href
+        ? pathname === href || pathname.startsWith(href)
+        : false;
 
   React.useEffect(() => {
     // If alwaysOpen is true, ensure the menu stays open
     if (alwaysOpen) {
-      setIsExpanded(true)
+      setIsExpanded(true);
     }
-  }, [alwaysOpen])
+  }, [alwaysOpen]);
 
   const handleClick = (e: React.MouseEvent) => {
     if (children && !href && !alwaysOpen) {
-      e.preventDefault()
-      setIsExpanded((prev) => !prev)
+      e.preventDefault();
+      setIsExpanded((prev) => !prev);
     }
     // Close the sidebar if in mobile view when a link is clicked
     if (isMobile && href) {
-      setIsOpen(false) // Close the sidebar
+      setIsOpen(false); // Close the sidebar
     }
-  }
+  };
   const content = (
     <>
       <div className="flex items-center">
         {icon && (
           <span
-            className={`${isActive ? "font-medium" : "text-gray-500 dark:text-gray-400"} ${isOpen ? "mr-3" : ""}`}
+            className={`${isActive ? 'font-medium' : 'text-gray-500 dark:text-gray-400'} ${isOpen ? 'mr-3' : ''}`}
           >
             {icon}
           </span>
         )}
         {isOpen && (
-          <span className={`${isActive ? "bg-sidebar-active text-sidebar-active-foreground font-bold": "text-gray-700 dark:text-gray-300"}`}>
+          <span
+            className={`${isActive ? 'bg-sidebar-active text-sidebar-active-foreground font-bold' : 'text-gray-700 dark:text-gray-300'}`}
+          >
             {label}
           </span>
         )}
       </div>
       {isOpen && children && !alwaysOpen && isCollapsable && (
         <span className="ml-auto">
-          <ChevronRight className={`h-4 w-4 transition-transform ${isExpanded ? "rotate-90" : ""}`} />
+          <ChevronRight
+            className={`h-4 w-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+          />
         </span>
       )}
     </>
-  )
+  );
 
   return (
     <div>
@@ -325,10 +360,10 @@ export function SidebarMenuItem({
             flex items-center justify-between w-full p-2 rounded-md
             ${
               isActive
-                ? "bg-sidebar-active text-black-500"
-                : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
+                ? 'bg-sidebar-active text-black-500'
+                : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
             }
-            ${!isOpen ? "justify-center" : ""}
+            ${!isOpen ? 'justify-center' : ''}
           `}
           onClick={handleClick}
         >
@@ -340,10 +375,10 @@ export function SidebarMenuItem({
             flex items-center justify-between w-full p-2 rounded-md
             ${
               isActive
-                ? "bg-sidebar text-blue-500"
-                : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
+                ? 'bg-sidebar text-blue-500'
+                : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
             }
-            ${!isOpen ? "justify-center" : ""}
+            ${!isOpen ? 'justify-center' : ''}
           `}
           onClick={handleClick}
         >
@@ -352,32 +387,37 @@ export function SidebarMenuItem({
       )}
 
       {isOpen && (isExpanded || alwaysOpen) && children && (
-        <div className="ml-6 mt-1 pl-3 border-l border-gray-200 dark:border-gray-700 space-y-1">{children}</div>
+        <div className="ml-6 mt-1 pl-3 border-l border-gray-200 dark:border-gray-700 space-y-1">
+          {children}
+        </div>
       )}
     </div>
-  )
+  );
 }
 
 export function NestedLink({
   children,
-  href = "#",
+  href = '#',
   isActive: propIsActive,
 }: {
-  children: React.ReactNode
-  href?: string
-  isActive?: boolean
+  children: React.ReactNode;
+  href?: string;
+  isActive?: boolean;
 }) {
-  const pathname = usePathname()
-  const { isMobile, setIsOpen } = useSidebar()
+  const pathname = usePathname();
+  const { isMobile, setIsOpen } = useSidebar();
 
   // Determine if this link is active based on the current path
-  const isActive = propIsActive !== undefined ? propIsActive : pathname === href || pathname.startsWith(href)
+  const isActive =
+    propIsActive !== undefined
+      ? propIsActive
+      : pathname === href || pathname.startsWith(href);
   const handleClick = () => {
     // Close the sidebar if in mobile view when a link is clicked
     if (isMobile && href) {
-      setIsOpen(false) // Close the sidebar
+      setIsOpen(false); // Close the sidebar
     }
-  }
+  };
   return (
     <Link
       href={href}
@@ -385,19 +425,19 @@ export function NestedLink({
         block py-1 px-2 rounded-md text-sm
         ${
           isActive
-            ? "bg-sidebar-active text-primary font-bold"
-            : "hover:bg-gray-100 dark:hover:bg-gray-800"
+            ? 'bg-sidebar-active text-primary font-bold'
+            : 'hover:bg-gray-100 dark:hover:bg-gray-800'
         }
       `}
       onClick={handleClick}
     >
       {children}
     </Link>
-  )
+  );
 }
 
 export function SidebarTrigger() {
-  const { toggleSidebar, side, isOpen } = useSidebar()
+  const { toggleSidebar, side, isOpen } = useSidebar();
 
   return (
     <button
@@ -406,7 +446,7 @@ export function SidebarTrigger() {
       aria-label="Toggle sidebar"
     >
       {isOpen ? (
-        side === "left" ? (
+        side === 'left' ? (
           <ChevronLeft className="h-5 w-5" />
         ) : (
           <ChevronRight className="h-5 w-5" />
@@ -415,19 +455,21 @@ export function SidebarTrigger() {
         <Menu className="h-5 w-5" />
       )}
     </button>
-  )
+  );
 }
 
 export function SidebarHeaderLogo({ logo }: { logo?: React.ReactNode }) {
   return (
-    <div className="h-10 w-10 flex items-center justify-center">
-      {logo}
-    </div>
-  )
+    <div className="h-10 w-10 flex items-center justify-center">{logo}</div>
+  );
 }
 
 export function Title({ children }: { children: React.ReactNode }) {
-  return <h1 className="text-3xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">{children}</h1>
+  return (
+    <h1 className="text-3xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
+      {children}
+    </h1>
+  );
 }
 
 export function UserAvatar({ avatar }: { avatar: React.ReactNode }) {
@@ -438,5 +480,5 @@ export function UserAvatar({ avatar }: { avatar: React.ReactNode }) {
     <div className="h-8 w-8 rounded-full flex items-center justify-center">
       {avatar}
     </div>
-  )
+  );
 }
