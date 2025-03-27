@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 interface DividerProps {
-  orientation?: "horizontal" | "vertical";
+  orientation?: 'horizontal' | 'vertical';
   color?: string;
   thickness?: string;
   length?: string;
@@ -9,16 +9,19 @@ interface DividerProps {
 }
 
 const Divider: React.FC<DividerProps> = ({
-  orientation = "horizontal",
-  color = "bg-gray-300",
-  thickness = "h-px",
-  length = "w-full",
-  margin = "my-4",
+  orientation = 'horizontal',
+  color = 'bg-gray-300',
+  thickness = 'h-px',
+  length = 'w-full',
+  margin = 'my-4',
 }) => {
-  return orientation === "horizontal" ? (
+  return orientation === 'horizontal' ? (
     <div className={`${color} ${thickness} ${length} ${margin}`} />
   ) : (
-    <div className={`${color} ${thickness} ${length} ${margin}`} style={{ width: "1px" }} />
+    <div
+      className={`${color} ${thickness} ${length} ${margin}`}
+      style={{ width: '1px' }}
+    />
   );
 };
 

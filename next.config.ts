@@ -1,5 +1,5 @@
 // import createMDX from '@next/mdx';
-import { createContentlayerPlugin } from "next-contentlayer2"
+import { createContentlayerPlugin } from 'next-contentlayer2';
 
 // const withMDX = createMDX({
 //   extension: /\.mdx?$/,
@@ -11,14 +11,14 @@ import { createContentlayerPlugin } from "next-contentlayer2"
 const nextConfig = {
   // pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   webpack: (config: any) => {
-    config.cache=false
-    return config
+    config.cache = false;
+    return config;
   },
   images: {
     remotePatterns: [
       {
-        protocol: "https" as "https",
-        hostname: "avatars.githubusercontent.com",
+        protocol: 'https' as 'https',
+        hostname: 'avatars.githubusercontent.com',
       },
     ],
   },
@@ -28,6 +28,6 @@ const nextConfig = {
 
 const withContentlayer = createContentlayerPlugin({
   // Additional Contentlayer config options
-})
+});
 
-export default withContentlayer(nextConfig)
+export default withContentlayer(nextConfig);

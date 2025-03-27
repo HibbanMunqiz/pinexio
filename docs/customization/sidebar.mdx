@@ -48,6 +48,7 @@ The sidebar configuration is stored in the `config` directory:
 To customize the sidebar, open `config/sidebar.tsx` and modify the `sidebarNav` array.
 
 ### Sidebar Structure
+
 Each sidebar item follows this structure:
 
 ```tsx
@@ -63,6 +64,7 @@ Each sidebar item follows this structure:
 ```
 
 ### Adding a New Sidebar Section
+
 If you want to add a new section, append an object to the `sidebarNav` array:
 
 ```tsx
@@ -79,6 +81,7 @@ If you want to add a new section, append an object to the `sidebarNav` array:
 ```
 
 ### Adding a Single Page Without Sub-Pages
+
 To add a single page (without dropdown sub-pages):
 
 ```tsx
@@ -91,15 +94,19 @@ To add a single page (without dropdown sub-pages):
 ```
 
 ### Removing an Existing Section
+
 Simply remove the corresponding object from the `sidebarNav` array.
 
 ### Updating an Existing Section
+
 Modify the `title`, `href`, or `pages` array for an existing item.
 
 ## Where is the Sidebar Rendered?
+
 The sidebar is typically used inside a `Sidebar.tsx` component inside the `components` directory. Ensure that this component correctly maps over the `sidebarNav` array and renders it dynamically.
 
 ## Summary
+
 - The sidebar structure is defined in `config/sidebar.tsx`.
 - Each section contains a `title`, optional `icon`, and `pages` array.
 - To modify the sidebar, update the `sidebarNav` array.

@@ -3,7 +3,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/button';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import {
+  oneDark,
+  oneLight,
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Check, Copy } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -45,25 +48,29 @@ export const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
   indicatorColor,
 }) => {
   // Filter out and validate Tab children
-  const tabElements = React.Children.toArray(children).filter((child) => 
-    React.isValidElement(child) && 
-    (child.type === CodeTab || (typeof child.type === 'function' && child.type.name === 'Tab'))
+  const tabElements = React.Children.toArray(children).filter(
+    (child) =>
+      React.isValidElement(child) &&
+      (child.type === CodeTab ||
+        (typeof child.type === 'function' && child.type.name === 'Tab'))
   );
 
   if (tabElements.length === 0) {
     throw new Error(
-      "Error: You must provide at least one <Tab> child. Example:\n\n" +
-      `<CodeHighlighter themeMode="dark" indicatorColor="bg-blue-900">\n  <Tab name="jsx">{\`\\\`\\\`jsx\nconst a = 1\n\\\`\\\`\\\`\`}</Tab>\n</CodeHighlighter>`
+      'Error: You must provide at least one <Tab> child. Example:\n\n' +
+        `<CodeHighlighter themeMode="dark" indicatorColor="bg-blue-900">\n  <Tab name="jsx">{\`\\\`\\\`jsx\nconst a = 1\n\\\`\\\`\\\`\`}</Tab>\n</CodeHighlighter>`
     );
   }
 
   // Parse each Tab child for its code block content.
-  // We assume a code block format: 
+  // We assume a code block format:
   // \`\`\`<language>\n<code>\n\`\`\`
   const tabs: Record<string, TabInfo> = {};
   tabElements.forEach((child, index) => {
-    const { name, children: tabContent } = (child as React.ReactElement<TabProps>).props;
-    const content = typeof tabContent === "string" ? tabContent.trim() : "";
+    const { name, children: tabContent } = (
+      child as React.ReactElement<TabProps>
+    ).props;
+    const content = typeof tabContent === 'string' ? tabContent.trim() : '';
     const codeRegex = /^```(\w+)\n([\s\S]+?)\n```$/;
     const match = content.match(codeRegex);
     let language = '';
@@ -75,7 +82,7 @@ export const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
       syntax = content;
     }
     // Use provided name if exists; otherwise, fall back to language or default label.
-    const tabName = name ? name : (language || `Tab ${index + 1}`);
+    const tabName = name ? name : language || `Tab ${index + 1}`;
     tabs[tabName] = { syntax, language, name: tabName };
   });
 
@@ -115,7 +122,9 @@ export const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
   const indicatorClass = isHexColor ? '' : indicatorColor || 'bg-yellow-500';
   const combinedIndicatorStyle = {
     ...indicatorStyle,
-    ...(isHexColor && indicatorColor ? { backgroundColor: indicatorColor } : {}),
+    ...(isHexColor && indicatorColor
+      ? { backgroundColor: indicatorColor }
+      : {}),
   };
 
   return (
@@ -123,8 +132,10 @@ export const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
       {/* Tab Container */}
       <div
         className={cn(
-          "p-2 rounded-t-lg",
-          themeMode === "light" ? "bg-gray-100 text-black" : "bg-[#1c1c1c] text-white"
+          'p-2 rounded-t-lg',
+          themeMode === 'light'
+            ? 'bg-gray-100 text-black'
+            : 'bg-[#1c1c1c] text-white'
         )}
       >
         <div className="flex items-center h-6">
@@ -147,8 +158,12 @@ export const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
                 className={cn(
                   'group relative flex items-center h-7 px-3 text-xs select-none cursor-pointer transition-all duration-200 mx-0.5 max-w-[200px] min-w-[60px]',
                   key === activeTabKey
-                    ? themeMode === "light" ? "text-black bg-white" : "text-white bg-[#2a2a2a]"
-                    : themeMode === "light" ? "text-gray-600 hover:bg-gray-200" : "text-gray-400 hover:bg-[#252525]"
+                    ? themeMode === 'light'
+                      ? 'text-black bg-white'
+                      : 'text-white bg-[#2a2a2a]'
+                    : themeMode === 'light'
+                      ? 'text-gray-600 hover:bg-gray-200'
+                      : 'text-gray-400 hover:bg-[#252525]'
                 )}
               >
                 {key}
@@ -166,8 +181,10 @@ export const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
             variant={'none'}
             onClick={copyToClipboard}
             className={cn(
-              "w-8 h-8 relative focus:ring-0 focus:outline-none ml-auto",
-              themeMode === "light" ? "bg-gray-300 hover:bg-gray-400" : "bg-[#1F2937] hover:bg-[#374151]"
+              'w-8 h-8 relative focus:ring-0 focus:outline-none ml-auto',
+              themeMode === 'light'
+                ? 'bg-gray-300 hover:bg-gray-400'
+                : 'bg-[#1F2937] hover:bg-[#374151]'
             )}
           >
             <span

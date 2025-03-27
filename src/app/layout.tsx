@@ -1,15 +1,15 @@
-import { Geist } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider"
-import { Metadata } from "next";
-import {meta} from "../../config/meta";
+import { Geist } from 'next/font/google';
+import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
+import { Metadata } from 'next';
+import { meta } from '../../config/meta';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
-export const metadata: Metadata = meta
+export const metadata: Metadata = meta;
 
 export default function RootLayout({
   children,
@@ -30,7 +30,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-
           {/* <ToastContainer /> */}
           {children}
         </ThemeProvider>

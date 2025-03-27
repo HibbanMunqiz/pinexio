@@ -2,13 +2,41 @@
   "name": "documentation-template-nextjs",
   "version": "0.1.0",
   "private": true,
+  "author": "Sanjay Rajeev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sanjayc208/pinexio/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:content": "contentlayer2 build"
+    "build:content": "contentlayer2 build",
+    "format": "prettier --write ."
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pnpm lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md, mdx}": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [
+    "nextjs",
+    "documentation",
+    "template",
+    "docs",
+    "nextjs-template",
+    "static-site",
+    "mdx",
+    "documentation-template",
+    "nextjs-docs",
+    "nextjs-starter"
+  ],
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
@@ -53,6 +81,8 @@
     "concurrently": "^9.1.2",
     "eslint": "^9",
     "eslint-config-next": "15.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.9",
     "typescript": "^5"

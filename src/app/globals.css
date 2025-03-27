@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tailwindcss-animated";
+@import 'tailwindcss';
+@import 'tailwindcss-animated';
 
 @variant dark (&:is(.dark *));
 

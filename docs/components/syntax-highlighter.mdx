@@ -1,6 +1,6 @@
 ---
-title: "Syntax Highlighter"
-description: "The Syntax Highlighter component offers customizable and interactive syntax highlighting for code snippets, supporting multiple languages, tabs for variations, and a copy-to-clipboard feature."
+title: 'Syntax Highlighter'
+description: 'The Syntax Highlighter component offers customizable and interactive syntax highlighting for code snippets, supporting multiple languages, tabs for variations, and a copy-to-clipboard feature.'
 date: 2025-03-12
 ---
 
@@ -45,18 +45,17 @@ The **Syntax Highlighter** component provides a customizable and interactive way
       );
     }
     ```
+
   </TabsContent>
 </Tabs>
 
 ## Props
 
-| Prop            | Type                              | Default  | Description |
-|---------------|---------------------------------|---------|-------------|
-| `tabs`       | `Record<string, { syntax: string; language?: string }>` | `{}` | An object where keys represent tab names and values contain code and language details. |
-| `className`  | `string` | `undefined` | Custom CSS classes for additional styling. |
-| `themeMode`  | `'light' \| 'dark'` | `'dark'` | Controls the theme mode of the syntax highlighter. |
-| `lightTheme` | `Record<string, any>` | `oneLight` | Custom theme for light mode. |
-| `darkTheme`  | `Record<string, any>` | `oneDark` | Custom theme for dark mode. |
-| `indicatorColor` | `string` | `'bg-yellow-500'` | Custom color for the active tab indicator. |
-
-
+| Prop             | Type                                                    | Default           | Description                                                                            |
+| ---------------- | ------------------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------- |
+| `tabs`           | `Record<string, { syntax: string; language?: string }>` | `{}`              | An object where keys represent tab names and values contain code and language details. |
+| `className`      | `string`                                                | `undefined`       | Custom CSS classes for additional styling.                                             |
+| `themeMode`      | `'light' \| 'dark'`                                     | `'dark'`          | Controls the theme mode of the syntax highlighter.                                     |
+| `lightTheme`     | `Record<string, any>`                                   | `oneLight`        | Custom theme for light mode.                                                           |
+| `darkTheme`      | `Record<string, any>`                                   | `oneDark`         | Custom theme for dark mode.                                                            |
+| `indicatorColor` | `string`                                                | `'bg-yellow-500'` | Custom color for the active tab indicator.                                             |
