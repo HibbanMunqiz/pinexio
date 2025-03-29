@@ -1,16 +1,9 @@
 // import createMDX from '@next/mdx';
 import { createContentlayerPlugin } from 'next-contentlayer2';
 
-// const withMDX = createMDX({
-//   extension: /\.mdx?$/,
-//   options: {
-//     providerImportSource: '@mdx-js/react', // Ensures that MDX files use MDXProvider
-//   },
-// });
-
 const nextConfig = {
   // pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  webpack: (config: any) => {
+  webpack: (config: { cache: boolean; }) => {
     config.cache = false;
     return config;
   },
@@ -23,8 +16,6 @@ const nextConfig = {
     ],
   },
 };
-
-// export default withMDX(nextConfig);
 
 const withContentlayer = createContentlayerPlugin({
   // Additional Contentlayer config options

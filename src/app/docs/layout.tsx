@@ -29,34 +29,12 @@ import Header from '@/components/header';
 import { ModeToggle } from '@/components/mode-toggle';
 import { Button } from '@/components/button';
 import { useIsMobile } from '@/hooks/use-mobile';
-// Group docs into top-level and nested by folder
-// function groupDocs(docs: any[]) {
-//   const topDocs: any[] = [];
-//   const folderGroups: { [key: string]: any[] } = {};
-
-//   docs.forEach((doc) => {
-//     // If the file is in the root, push to topDocs
-//     if (doc._raw.sourceFileDir === ".") {
-//       topDocs.push(doc);
-//     } else {
-//       // Use the folder name from sourceFileDir (e.g. "getting-started")
-//       const folder = doc._raw.sourceFileDir;
-//       if (!folderGroups[folder]) {
-//         folderGroups[folder] = [];
-//       }
-//       folderGroups[folder].push(doc);
-//     }
-//   });
-
-//   return { topDocs, folderGroups };
-// }
 
 export default function DocsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // const { topDocs, folderGroups } = groupDocs(allDocs);
   // Destructure sidebarNav from configDocs
   const router = useRouter();
   const isMobile = useIsMobile();
@@ -90,7 +68,7 @@ export default function DocsLayout({
             </Link>
           </SidebarHeader>
           <SidebarContent>
-            {sidebarNav.map((section: any) => (
+            {sidebarNav.map((section) => (
               <SidebarMenuItem
                 isCollapsable={section.pages && section.pages.length > 0}
                 key={section.title}
@@ -99,67 +77,13 @@ export default function DocsLayout({
                 icon={section.icon}
                 defaultOpen={true}
               >
-                {section.pages?.map((page: any) => (
+                {section.pages?.map((page) => (
                   <NestedLink key={page.href} href={page.href}>
                     {page.title}
                   </NestedLink>
                 ))}
               </SidebarMenuItem>
             ))}
-            {/* <SidebarContent>
-          {topDocs.map((doc) => (
-            <SidebarMenuItem
-              key={doc._raw.flattenedPath}
-              icon={<FileText className="h-5 w-5" />}
-              label={doc.title}
-              href={doc.url} // e.g., "/docs/search-button"
-            />
-          ))}
-
-          {Object.entries(folderGroups).map(([folder, docs]) => (
-            <SidebarMenuItem
-              key={folder}
-              label={folder
-                .split('-') // Split on hyphens
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-                .join(' ') // Join back with spaces
-              }
-              defaultOpen={true}
-              icon={<FileText className="h-5 w-5" />}
-            >
-              {docs.map((doc) => (
-                <NestedLink key={doc._raw.flattenedPath} href={doc.url}>
-                  {doc.title}
-                </NestedLink>
-              ))}
-            </SidebarMenuItem>
-          ))} */}
-            {/* <SidebarMenu>
-              <SidebarMenuItem icon={<Home className="h-5 w-5" />} label="Dashboard" href="/" />
-              <SidebarMenuItem icon={<Users className="h-5 w-5" />} label="Users" defaultOpen={true}>
-                <NestedLink href="/users">User List</NestedLink>
-                <NestedLink href="/users/groups">User Groups</NestedLink>
-              </SidebarMenuItem>
-              <SidebarMenuItem isActive={true} icon={<FileText className="h-5 w-5" />} label="Documents" href="/documents" />
-              <SidebarMenuItem icon={<BarChart className="h-5 w-5" />} label="Analytics" href="/analytics" />
-              <SidebarMenuItem icon={<Mail className="h-5 w-5" />} label="Messages" href="/messages" />
-              <SidebarMenuItem icon={<Bell className="h-5 w-5" />} label="Notifications" alwaysOpen={true}>
-                <NestedLink href="/notifications">All Notifications</NestedLink>
-                <NestedLink href="/notifications/mentions">Mentions</NestedLink>
-                <NestedLink href="/notifications/settings">Settings</NestedLink>
-              </SidebarMenuItem>
-              <SidebarMenuItem icon={<Bell className="h-5 w-5" />} label="Notifications" alwaysOpen={true}>
-                <NestedLink href="/notifications">All Notifications</NestedLink>
-                <NestedLink href="/notifications/mentions">Mentions</NestedLink>
-                <NestedLink href="/notifications/settings">Settings</NestedLink>
-              </SidebarMenuItem>
-              <SidebarMenuItem icon={<Bell className="h-5 w-5" />} label="Notifications" alwaysOpen={true}>
-                <NestedLink href="/notifications">All Notifications</NestedLink>
-                <NestedLink href="/notifications/mentions">Mentions</NestedLink>
-                <NestedLink href="/notifications/settings">Settings</NestedLink>
-              </SidebarMenuItem>
-              <SidebarMenuItem icon={<Settings className="h-5 w-5" />} label="Settings" href="/settings" />
-            </SidebarMenu> */}
           </SidebarContent>
 
           <SidebarFooter>

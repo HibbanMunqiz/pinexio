@@ -38,7 +38,7 @@ const Toc: React.FC<TocProps> = ({ doc }) => {
       <nav className="mt-4">
         <ul className="space-y-3">
           {TocData[doc.slug as keyof typeof TocData]?.map(
-            (item: any, index: any) => {
+            (item, index) => {
               const isActive = currentPath === item.href;
 
               return (
@@ -54,9 +54,9 @@ const Toc: React.FC<TocProps> = ({ doc }) => {
                     {item.title}
                   </Link>
 
-                  {'pages' in item && item.pages?.length > 0 && (
+                  {'pages' in item && (item.pages ?? []).length > 0 && (
                     <ul className="mt-2 ml-4 space-y-2 border-l-2 border-gray-300 pl-3">
-                      {item.pages.map((subItem: any, subIndex: any) => {
+                      {item.pages?.map((subItem, subIndex) => {
                         const isSubActive = currentPath === subItem.href;
 
                         return (

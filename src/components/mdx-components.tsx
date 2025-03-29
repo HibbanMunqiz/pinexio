@@ -197,7 +197,7 @@ const components = {
   StepTitle,
   StepContent,
   Stepper,
-  CodeTabs: ({ tabs }: React.HTMLAttributes<HTMLElement> & { tabs?: any }) => {
+  CodeTabs: ({ tabs }: React.HTMLAttributes<HTMLElement> & { tabs: Record<string, { syntax: string; language: string }> }) => {
     const isLightMode = 'dark';
 
     return (
