@@ -231,4 +231,14 @@ export const TocData: TocData = {
             href: '/docs/customization/seo-and-social-sharing#configuring-metadata-in-nextjs',
         },
     ],
+    'getting-started/quick-start': [
+        {
+            title: 'Create your MDX file and add metadata',
+            href: '/docs/getting-started/quick-start#create-your-mdx-file-and-add-metadata',
+        },
+        {
+            title: 'Start Writing',
+            href: '/docs/customization/seo-and-social-sharing#configuring-metadata-in-nextjs',
+        },
+    ],
 };
