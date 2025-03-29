@@ -238,7 +238,7 @@ export const TocData: TocData = {
         },
         {
             title: 'Start Writing',
-            href: '/docs/customization/seo-and-social-sharing#configuring-metadata-in-nextjs',
+            href: '/docs/getting-started/quick-start#start-writing',
         },
     ],
 };
