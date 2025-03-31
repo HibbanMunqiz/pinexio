@@ -55,6 +55,14 @@ export const sidebarNav = [
         title: 'Note',
         href: '/docs/components/note',
       },
+      {
+        title: 'Menu',
+        href: '/docs/components/menu',
+      },
+      {
+        title: 'Popover',
+        href: '/docs/components/popover',
+      },
     ],
   },
   {

@@ -10,6 +10,15 @@ import CustomSyntaxHighlighter from '@/components/syntax-highlighter';
 import Stepper from '@/components/vertical-stepper';
 import { Step, Steps, StepTitle, StepContent } from '@/components/step';
 import { Button } from '@/components/button';
+import { Menu, MenuItem, MenuTrigger, PopMenu } from '@/components/menu';
+
+import {
+  PopoverContent,
+  PopoverTrigger,
+  Popover,
+  PopoverClose,
+} from '@/components/popover';
+
 import {
   SidebarProvider,
   SidebarLayout,
@@ -197,7 +206,11 @@ const components = {
   StepTitle,
   StepContent,
   Stepper,
-  CodeTabs: ({ tabs }: React.HTMLAttributes<HTMLElement> & { tabs: Record<string, { syntax: string; language: string }> }) => {
+  CodeTabs: ({
+    tabs,
+  }: React.HTMLAttributes<HTMLElement> & {
+    tabs: Record<string, { syntax: string; language: string }>;
+  }) => {
     const isLightMode = 'dark';
 
     return (
@@ -235,6 +248,14 @@ const components = {
   FolderTree,
   File,
   Note,
+  Menu,
+  MenuItem,
+  MenuTrigger,
+  PopMenu,
+  PopoverContent,
+  PopoverTrigger,
+  Popover,
+  PopoverClose,
 };
 
 interface Mdxchildren {

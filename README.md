@@ -34,6 +34,7 @@
 - [GitHub Repo](https://github.com/sanjayc208/pinexio)
 
 ---
+
 ## 🚀 Deploy to Vercel in Seconds
 
 Want to get your Next.js app live with zero hassle? Vercel, built by the creators of Next.js, makes deployment a breeze!
@@ -43,6 +44,5 @@ Check out the [Next.js deployment guide](https://nextjs.org/docs/deployment) for
 Ready to go live? Click the button below and deploy your app in just a few clicks! 🔥
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/sanjayc208/pinexio)
-
 
 _Pinexio is open-source and free to use. Happy documenting!_ 🚀
