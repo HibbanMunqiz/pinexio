@@ -3,7 +3,7 @@ import { createContentlayerPlugin } from 'next-contentlayer2';
 
 const nextConfig = {
   // pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  webpack: (config: { cache: boolean; }) => {
+  webpack: (config: { cache: boolean }) => {
     config.cache = false;
     return config;
   },
