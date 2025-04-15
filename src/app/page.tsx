@@ -62,7 +62,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+              className="text-shadow-lg mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
             >
               A customizable open-source documentation template built with
               Next.js 15, Tailwind CSS 4, and Contentlayer for beautiful, fast,
@@ -78,15 +78,17 @@ export default function Home() {
             className="flex flex-row sm:flex-row gap-4 mt-8"
           >
             <Button
-              className="px-6 py-3 text-md"
+              className="px-6 py-3"
               variant={'primary'}
               onClick={() => router.push('/docs/getting-started/introduction')}
+              size={'md'}
             >
               Get Started
             </Button>
             <Button
-              className="px-6 py-3 text-md gap-2"
+              className="px-6 py-3 gap-2"
               variant={'outline'}
+              size={'md'}
               onClick={() =>
                 router.push('https://github.com/sanjayc208/pinexio')
               }
@@ -96,7 +98,6 @@ export default function Home() {
             </Button>
           </motion.div>
         </motion.div>
-
         <div className="mt-16 mb-6 flex flex-wrap justify-center items-center gap-8 md:gap-12">
           {[
             {

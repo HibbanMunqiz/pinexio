@@ -11,6 +11,14 @@ import Stepper from '@/components/vertical-stepper';
 import { Step, Steps, StepTitle, StepContent } from '@/components/step';
 import { Button } from '@/components/button';
 import { Menu, MenuItem, MenuTrigger, PopMenu } from '@/components/menu';
+import {
+  NavMenu,
+  NavMenuItem,
+  NavMenuList,
+  NavMenuTrigger,
+  NavListItem,
+  NavMenuContent,
+} from '@/components/nav-menu';
 
 import {
   PopoverContent,
@@ -31,7 +39,7 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
   SidebarHeaderLogo,
-  Title,
+  SidebarHeaderTitle,
   UserAvatar,
   NestedLink,
 } from '@/components/sidebar';
@@ -46,6 +54,23 @@ import {
   BookOpen,
   Component,
 } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from '@/components/select';
+import {
+  DialogCloseTrigger,
+  DialogContent,
+  DialogTrigger,
+  Dialog,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+} from '@/components/dialog';
+
 import { Folder, FolderTree, File } from '@/components/folder-tree';
 import { Note } from '@/components/note';
 
@@ -232,7 +257,7 @@ const components = {
   SidebarMenuItem,
   SidebarTrigger,
   SidebarHeaderLogo,
-  Title,
+  SidebarHeaderTitle,
   UserAvatar,
   NestedLink,
   Home,
@@ -256,6 +281,24 @@ const components = {
   PopoverTrigger,
   Popover,
   PopoverClose,
+  NavMenu,
+  NavMenuItem,
+  NavMenuList,
+  NavMenuTrigger,
+  NavListItem,
+  NavMenuContent,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogTrigger,
+  Dialog,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
 };
 
 interface Mdxchildren {

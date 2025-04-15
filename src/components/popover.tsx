@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import React from 'react';
 import {
   createContext,
@@ -8,7 +9,12 @@ import {
   ReactNode,
 } from 'react';
 
-// Removed duplicate Position type declaration
+export type Position = {
+  xAlign: 'left' | 'center' | 'right';
+  yAlign: 'top' | 'bottom' | 'center';
+};
+
+export type PopoverPosition = 'top' | 'bottom' | 'left' | 'right';
 
 type PopoverContextType = {
   isOpen: boolean;
@@ -16,6 +22,11 @@ type PopoverContextType = {
   triggerRef: React.RefObject<HTMLDivElement | null>;
   contentRef?: React.RefObject<HTMLDivElement | null>;
   close: () => void;
+  position: PopoverPosition;
+  actualPlacement: Position;
+  setActualPlacement: React.Dispatch<React.SetStateAction<Position>>;
+  isPositioned: boolean;  // Added isPositioned to the context
+  setIsPositioned: React.Dispatch<React.SetStateAction<boolean>>;  // Added setIsPositioned to the context
 };
 
 const PopoverContext = createContext<PopoverContextType | null>(null);
@@ -27,6 +38,7 @@ type PopoverProps = {
   onClose?: () => void;
   closeOnOutsideClick?: boolean;
   closeOnEsc?: boolean;
+  position?: PopoverPosition;
 };
 
 export const Popover = ({
@@ -36,10 +48,16 @@ export const Popover = ({
   onClose,
   closeOnOutsideClick = true,
   closeOnEsc = true,
+  position = 'bottom',
 }: PopoverProps) => {
   const [isOpen, setIsOpen] = useState(open);
+  const [isPositioned, setIsPositioned] = useState(false);  // local state to track if the popover has been positioned
   const popoverRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
+  const [actualPlacement, setActualPlacement] = useState<Position>({
+    xAlign: 'center',
+    yAlign: position === 'top' ? 'top' : 'bottom',
+  });
 
   // Controlled vs uncontrolled handling
   useEffect(() => {
@@ -49,6 +67,7 @@ export const Popover = ({
   // Handle external close function
   const close = () => {
     setIsOpen(false);
+    setIsPositioned(false);  // Reset positioning state when closing
     onClose?.();
   };
 
@@ -57,12 +76,10 @@ export const Popover = ({
     if (!closeOnOutsideClick) return;
 
     const handleClickOutside = (event: MouseEvent) => {
-      console.log('handleClickOutside', event);
       if (
         popoverRef.current &&
         !popoverRef.current.contains(event?.target as Node)
       ) {
-        console.log('Click outside detected');
         close();
       }
     };
@@ -90,8 +107,20 @@ export const Popover = ({
   }, [isOpen, closeOnEsc, onClose]);
 
   return (
-    <PopoverContext.Provider value={{ isOpen, setIsOpen, triggerRef, close }}>
-      <div className={`relative inline-block ${className}`} ref={popoverRef}>
+    <PopoverContext.Provider 
+      value={{ 
+        isOpen, 
+        setIsOpen, 
+        triggerRef, 
+        close, 
+        position, 
+        actualPlacement,
+        setActualPlacement: setActualPlacement,
+        isPositioned, // pass isPositioned to context
+        setIsPositioned, // pass setIsPositioned to context
+      }}
+    >
+      <div className={`relative inline-block ${className || ''}`} ref={popoverRef}>
         {children}
       </div>
     </PopoverContext.Provider>
@@ -131,7 +160,7 @@ export const PopoverTrigger = ({
 
   return (
     <div
-      className={`cursor-pointer ${className}`}
+      className={`cursor-pointer ${className || ''}`}
       onClick={() => setIsOpen((prev) => !prev)}
       aria-haspopup="true"
       ref={triggerRef}
@@ -141,56 +170,42 @@ export const PopoverTrigger = ({
   );
 };
 
-// Removed duplicate PopoverContentProps declaration
-export type Position = {
-  xAlign: 'left' | 'center' | 'right';
-  yAlign: 'top' | 'bottom' | 'center';
-};
-
-export type PopoverPosition = 'top' | 'bottom' | 'left' | 'right';
-
-export interface PopoverContentProps {
+interface PopoverContentProps {
   children: React.ReactNode;
   className?: string;
   sideOffset?: number;
-  position?: PopoverPosition; // New position prop
+  position?: PopoverPosition;
+  showArrow?: boolean;
+  arrowClassName?: string;
+  arrowSize?: number;
 }
 
 export const PopoverContent = ({
   children,
-  className,
+  className = '',
   sideOffset = 5,
-  position = 'top', // Default position is bottom
+  position = 'bottom',
+  showArrow = true,
+  arrowClassName = '',
+  arrowSize = 8,
 }: PopoverContentProps) => {
   const context = useContext(PopoverContext);
   if (!context) {
     throw new Error('PopoverContent must be used within a Popover');
   }
 
-  const { isOpen, triggerRef } = context;
+  const { isOpen, triggerRef, isPositioned, setIsPositioned } = context;
+  const [arrowDefaultClassName, setArrowDefaultClassName] =  useState<string>('');
   const contentRef = useRef<HTMLDivElement>(null);
   const [placement, setPlacement] = useState<Position>({
     xAlign: 'center',
     yAlign: position === 'top' ? 'top' : 'bottom',
   });
-  const [contentStyles, setContentStyles] = useState({
-    position: 'absolute',
-    top: '0px',
-    left: '0px',
+  // const [isPositioned, setIsPositioned] = useState(false);
+  const [dynamicStyles, setDynamicStyles] = useState({
     transform: 'translate(0px, 0px)',
-    opacity: 0,
-    visibility: 'hidden' as 'hidden' | 'visible',
-    maxWidth: 'calc(100vw - 16px)',
-    maxHeight: 'calc(100vh - 16px)',
-    zIndex: 50,
   });
-
-  // Register the content ref with the context
-  useEffect(() => {
-    if (context && contentRef.current) {
-      context.contentRef = contentRef;
-    }
-  }, [context, contentRef.current]);
+  const [arrowStyles, setArrowStyles] = useState<any>({});
 
   // Convert the preferred position to initial placements
   const getInitialPlacement = (pos: PopoverPosition): Position => {
@@ -214,23 +229,6 @@ export const PopoverContent = ({
 
     const triggerRect = triggerRef.current.getBoundingClientRect();
     const contentRect = contentRef.current.getBoundingClientRect();
-
-    // Check if trigger is visible in viewport
-    const isTriggerVisible =
-      triggerRect.top < window.innerHeight &&
-      triggerRect.bottom > 0 &&
-      triggerRect.left < window.innerWidth &&
-      triggerRect.right > 0;
-
-    // Hide popover if trigger not visible
-    if (!isTriggerVisible) {
-      setContentStyles((prev) => ({
-        ...prev,
-        visibility: 'hidden',
-        opacity: 0,
-      }));
-      return;
-    }
 
     // Viewport dimensions
     const viewportWidth = window.innerWidth;
@@ -347,29 +345,70 @@ export const PopoverContent = ({
       translateX = (triggerRect.width - contentRect.width) / 2;
     }
 
-    // Calculate final position (relative to trigger)
-    const top = 0; // We'll use transform instead
-    const left = 0; // We'll use transform instead
-
+    // Position the arrow
+    const arrowPosition = getArrowPosition(xAlign, yAlign, arrowSize);
+    
     // Apply positioning with transform
-    setContentStyles({
-      position: 'absolute',
-      top: `${top}px`,
-      left: `${left}px`,
+    setDynamicStyles({
       transform: `translate(${translateX}px, ${translateY}px)`,
-      opacity: 1,
-      visibility: 'visible',
-      maxWidth: 'calc(100vw - 16px)',
-      maxHeight: 'calc(100vh - 16px)',
-      zIndex: 10,
     });
+
+    setArrowStyles(arrowPosition);
+    // Now that we've calculated positions, make the popover visible
+    setIsPositioned(true);
   };
 
-  useEffect(() => {
-    // Position content initially and on changes
-    updatePosition();
+  const getArrowPosition = (xAlign: string, yAlign: string, arrowSize: number) => {
+    const arrowOffset = arrowSize / 2;
+    const position: any = {};
+    
+    // Based on popover placement, determine arrow position and border styles
+    if (yAlign === 'top') {
+      position.bottom = `-${arrowOffset}px`;
+      setArrowDefaultClassName(`border-r border-b border-border`);
 
-    // Update position on scroll and resize
+    } else if (yAlign === 'bottom') {
+      position.top = `-${arrowOffset}px`;
+      setArrowDefaultClassName(`border-t border-l border-border`);
+    }
+    
+    if ((yAlign === 'top' || yAlign === 'bottom') && xAlign === 'center') {
+      position.left = '50%';
+      position.marginLeft = `-${arrowOffset}px`;
+    } else if ((yAlign === 'top' || yAlign === 'bottom') && xAlign === 'left') {
+      position.left = '20px';
+    } else if ((yAlign === 'top' || yAlign === 'bottom') && xAlign === 'right') {
+      position.right = '20px';
+    }
+    
+    if (xAlign === 'left' && yAlign === 'center') {
+      position.right = `-${arrowOffset}px`;
+      setArrowDefaultClassName(`border-r border-b border-border`);
+      position.top = '50%';
+      position.marginTop = `-${arrowOffset}px`;
+    } else if (xAlign === 'right' && yAlign === 'center') {
+      position.left = `-${arrowOffset}px`;
+      setArrowDefaultClassName(`border-l border-b border-border`);
+      position.top = '50%';
+      position.marginTop = `-${arrowOffset}px`;
+    }
+    
+    return position;
+  };
+
+  // Initialize position calculation in a layout effect to prevent flicker
+  useEffect(() => {
+    if (isOpen && contentRef.current && triggerRef.current) {
+      updatePosition();
+    }
+    return undefined;
+  }, [isOpen]);
+
+  // Update position on scroll and resize
+  useEffect(() => {
+    // Skip if not positioned yet
+    if (!isPositioned) return;
+    
     const handlePositionChange = () => {
       window.requestAnimationFrame(updatePosition);
     };
@@ -381,41 +420,50 @@ export const PopoverContent = ({
       window.removeEventListener('resize', handlePositionChange);
       window.removeEventListener('scroll', handlePositionChange, true);
     };
-  }, [isOpen, sideOffset, position]);
+  }, [isOpen, sideOffset, position, isPositioned]);
 
   // Update position when content changes
   useEffect(() => {
+    if (!isPositioned) return;
+    
     const observer = new MutationObserver(updatePosition);
     if (contentRef.current) {
       observer.observe(contentRef.current, { childList: true, subtree: true });
     }
     return () => observer.disconnect();
-  }, [isOpen]);
+  }, [isOpen, isPositioned]);
 
   if (!isOpen) {
     return null;
   }
 
-  return (
-    <div
+  return (<div
       ref={contentRef}
-      className={`border rounded-lg shadow-md bg-background border-border transition-opacity duration-200 ${className}`}
-      style={
-        {
-          ...contentStyles,
-          transition: 'opacity 200ms, visibility 200ms',
-        } as React.CSSProperties
-      }
+      className={`absolute z-50 border rounded-lg shadow-sm bg-background border-border max-w-[calc(100vw-16px)] max-h-[calc(100vh-16px)] transition-opacity duration-200 ${isPositioned ? 'opacity-100' : 'opacity-0'} ${className}`}
+      style={{
+        top: 0,
+        left: 0,
+        ...dynamicStyles,
+      }}
       role="dialog"
       data-placement={`${placement.yAlign}-${placement.xAlign}`}
     >
       {children}
-    </div>
-  );
+      {showArrow && (
+        <div 
+          className={cn(`absolute bg-background rotate-45 z-40`,arrowDefaultClassName, arrowClassName)}
+          style={{
+            width: `${arrowSize}px`,
+            height: `${arrowSize}px`,
+            ...arrowStyles
+          }}
+          data-popover-arrow
+        />
+      )}
+    </div>);
 };
 
 // Additional components for convenience
-
 type PopoverCloseProps = {
   children: ReactNode;
   className?: string;
@@ -448,7 +496,7 @@ export const PopoverClose = ({
 
   return (
     <div
-      className={`cursor-pointer ${className}`}
+      className={`cursor-pointer ${className || ''}`}
       onClick={close}
       aria-label="Close"
     >

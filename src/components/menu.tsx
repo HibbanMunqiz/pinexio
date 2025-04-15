@@ -283,14 +283,13 @@ export const PopMenu = React.forwardRef<
     };
 
     // Responsive width classes
-    const widthClasses =
-      'w-auto sm:min-w-[12rem] md:min-w-[14rem] lg:min-w-[16rem]';
+    const widthClasses = 'min-w-[12rem]';
 
     return (
       <div
         ref={ref}
         className={`absolute z-10 ${positionClasses[position]} ${widthClasses} 
-                 rounded-md shadow-lg overflow-hidden
+                 rounded-md shadow-sm overflow-hidden
                  bg-white dark:bg-black border border-border
                  transition-opacity duration-200 ${isPositioning ? 'opacity-0' : 'opacity-100'}
                  transform transition-transform duration-200 ${className}`}
@@ -313,8 +312,11 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   return (
     <button
       type="button"
-      className={`cursor-pointer block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 
-                 hover:bg-gray-100 dark:hover:bg-gray-700 ${className}`}
+      className={cn(
+        `cursor-pointer block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 
+                 hover:bg-gray-100 dark:hover:bg-gray-700`,
+        className
+      )}
       role="menuitem"
       onClick={onClick}
     >
