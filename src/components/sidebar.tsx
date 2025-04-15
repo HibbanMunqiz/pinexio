@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronLeft, ChevronRight, Menu } from 'lucide-react';
 import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 
 type SidebarContextType = {
   isOpen: boolean;
@@ -174,7 +175,7 @@ export function Sidebar({
             ${side === 'left' ? 'left-0' : 'right-0'}
             ${isOpen ? 'translate-x-0' : side === 'left' ? '-translate-x-full' : 'translate-x-full'}
             w-[85vw] max-w-[300px] bg-white dark:bg-gray-900 
-            ${side === 'left' ? 'border-r' : 'border-l'} dark:border-gray-800
+            ${side === 'left' ? 'border-r' : 'border-l'} border-border
             transition-transform duration-300 ease-in-out
           `,
             className
@@ -193,7 +194,7 @@ export function Sidebar({
       className={clsx(
         `
         sticky top-0 bottom-0 z-0 flex flex-col h-screen
-        ${side === 'left' ? 'left-0 border-r' : 'right-0 border-l'} dark:border-gray-800
+        ${side === 'left' ? 'left-0 border-r' : 'right-0 border-l'} border-border
         transition-all duration-300 ease-in-out
         bg-sidebar
       `,
@@ -223,7 +224,7 @@ export function SidebarHeader({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`
-        flex items-center h-16 gap-2 border-b ${isOpen ? 'px-8' : ''} dark:border-gray-800
+        flex items-center h-16 gap-2 border-b ${isOpen ? 'px-8' : ''} border-border
         ${isOpen ? '' : 'justify-center'}
       `}
     >
@@ -253,7 +254,7 @@ export function SidebarFooter({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`
-        flex items-center h-16 border-t gap-2 ${isOpen ? 'px-4' : ''} dark:border-gray-800
+        flex items-center h-16 border-t gap-2 ${isOpen ? 'px-4' : ''} border-border
         ${isOpen ? '' : 'justify-center'}
       `}
     >
@@ -335,7 +336,7 @@ export function SidebarMenuItem({
         )}
         {isOpen && (
           <span
-            className={`${isActive ? 'bg-sidebar-active text-sidebar-active-foreground font-bold' : 'text-gray-700 dark:text-gray-300'}`}
+            className={`${isActive ? 'bg-accent text-accent-foreground' : 'text-gray-700 dark:text-gray-300'}`}
           >
             {label}
           </span>
@@ -360,8 +361,8 @@ export function SidebarMenuItem({
             flex items-center justify-between w-full p-2 rounded-md
             ${
               isActive
-                ? 'bg-sidebar-active text-black-500'
-                : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
+                ? 'bg-accent text-accent-foreground'
+                : 'hover:bg-accent text-gray-700 dark:text-gray-300'
             }
             ${!isOpen ? 'justify-center' : ''}
           `}
@@ -376,7 +377,7 @@ export function SidebarMenuItem({
             ${
               isActive
                 ? 'bg-sidebar text-blue-500'
-                : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
+                : 'hover:bg-accent text-gray-700 dark:text-gray-300'
             }
             ${!isOpen ? 'justify-center' : ''}
           `}
@@ -387,7 +388,7 @@ export function SidebarMenuItem({
       )}
 
       {isOpen && (isExpanded || alwaysOpen) && children && (
-        <div className="ml-6 mt-1 pl-3 border-l border-gray-200 dark:border-gray-700 space-y-1">
+        <div className="ml-6 mt-1 pl-3 border-l border-border space-y-1">
           {children}
         </div>
       )}
@@ -425,8 +426,8 @@ export function NestedLink({
         block py-1 px-2 rounded-md text-sm
         ${
           isActive
-            ? 'bg-sidebar-active text-primary font-bold'
-            : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+            ? 'bg-accent text-accent-foreground'
+            : 'hover:bg-accent'
         }
       `}
       onClick={handleClick}
@@ -458,26 +459,39 @@ export function SidebarTrigger() {
   );
 }
 
-export function SidebarHeaderLogo({ logo }: { logo?: React.ReactNode }) {
+export function SidebarHeaderLogo({ logo, className }: {
+  logo?: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="h-10 w-10 flex items-center justify-center">{logo}</div>
+    <div className={cn('h-10 w-10 flex items-center justify-center truncate', className)}>
+      {logo}
+    </div>
   );
 }
 
-export function Title({ children }: { children: React.ReactNode }) {
+export function SidebarHeaderTitle({ children, className }: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <h1 className="text-3xl font-stretch-110% -tracking-tighter text-gray-900 dark:text-white">
+    <h1
+      className={cn(
+        'text-3xl font-stretch-110% -tracking-tighter text-black dark:text-white truncate',
+        className
+      )}
+    >
       {children}
     </h1>
   );
 }
 
-export function UserAvatar({ avatar }: { avatar: React.ReactNode }) {
+export function UserAvatar({ avatar, className }: {
+  avatar: React.ReactNode;
+  className?: string;
+}) {
   return (
-    // <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-    //   <span className="text-sm font-medium text-gray-600 dark:text-gray-300">U</span>
-    // </div>
-    <div className="h-8 w-8 rounded-full flex items-center justify-center">
+    <div className={cn('h-8 w-8 rounded-full flex items-center justify-center', className)}>
       {avatar}
     </div>
   );

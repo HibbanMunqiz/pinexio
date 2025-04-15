@@ -18,7 +18,7 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
   SidebarHeaderLogo,
-  Title,
+  SidebarHeaderTitle,
   UserAvatar,
   NestedLink,
 } from '@/components/sidebar';
@@ -62,9 +62,9 @@ export default function DocsLayout({
             />
 
             <Link href={'/'} className="flex flex-1 gap-3">
-              <Title>
+              <SidebarHeaderTitle>
                 PINE<span className="text-4xl">X</span>IO
-              </Title>
+              </SidebarHeaderTitle>
             </Link>
           </SidebarHeader>
           <SidebarContent>
@@ -75,7 +75,7 @@ export default function DocsLayout({
                 label={section.title}
                 href={section.href}
                 icon={section.icon}
-                defaultOpen={true}
+                defaultOpen={section.defaultOpen}
               >
                 {section.pages?.map((page) => (
                   <NestedLink key={page.href} href={page.href}>

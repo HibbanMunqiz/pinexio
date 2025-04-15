@@ -88,11 +88,11 @@ html {
     /* UI Colors */
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 215 14% 34%;
+    --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
+    --accent: 215.4 35.87% 87.65%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     /* Component Colors */
@@ -121,24 +121,9 @@ html {
     /* Same as secondary */
     --sidebar-foreground: 215.4 16.3% 46.9%;
     /* Same as muted-foreground */
-    --sidebar-active: 0 0% 92%;
+    --sidebar-active: 215 14% 34%;
     /* Light gray for active state */
     --sidebar-active-foreground: 222.2 47.4% 11.2%;
-    /* Same as primary */
-
-    /* Button Elements (consolidated from search-button) */
-    --button: 0 0% 100%;
-    /* White background */
-    --button-border: 220 13% 91%;
-    /* Light gray border */
-    --button-foreground: 215 14% 34%;
-    /* Dark gray text */
-    --button-hover: 210 40% 98%;
-    /* Light gray on hover */
-    --button-secondary: 220 14% 96%;
-    /* Light gray for secondary buttons */
-    --button-secondary-foreground: 220 9% 65%;
-    /* Medium gray text for secondary buttons */
   }
 
   .dark {
@@ -153,11 +138,11 @@ html {
     /* UI Colors */
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 220 13% 31%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 215 23.96% 33.07%;
     --accent-foreground: 210 40% 98%;
 
     /* Component Colors */
@@ -186,21 +171,6 @@ html {
     --sidebar-active: 220 13% 31%;
     /* Darker gray for active state */
     --sidebar-active-foreground: 210 40% 98%;
-    /* Same as primary */
-
-    /* Button Elements (consolidated from search-button) */
-    --button: 215 28% 17%;
-    /* Dark gray background */
-    --button-border: 215 28% 32%;
-    /* Medium gray border */
-    --button-foreground: 220 13% 82%;
-    /* Light gray text */
-    --button-hover: 216 28% 24%;
-    /* Slightly lighter on hover */
-    --button-secondary: 215 28% 26%;
-    /* Medium gray for secondary buttons */
-    --button-secondary-foreground: 220 9% 65%;
-    /* Medium gray text for secondary buttons */
   }
 
   body {

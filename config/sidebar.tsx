@@ -4,6 +4,7 @@ export const sidebarNav = [
   {
     title: 'Getting Started',
     icon: <Rocket className="h-5 w-5" />,
+    defaultOpen: true,
     pages: [
       {
         title: 'Introduction',
@@ -22,6 +23,7 @@ export const sidebarNav = [
   {
     title: 'Components',
     icon: <Component className="h-5 w-5" />,
+    defaultOpen: false,
     pages: [
       {
         title: 'Button',
@@ -63,11 +65,20 @@ export const sidebarNav = [
         title: 'Popover',
         href: '/docs/components/popover',
       },
+      {
+        title: 'Dialog',
+        href: '/docs/components/dialog',
+      },
+      {
+        title: 'Select',
+        href: '/docs/components/select',
+      },
     ],
   },
   {
     title: 'Customization',
     icon: <Wrench className="h-5 w-5" />,
+    defaultOpen: true,
     pages: [
       {
         title: 'Sidebar',
@@ -90,12 +101,14 @@ export const sidebarNav = [
   {
     title: 'Theme',
     icon: <Paintbrush className="h-5 w-5" />,
+    defaultOpen: true,
     href: '/docs/theme',
     pages: [],
   },
   {
     title: 'Search Bar',
     icon: <Search className="h-5 w-5" />,
+    defaultOpen: true,
     href: '/docs/search-bar',
     pages: [],
   },

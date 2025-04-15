@@ -138,6 +138,26 @@ export const TocData: TocData = {
       href: '/docs/components/popover#props',
     },
   ],
+  'components/dialog': [
+    {
+      title: 'Preview & Code Snippet',
+      href: '/docs/components/dialog#preview-and-code-snippet',
+    },
+    {
+      title: 'Props',
+      href: '/docs/components/dialog#props',
+    },
+  ],
+  'components/select': [
+    {
+      title: 'Preview & Code Snippet',
+      href: '/docs/components/select#preview-and-code-snippet',
+    },
+    {
+      title: 'Props',
+      href: '/docs/components/select#props',
+    },
+  ],
   theme: [
     {
       title: 'Overview',

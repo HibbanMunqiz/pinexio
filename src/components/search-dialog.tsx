@@ -7,14 +7,16 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from 'react';
-import * as Dialog from '@radix-ui/react-dialog';
-import clsx from 'clsx';
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+} from '@/components/dialog';
+import { Input } from '@/components/input';
 import SearchButton from '@/components/search-button';
 import { Text, Search } from 'lucide-react';
 import Link from 'next/link';
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
-// Define a type for your document data.
 export interface DocType {
   title: string;
   body: { raw?: string };
@@ -30,7 +32,6 @@ export interface SearchDialogHandle {
   open: () => void;
 }
 
-// Helper function to highlight search text.
 function highlightText(text: string, searchTerm: string): React.ReactNode {
   if (!searchTerm) return text;
   const regex = new RegExp(`(${searchTerm})`, 'gi');
@@ -50,7 +51,6 @@ function highlightText(text: string, searchTerm: string): React.ReactNode {
   );
 }
 
-// Helper function to extract a snippet around the search term.
 function getSnippet(
   text: string,
   searchTerm: string,
@@ -75,19 +75,16 @@ function getSnippet(
   );
 }
 
-// ForwardRef component so the parent can control open/close if needed.
 const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
   ({ searchData }, ref) => {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
 
-    // Expose open and close functions via the ref.
     useImperativeHandle(ref, () => ({
       close: () => setOpen(false),
       open: () => setOpen(true),
     }));
 
-    // Listen for Command+K / Ctrl+K to open the dialog.
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -99,7 +96,6 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
       return () => document.removeEventListener('keydown', handleKeyDown);
     }, []);
 
-    // Filter documents based on query.
     const filteredDocs = useMemo(() => {
       if (!query) return [];
       const q = query.toLowerCase();
@@ -111,60 +107,42 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
     }, [query, searchData]);
 
     return (
-      <Dialog.Root open={open} onOpenChange={setOpen}>
-        <Dialog.Trigger asChild>
+      <Dialog open={open} setOpen={setOpen}>
+        <DialogTrigger className='hidden sm:block'>
           <SearchButton
             size="sm"
-            onClick={() => setOpen(true)}
-            placeholder="search documentation.."
-            className={'hidden md:block'}
+            placeholder="Search documentation.."
           />
-        </Dialog.Trigger>
-        <Dialog.Portal>
-          <Dialog.Overlay
-            className={clsx(
-              'fixed z-2 inset-0 bg-black/50 transition-opacity duration-300 ease-out',
-              'data-[state=open]:opacity-100',
-              'data-[state=closed]:opacity-0'
-            )}
-          />
-          <Dialog.Content
-            className={clsx(
-              'fixed z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
-              'w-[90%] max-w-[500px] rounded-lg p-4 shadow-lg',
-              // Use your existing CSS variables for dark/light mode.
-              'bg-secondary border border-border',
-              'transition-all duration-300 ease-out',
-              'data-[state=open]:opacity-100 data-[state=open]:scale-100',
-              'data-[state=closed]:opacity-0 data-[state=closed]:scale-95'
-            )}
+        </DialogTrigger>
+        <DialogContent className="fixed h-auto sm:max-w-xl bg-muted p-2 top-40">
+        {/* Close Button */}
+        {/* <DialogCloseTrigger asChild>
+          <button
+            className="cursor-pointer border border-border text-lg absolute -top-2 -right-2 bg-muted text-black dark:text-white rounded-full w-5 h-5 flex items-center justify-center shadow"
+            aria-label="Close"
           >
-            <VisuallyHidden>
-              <Dialog.DialogTitle></Dialog.DialogTitle>
-            </VisuallyHidden>
-
-            <div className="relative">
-              <input
-                type="text"
-                className={clsx(
-                  'w-full pl-10 pr-4 py-2 border rounded-lg',
-                  'bg-input text-foreground border-border'
-                )}
-                placeholder="Search the docs..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-              <div
-                className="absolute inset-y-0 left-0 pl-3 
-                                flex items-center 
-                                pointer-events-none"
-              >
-                <Search />
-              </div>
+            &times;
+          </button>
+        </DialogCloseTrigger> */}
+          {/* <DialogHeader>
+            <DialogTitle>Search Documentation</DialogTitle>
+            <DialogDescription>Type below to search your docs.</DialogDescription>
+          </DialogHeader> */}
+          <div className="relative">
+            <Input
+              type="text"
+              className="w-full bg-transparent focus:outline-none rounded-none border-t-0 border-x-0 border-border pl-10 pr-4 py-2"
+              placeholder="Search the docs..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Search />
             </div>
-
+          </div>
+          <div className="mt-2 max-h-[300px] overflow-y-auto">
             {filteredDocs.length > 0 ? (
-              <ul className="list-none p-0 max-h-[300px] overflow-y-auto">
+              <ul className="list-none p-0">
                 {filteredDocs.map((doc) => (
                   <li
                     key={doc._raw.flattenedPath}
@@ -187,13 +165,13 @@ const SearchDialog = forwardRef<SearchDialogHandle, SearchDialogProps>(
                 ))}
               </ul>
             ) : (
-              <p className="pt-2 text-sm justify-self-center">
-                {query.length > 0 ? `No results found.` : `Type to search`}
+              <p className="text-sm text-center">
+                {query.length > 0 ? 'No results found.' : 'Type to search'}
               </p>
             )}
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
+          </div>
+        </DialogContent>
+      </Dialog>
     );
   }
 );

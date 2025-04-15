@@ -17,11 +17,11 @@ export const buttonVariants = cva(
         none: 'bg-transparent border-0 hover:bg-gray-100 dark:hover:bg-gray-800',
       },
       size: {
-        xs: 'py-1 px-2 text-xs',
-        sm: 'py-1.5 px-3 text-sm',
-        md: 'py-2 px-4 text-base',
-        lg: 'py-3 px-6 text-lg',
-        xl: 'py-4 px-8 text-xl',
+        xs: 'h-8 py-1 px-2 text-xs',
+        sm: 'h-9 py-1.5 px-3 text-sm',
+        md: 'h-11 py-2 px-4 text-md',
+        lg: 'h-12 py-3 px-6 text-lg',
+        xl: 'h-14 py-4 px-8 text-xl',
       },
     },
     defaultVariants: {
