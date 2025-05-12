@@ -1,6 +1,12 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '@/lib/utils';
 
@@ -17,8 +23,13 @@ type DialogProps = {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function Dialog({ children, open: controlledOpen, setOpen: controlledSetOpen }: DialogProps) {
-  const isControlled = controlledOpen !== undefined && controlledSetOpen !== undefined;
+export function Dialog({
+  children,
+  open: controlledOpen,
+  setOpen: controlledSetOpen,
+}: DialogProps) {
+  const isControlled =
+    controlledOpen !== undefined && controlledSetOpen !== undefined;
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
 
   const open = isControlled ? controlledOpen : uncontrolledOpen;
@@ -31,38 +42,46 @@ export function Dialog({ children, open: controlledOpen, setOpen: controlledSetO
   );
 }
 
-export function DialogTrigger({ children, className }: { children: React.ReactNode, className?: string; }) {
+export function DialogTrigger({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const ctx = useContext(DialogContext);
   if (!ctx) throw new Error('DialogTrigger must be inside Dialog');
 
   const { setOpen } = ctx;
 
   return (
-    <div onClick={() => setOpen(true)} className={cn("cursor-pointer", className)}>
-      {children}
-    </div>
+    <div
+      onClick={() => setOpen(true)}
+      className={cn('cursor-pointer', className)}
+      {...props}
+    />
   );
 }
-
+interface DialogTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  children?: React.ReactNode;
+  overlayClassName?: string;
+  closeOnClickOutside?: boolean;
+}
 export function DialogContent({
   children,
   className = '',
   overlayClassName = '',
   closeOnClickOutside = true,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  overlayClassName?: string;
-  closeOnClickOutside?: boolean;
-}) {
+}: DialogTriggerProps) {
   const ctx = useContext(DialogContext);
   if (!ctx) throw new Error('DialogContent must be inside Dialog');
 
   const { open, setOpen } = ctx;
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') setOpen(false);
-  }, [setOpen]);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    },
+    [setOpen]
+  );
 
   useEffect(() => {
     if (open) {
@@ -83,7 +102,9 @@ export function DialogContent({
     <div
       className={cn(
         `fixed inset-0 z-50 flex items-center justify-center bg-black/70 transition-opacity duration-300`,
-        open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
+        open
+          ? 'opacity-100 pointer-events-auto'
+          : 'opacity-0 pointer-events-none',
         overlayClassName
       )}
       onClick={(e) => {
@@ -108,12 +129,10 @@ export function DialogContent({
 }
 
 export function DialogClose({
+  className,
   children,
-  className = '',
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) {
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const ctx = useContext(DialogContext);
   if (!ctx) throw new Error('DialogClose must be inside Dialog');
 
@@ -123,10 +142,9 @@ export function DialogClose({
     <div
       onClick={() => setOpen(false)}
       className={cn('cursor-pointer absolute top-4 right-4', className)}
+      {...props}
     >
-      {children ?? (
-        <span className="text-lg font-bold">×</span>
-      )}
+      {children ?? <span className="text-lg font-bold">×</span>}
     </div>
   );
 }

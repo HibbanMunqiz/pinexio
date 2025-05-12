@@ -73,6 +73,9 @@ import {
 
 import { Folder, FolderTree, File } from '@/components/folder-tree';
 import { Note } from '@/components/note';
+import { Checkbox } from '@/components/checkbox';
+import { Label } from '@/components/label';
+import { Input } from '@/components/input';
 
 const components = {
   h1: ({ className, ...children }: React.HTMLAttributes<HTMLElement>) => (
@@ -231,6 +234,9 @@ const components = {
   StepTitle,
   StepContent,
   Stepper,
+  Checkbox,
+  Label,
+  Input,
   CodeTabs: ({
     tabs,
   }: React.HTMLAttributes<HTMLElement> & {

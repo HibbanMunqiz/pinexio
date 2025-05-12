@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import React from 'react';
 
 export function NavMenu({
@@ -15,89 +16,73 @@ export function NavMenu({
 }
 
 export function NavMenuList({
-  children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <ul className={`flex gap-4 ${className}`}>{children}</ul>;
+  ...props
+}: React.HTMLAttributes<HTMLUListElement>) {
+  return <ul className={`flex gap-4 ${className}`} {...props} />;
 }
 
 export function NavMenuItem({
-  children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <li className={`relative rounded-lg group ${className}`}>{children}</li>
-  );
+  ...props
+}: React.HTMLAttributes<HTMLLIElement>) {
+  return <li className={`relative rounded-lg group ${className}`} {...props} />;
 }
 
 export function NavMenuTrigger({
-  children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+  ...props
+}: React.HTMLAttributes<HTMLButtonElement>) {
   return (
     <button
-      className={`cursor-pointer px-4 py-2 rounded-lg text-sm font-medium hover:bg-muted ${className}`}
-    >
-      {children}
-    </button>
+      className={cn(
+        `cursor-pointer px-4 py-2 rounded-lg text-sm font-medium hover:bg-muted`,
+        className
+      )}
+      {...props}
+    />
   );
 }
 
+interface NavMenuContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  position?: 'up' | 'down';
+}
 export function NavMenuContent({
-  children,
   className,
   position = 'down',
-}: {
-  children: React.ReactNode;
-  className?: string;
-  position?: 'up' | 'down';
-}) {
+  ...props
+}: NavMenuContentProps) {
   return (
     <div
-      className={`absolute left-0 rounded-lg ${position === 'up' ? 'bottom-full mb-2' : 'top-full mt-2'} w-64 border bg-background shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-200 ${className}`}
-    >
-      {children}
-    </div>
+      className={cn(
+        `absolute left-0 rounded-lg ${position === 'up' ? 'bottom-full mb-2' : 'top-full mt-2'} w-64 border bg-background shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-200`,
+        className
+      )}
+      {...props}
+    />
   );
 }
 
 export function NavMenuLink({
-  children,
-  href,
   className,
-}: {
-  children: React.ReactNode;
-  href: string;
-  className?: string;
-}) {
+  ...props
+}: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <a
-      href={href}
-      className={`block rounded-lg px-4 py-2 text-sm hover:bg-muted ${className}`}
-    >
-      {children}
-    </a>
+      className={cn(
+        `block rounded-lg px-4 py-2 text-sm hover:bg-muted`,
+        className
+      )}
+      {...props}
+    />
   );
 }
 
-export function NavListItem({
-  href,
-  title,
-  children,
-}: {
+interface NavListItemProps extends React.AnchorHTMLAttributes<HTMLLIElement> {
   href: string;
   title: string;
-  children: React.ReactNode;
-}) {
+}
+export function NavListItem({ href, title, children }: NavListItemProps) {
   return (
     <li>
       <NavMenuLink href={href}>

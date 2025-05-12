@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 import { cn } from '@/lib/utils';
 import {
   InfoIcon,
@@ -10,18 +10,16 @@ import {
 
 type NoteType = 'none' | 'info' | 'warning' | 'alert' | 'success' | 'tip';
 
-interface NoteProps {
-  children: React.ReactNode;
+interface NoteProps extends React.HTMLAttributes<HTMLDivElement> {
   type?: NoteType;
-  className?: string;
   hideIcon?: boolean;
 }
 
 export function Note({
-  children,
   type = 'none',
   className,
   hideIcon = false,
+  ...props
 }: NoteProps) {
   // Define icons for each type
   const icons = {
@@ -80,11 +78,11 @@ export function Note({
         {!hideIcon && (
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">{icons[type]}</div>
-            <div className="flex-1">{children}</div>
+            <div className="flex-1" {...props} />
           </div>
         )}
 
-        {hideIcon && <div>{children}</div>}
+        {hideIcon && <div {...props} />}
       </div>
     </div>
   );

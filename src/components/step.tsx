@@ -2,18 +2,23 @@
 
 import React from 'react';
 import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 
 export interface StepsProps {
   children: React.ReactNode;
   className?: string;
 }
 
-export function Steps({ children, className }: StepsProps) {
+export function Steps({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const stepsArray = React.Children.toArray(children).filter((child) =>
     React.isValidElement(child)
   );
   return (
-    <div className={clsx('relative', className)}>
+    <div className={cn('relative', className)} {...props}>
       {stepsArray.map((child, index) =>
         React.cloneElement(child as React.ReactElement<any>, {
           stepNumber: index + 1,
@@ -131,22 +136,16 @@ export function Step({
 
 // Title component for a Step.
 export function StepTitle({
-  children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <div className={clsx('step-title', className)}>{children}</div>;
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('', className)} {...props} />;
 }
 
 // Content component for a Step.
 export function StepContent({
-  children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <div className={clsx('step-content', className)}>{children}</div>;
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('', className)} {...props} />;
 }

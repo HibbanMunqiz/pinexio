@@ -30,6 +30,18 @@ export const sidebarNav = [
         href: '/docs/components/button',
       },
       {
+        title: 'Input',
+        href: '/docs/components/input',
+      },
+      {
+        title: 'Label',
+        href: '/docs/components/label',
+      },
+      {
+        title: 'Checkbox',
+        href: '/docs/components/checkbox',
+      },
+      {
         title: 'Search Button',
         href: '/docs/components/search-button',
       },
