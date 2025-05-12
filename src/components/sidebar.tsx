@@ -48,8 +48,7 @@ function useIsMobile() {
   return isMobile;
 }
 
-interface SidebarProviderProps {
-  children: React.ReactNode;
+interface SidebarProviderProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultOpen?: boolean;
   defaultSide?: 'left' | 'right';
   defaultMaxWidth?: number;
@@ -58,12 +57,12 @@ interface SidebarProviderProps {
 }
 
 export function SidebarProvider({
-  children,
   defaultOpen = true,
   defaultSide = 'left',
   defaultMaxWidth = 280,
   showIconsOnCollapse = true,
   mobileView = true,
+  ...props
 }: SidebarProviderProps) {
   const useMobile = useIsMobile();
 
@@ -111,50 +110,37 @@ export function SidebarProvider({
     ]
   );
 
-  return (
-    <SidebarContext.Provider value={contextValue}>
-      {children}
-    </SidebarContext.Provider>
-  );
+  return <SidebarContext.Provider value={contextValue} {...props} />;
 }
 
 // For enabling multiple sidebars in a layout
-export function SidebarLayout({ children }: { children: React.ReactNode }) {
-  return <div className="flex min-h-screen w-full">{children}</div>;
+export function SidebarLayout({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={cn('flex min-h-screen w-full', className)} {...props} />
+  );
 }
 
 // Component for main content between sidebars
-export function MainContent({ children }: { children: React.ReactNode }) {
-  // Calculate the margin based on sidebar state
-  // const marginStyle = React.useMemo(() => {
-  //   if (isMobile) return {}
-
-  //   const sideMargin = isOpen
-  //     ? `${maxWidth}px`
-  //     : showIconsOnCollapse ? "4rem" : "0"
-
-  //   return {
-  //     [side === "left" ? "marginLeft" : "marginRight"]: sideMargin
-  //   }
-  // }, [isOpen, side, isMobile, maxWidth, showIconsOnCollapse])
-
+export function MainContent({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className="flex flex-col h-screen overflow-auto w-full"
-      // style={marginStyle}
-    >
-      {children}
-    </div>
+      className={cn('flex flex-col h-screen overflow-auto w-full', className)}
+      {...props}
+    />
   );
 }
 
 export function Sidebar({
   className,
   children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) {
+  ...props
+}: React.HTMLAttributes<HTMLElement>) {
   const { isOpen, side, isMobile, maxWidth, setIsOpen, showIconsOnCollapse } =
     useSidebar();
 
@@ -169,7 +155,7 @@ export function Sidebar({
           />
         )}
         <aside
-          className={clsx(
+          className={cn(
             `
             fixed top-0 bottom-0 z-50 flex flex-col
             ${side === 'left' ? 'left-0' : 'right-0'}
@@ -181,9 +167,8 @@ export function Sidebar({
             className
           )}
           style={{ maxWidth: `${maxWidth}px` }}
-        >
-          {children}
-        </aside>
+          {...props}
+        />
       </>
     );
   }
@@ -214,7 +199,11 @@ export function Sidebar({
   );
 }
 
-export function SidebarHeader({ children }: { children: React.ReactNode }) {
+export function SidebarHeader({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const { isOpen, showIconsOnCollapse } = useSidebar();
 
   // Extract the first child to show as icon when collapsed
@@ -223,10 +212,14 @@ export function SidebarHeader({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className={`
+      className={cn(
+        `
         flex items-center h-16 gap-2 border-b ${isOpen ? 'px-8' : ''} border-border
         ${isOpen ? '' : 'justify-center'}
-      `}
+      `,
+        className
+      )}
+      {...props}
     >
       {isOpen
         ? children
@@ -237,14 +230,24 @@ export function SidebarHeader({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function SidebarContent({ children }: { children: React.ReactNode }) {
+export function SidebarContent({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const { isOpen, showIconsOnCollapse } = useSidebar();
   return isOpen || showIconsOnCollapse ? (
-    <div className="flex-1 overflow-auto px-3 py-2">{children}</div>
+    <div
+      className={cn('flex-1 overflow-auto px-3 py-2', className)}
+      {...props}
+    />
   ) : null;
 }
 
-export function SidebarFooter({ children }: { children: React.ReactNode }) {
+export function SidebarFooter({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const { isOpen, showIconsOnCollapse } = useSidebar();
 
   // Extract the first child to show as icon when collapsed
@@ -253,10 +256,14 @@ export function SidebarFooter({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className={`
+      className={cn(
+        `
         flex items-center h-16 border-t gap-2 ${isOpen ? 'px-4' : ''} border-border
         ${isOpen ? '' : 'justify-center'}
-      `}
+      `,
+        className
+      )}
+      {...props}
     >
       {isOpen
         ? children
@@ -267,10 +274,13 @@ export function SidebarFooter({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function SidebarMenu({ children }: { children: React.ReactNode }) {
+export function SidebarMenu({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const { isOpen, showIconsOnCollapse } = useSidebar();
   return isOpen || showIconsOnCollapse ? (
-    <nav className="space-y-1 px-2">{children}</nav>
+    <nav className={cn('space-y-1 px-2', className)} {...props} />
   ) : null;
 }
 
@@ -424,11 +434,7 @@ export function NestedLink({
       href={href}
       className={`
         block py-1 px-2 rounded-md text-sm
-        ${
-          isActive
-            ? 'bg-accent text-accent-foreground'
-            : 'hover:bg-accent'
-        }
+        ${isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent'}
       `}
       onClick={handleClick}
     >
@@ -459,40 +465,51 @@ export function SidebarTrigger() {
   );
 }
 
-export function SidebarHeaderLogo({ logo, className }: {
+export function SidebarHeaderLogo({
+  logo,
+  className,
+}: {
   logo?: React.ReactNode;
   className?: string;
 }) {
   return (
-    <div className={cn('h-10 w-10 flex items-center justify-center truncate', className)}>
+    <div
+      className={cn(
+        'h-10 w-10 flex items-center justify-center truncate',
+        className
+      )}
+    >
       {logo}
     </div>
   );
 }
 
-export function SidebarHeaderTitle({ children, className }: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+export function SidebarHeaderTitle({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLHeadElement>) {
   return (
     <h1
       className={cn(
         'text-3xl font-stretch-110% -tracking-tighter text-black dark:text-white truncate',
         className
       )}
-    >
-      {children}
-    </h1>
+      {...props}
+    />
   );
 }
 
-export function UserAvatar({ avatar, className }: {
-  avatar: React.ReactNode;
-  className?: string;
-}) {
+export function UserAvatar({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('h-8 w-8 rounded-full flex items-center justify-center', className)}>
-      {avatar}
-    </div>
+    <div
+      className={cn(
+        'h-8 w-8 rounded-full flex items-center justify-center',
+        className
+      )}
+      {...props}
+    />
   );
 }

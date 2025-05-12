@@ -25,8 +25,8 @@ type PopoverContextType = {
   position: PopoverPosition;
   actualPlacement: Position;
   setActualPlacement: React.Dispatch<React.SetStateAction<Position>>;
-  isPositioned: boolean;  // Added isPositioned to the context
-  setIsPositioned: React.Dispatch<React.SetStateAction<boolean>>;  // Added setIsPositioned to the context
+  isPositioned: boolean; // Added isPositioned to the context
+  setIsPositioned: React.Dispatch<React.SetStateAction<boolean>>; // Added setIsPositioned to the context
 };
 
 const PopoverContext = createContext<PopoverContextType | null>(null);
@@ -51,7 +51,7 @@ export const Popover = ({
   position = 'bottom',
 }: PopoverProps) => {
   const [isOpen, setIsOpen] = useState(open);
-  const [isPositioned, setIsPositioned] = useState(false);  // local state to track if the popover has been positioned
+  const [isPositioned, setIsPositioned] = useState(false); // local state to track if the popover has been positioned
   const popoverRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const [actualPlacement, setActualPlacement] = useState<Position>({
@@ -67,7 +67,7 @@ export const Popover = ({
   // Handle external close function
   const close = () => {
     setIsOpen(false);
-    setIsPositioned(false);  // Reset positioning state when closing
+    setIsPositioned(false); // Reset positioning state when closing
     onClose?.();
   };
 
@@ -107,31 +107,32 @@ export const Popover = ({
   }, [isOpen, closeOnEsc, onClose]);
 
   return (
-    <PopoverContext.Provider 
-      value={{ 
-        isOpen, 
-        setIsOpen, 
-        triggerRef, 
-        close, 
-        position, 
+    <PopoverContext.Provider
+      value={{
+        isOpen,
+        setIsOpen,
+        triggerRef,
+        close,
+        position,
         actualPlacement,
         setActualPlacement: setActualPlacement,
         isPositioned, // pass isPositioned to context
         setIsPositioned, // pass setIsPositioned to context
       }}
     >
-      <div className={`relative inline-block ${className || ''}`} ref={popoverRef}>
+      <div
+        className={`relative inline-block ${className || ''}`}
+        ref={popoverRef}
+      >
         {children}
       </div>
     </PopoverContext.Provider>
   );
 };
 
-type PopoverTriggerProps = {
-  children: ReactNode;
-  className?: string;
+interface PopoverTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
-};
+}
 
 export const PopoverTrigger = ({
   children,
@@ -195,7 +196,8 @@ export const PopoverContent = ({
   }
 
   const { isOpen, triggerRef, isPositioned, setIsPositioned } = context;
-  const [arrowDefaultClassName, setArrowDefaultClassName] =  useState<string>('');
+  const [arrowDefaultClassName, setArrowDefaultClassName] =
+    useState<string>('');
   const contentRef = useRef<HTMLDivElement>(null);
   const [placement, setPlacement] = useState<Position>({
     xAlign: 'center',
@@ -347,7 +349,7 @@ export const PopoverContent = ({
 
     // Position the arrow
     const arrowPosition = getArrowPosition(xAlign, yAlign, arrowSize);
-    
+
     // Apply positioning with transform
     setDynamicStyles({
       transform: `translate(${translateX}px, ${translateY}px)`,
@@ -358,29 +360,35 @@ export const PopoverContent = ({
     setIsPositioned(true);
   };
 
-  const getArrowPosition = (xAlign: string, yAlign: string, arrowSize: number) => {
+  const getArrowPosition = (
+    xAlign: string,
+    yAlign: string,
+    arrowSize: number
+  ) => {
     const arrowOffset = arrowSize / 2;
     const position: any = {};
-    
+
     // Based on popover placement, determine arrow position and border styles
     if (yAlign === 'top') {
       position.bottom = `-${arrowOffset}px`;
       setArrowDefaultClassName(`border-r border-b border-border`);
-
     } else if (yAlign === 'bottom') {
       position.top = `-${arrowOffset}px`;
       setArrowDefaultClassName(`border-t border-l border-border`);
     }
-    
+
     if ((yAlign === 'top' || yAlign === 'bottom') && xAlign === 'center') {
       position.left = '50%';
       position.marginLeft = `-${arrowOffset}px`;
     } else if ((yAlign === 'top' || yAlign === 'bottom') && xAlign === 'left') {
       position.left = '20px';
-    } else if ((yAlign === 'top' || yAlign === 'bottom') && xAlign === 'right') {
+    } else if (
+      (yAlign === 'top' || yAlign === 'bottom') &&
+      xAlign === 'right'
+    ) {
       position.right = '20px';
     }
-    
+
     if (xAlign === 'left' && yAlign === 'center') {
       position.right = `-${arrowOffset}px`;
       setArrowDefaultClassName(`border-r border-b border-border`);
@@ -392,7 +400,7 @@ export const PopoverContent = ({
       position.top = '50%';
       position.marginTop = `-${arrowOffset}px`;
     }
-    
+
     return position;
   };
 
@@ -408,7 +416,7 @@ export const PopoverContent = ({
   useEffect(() => {
     // Skip if not positioned yet
     if (!isPositioned) return;
-    
+
     const handlePositionChange = () => {
       window.requestAnimationFrame(updatePosition);
     };
@@ -425,7 +433,7 @@ export const PopoverContent = ({
   // Update position when content changes
   useEffect(() => {
     if (!isPositioned) return;
-    
+
     const observer = new MutationObserver(updatePosition);
     if (contentRef.current) {
       observer.observe(contentRef.current, { childList: true, subtree: true });
@@ -437,7 +445,8 @@ export const PopoverContent = ({
     return null;
   }
 
-  return (<div
+  return (
+    <div
       ref={contentRef}
       className={`absolute z-50 border rounded-lg shadow-sm bg-background border-border max-w-[calc(100vw-16px)] max-h-[calc(100vh-16px)] transition-opacity duration-200 ${isPositioned ? 'opacity-100' : 'opacity-0'} ${className}`}
       style={{
@@ -450,30 +459,34 @@ export const PopoverContent = ({
     >
       {children}
       {showArrow && (
-        <div 
-          className={cn(`absolute bg-background rotate-45 z-40`,arrowDefaultClassName, arrowClassName)}
+        <div
+          className={cn(
+            `absolute bg-background rotate-45 z-40`,
+            arrowDefaultClassName,
+            arrowClassName
+          )}
           style={{
             width: `${arrowSize}px`,
             height: `${arrowSize}px`,
-            ...arrowStyles
+            ...arrowStyles,
           }}
           data-popover-arrow
         />
       )}
-    </div>);
+    </div>
+  );
 };
 
 // Additional components for convenience
-type PopoverCloseProps = {
-  children: ReactNode;
-  className?: string;
+interface PopoverCloseProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
-};
+}
 
 export const PopoverClose = ({
   children,
   className,
   asChild = false,
+  ...props
 }: PopoverCloseProps) => {
   const context = useContext(PopoverContext);
   if (!context) {
@@ -499,6 +512,7 @@ export const PopoverClose = ({
       className={`cursor-pointer ${className || ''}`}
       onClick={close}
       aria-label="Close"
+      {...props}
     >
       {children}
     </div>

@@ -13,16 +13,13 @@
     "start": "next start",
     "lint": "next lint",
     "build:content": "contentlayer2 build",
-    "format": "prettier --write ."
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pnpm lint-staged"
-    }
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,md, mdx}": [
-      "prettier --write"
+      "prettier --write",
+      "eslint --fix"
     ]
   },
   "keywords": [

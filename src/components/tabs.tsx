@@ -160,7 +160,7 @@ const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
           ref={indicatorRef}
           className={cn(
             'z-0 absolute bottom-0 transition-all duration-300 ease-in-out',
-            typeClassName.indicator, // Apply the indicator style based on type
+            typeClassName.indicator // Apply the indicator style based on type
           )}
           aria-hidden="true"
         />
@@ -175,7 +175,7 @@ interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
-  ({ className, value, ...props }, forwardedRef) => {
+  ({ className, value, ...props }, ref) => {
     const {
       value: selectedValue,
       onChange,
@@ -195,10 +195,10 @@ const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
       <button
         ref={(node) => {
           tabRef.current = node;
-          if (typeof forwardedRef === 'function') {
-            forwardedRef(node);
-          } else if (forwardedRef) {
-            forwardedRef.current = node;
+          if (typeof ref === 'function') {
+            ref(node);
+          } else if (ref) {
+            ref.current = node;
           }
         }}
         role="tab"

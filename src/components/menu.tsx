@@ -1,26 +1,18 @@
 import { cn } from '@/lib/utils';
-import React, { useState, useRef, useEffect, ReactNode } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 // Type definitions
-interface MenuProps {
-  className?: string;
-  children: ReactNode;
+interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;
   setOpen?: (open: boolean) => void;
-}
-
-interface MenuItemProps {
-  children: ReactNode;
-  onClick?: () => void;
-  className?: string;
 }
 
 // Available positions for the popup menu
 type Position = 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
 
 export const Menu: React.FC<MenuProps> = ({
-  className = '',
   children,
+  className = '',
   open: controlledOpen,
   setOpen: setControlledOpen,
 }) => {
@@ -235,42 +227,39 @@ export const Menu: React.FC<MenuProps> = ({
   );
 };
 
-export const MenuTrigger: React.FC<{
-  children: ReactNode;
-  onClick?: () => void;
+interface MenuTriggerProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isOpen?: boolean;
-  className?: string;
-}> = ({ children, onClick, isOpen, className = '' }) => {
-  return (
-    <div
-      className={cn(
-        'cursor-pointer flex items-center justify-center',
-        className
-      )}
-      onClick={onClick}
-      aria-expanded={isOpen}
-    >
-      {children}
-    </div>
-  );
-};
+}
+export const MenuTrigger = React.forwardRef<
+  HTMLButtonElement,
+  MenuTriggerProps
+>(({ className, onClick, isOpen, ...props }, ref) => (
+  <button
+    ref={ref}
+    className={cn('cursor-pointer flex items-center justify-center', className)}
+    onClick={onClick}
+    aria-expanded={isOpen}
+    {...props}
+  />
+));
+
+MenuTrigger.displayName = 'MenuTrigger';
+
+interface PopMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  position?: Position;
+  isPositioning?: boolean;
+  onClose?: () => void;
+}
 
 // Forward ref to access the DOM node
-export const PopMenu = React.forwardRef<
-  HTMLDivElement,
-  {
-    children: ReactNode;
-    className?: string;
-    position?: Position;
-    isPositioning?: boolean;
-  }
->(
+export const PopMenu = React.forwardRef<HTMLDivElement, PopMenuProps>(
   (
     {
-      children,
       className = '',
       position = 'bottom-left',
       isPositioning = false,
+      ...props
     },
     ref
   ) => {
@@ -296,7 +285,7 @@ export const PopMenu = React.forwardRef<
         role="menu"
         aria-orientation="vertical"
       >
-        <div className="py-1 max-h-[80vh] overflow-y-auto">{children}</div>
+        <div className="py-1 max-h-[80vh] overflow-y-auto" {...props} />
       </div>
     );
   }
@@ -304,11 +293,11 @@ export const PopMenu = React.forwardRef<
 
 PopMenu.displayName = 'PopMenu';
 
-export const MenuItem: React.FC<MenuItemProps> = ({
-  children,
+export const MenuItem = ({
+  className,
   onClick,
-  className = '',
-}) => {
+  ...props
+}: React.HTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
       type="button"
@@ -319,17 +308,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
       )}
       role="menuitem"
       onClick={onClick}
-    >
-      {children}
-    </button>
-  );
-};
-
-// Divider component to separate menu items
-export const MenuDivider: React.FC<{ className?: string }> = ({
-  className = '',
-}) => {
-  return (
-    <div className={`my-1 h-px bg-gray-200 dark:bg-gray-700 ${className}`} />
+      {...props}
+    />
   );
 };

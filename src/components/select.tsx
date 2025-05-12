@@ -6,7 +6,6 @@ import React, {
   useContext,
   useRef,
   useEffect,
-  ReactNode,
 } from 'react';
 import { ChevronDownIcon, LucideSearch, CheckIcon, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -123,13 +122,11 @@ const useSelect = () => {
   return context;
 };
 
-const SelectValue = ({
-  placeholder,
-  className,
-}: {
+interface SelectValueProps extends React.HTMLAttributes<HTMLDivElement> {
   placeholder?: string;
-  className?: string;
-}) => {
+}
+
+const SelectValue = ({ className, placeholder }: SelectValueProps) => {
   const {
     selectedValues,
     setIsOpen,
@@ -143,7 +140,7 @@ const SelectValue = ({
   return (
     <div
       className={cn(
-        'relative flex flex-wrap items-center justify-between gap-2 p-2 border rounded-lg h-9 max-h-20 overflow-y-scroll pr-8',
+        'flex flex-wrap items-center justify-between gap-2 p-2 border rounded-lg h-9 max-h-20 overflow-y-scroll pr-8',
         disabled ? 'cursor-not-allowed bg-gray-100' : 'cursor-pointer',
         className
       )}
@@ -184,14 +181,14 @@ const SelectValue = ({
       <div className="absolute right-3 flex items-center">
         {multiple && selectedValues.length > 0 ? (
           <X
-            className="text-gray-500 cursor-pointer relative z-10"
+            className="text-gray-500 cursor-pointer relative z-10 h-5"
             onClick={(e) => {
               e.stopPropagation(); // Prevent dropdown from toggling
               setSelectedValues([]); // Clear selections
             }}
           />
         ) : (
-          <ChevronDownIcon className="text-gray-500" />
+          <ChevronDownIcon className="text-gray-500 h-5" />
         )}
       </div>
     </div>
@@ -199,12 +196,9 @@ const SelectValue = ({
 };
 
 const SelectContent = ({
-  children,
   className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) => {
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => {
   const { isOpen, search, searchTerm, setSearchTerm, disabled } = useSelect();
 
   if (!isOpen || disabled) return null;
@@ -230,20 +224,20 @@ const SelectContent = ({
           />
         </div>
       )}
-      <div className="max-h-60 overflow-y-auto">{children}</div>
+      <div className="max-h-60 overflow-y-auto" {...props} />
     </div>
   );
 };
 
+interface SelectItemProps extends React.HTMLAttributes<HTMLDivElement> {
+  value: string;
+}
 const SelectItem = ({
   value,
-  children,
   className,
-}: {
-  value: string;
-  children: ReactNode;
-  className?: string;
-}) => {
+  children,
+  ...props
+}: SelectItemProps) => {
   const { selectedValues, toggleOption, searchTerm, disabled } = useSelect();
   const isSelected = selectedValues.includes(value);
 
@@ -258,6 +252,7 @@ const SelectItem = ({
         className
       )}
       onClick={() => !disabled && toggleOption(value)}
+      {...props}
     >
       {children}
       {isSelected && <CheckIcon className="w-4 h-4 text-primary" />}

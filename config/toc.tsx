@@ -158,6 +158,36 @@ export const TocData: TocData = {
       href: '/docs/components/select#props',
     },
   ],
+  'components/input': [
+    {
+      title: 'Preview & Code Snippet',
+      href: '/docs/components/input#preview-and-code-snippet',
+    },
+    {
+      title: 'Props',
+      href: '/docs/components/input#props',
+    },
+  ],
+  'components/checkbox': [
+    {
+      title: 'Preview & Code Snippet',
+      href: '/docs/components/checkbox#preview-and-code-snippet',
+    },
+    {
+      title: 'Props',
+      href: '/docs/components/checkbox#props',
+    },
+  ],
+  'components/label': [
+    {
+      title: 'Preview & Code Snippet',
+      href: '/docs/components/label#preview-and-code-snippet',
+    },
+    {
+      title: 'Props',
+      href: '/docs/components/label#props',
+    },
+  ],
   theme: [
     {
       title: 'Overview',

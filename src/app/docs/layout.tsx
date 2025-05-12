@@ -87,8 +87,8 @@ export default function DocsLayout({
           </SidebarContent>
 
           <SidebarFooter>
-            <UserAvatar
-              avatar={
+            <UserAvatar>
+              {
                 <Image
                   alt="logo"
                   src={'https://avatars.githubusercontent.com/u/24631970?v=4'}
@@ -96,7 +96,7 @@ export default function DocsLayout({
                   height={100}
                 />
               }
-            />
+            </UserAvatar>
             <div className="flex flex-col">
               <span className="text-sm font-medium text-gray-900 dark:text-white">
                 Sanjay Rajeev

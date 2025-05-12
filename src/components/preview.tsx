@@ -1,23 +1,21 @@
 'use client';
 import { cn } from '@/lib/utils';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-interface PreviewProps {
-  children: ReactNode;
-  className?: string;
-}
+export const Preview = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    className={cn(
+      `p-4 h-[330px] justify-items-center content-center rounded-lg border border-border bg-muted text-card-foreground`,
+      className
+    )}
+    ref={ref}
+    {...props}
+  />
+));
 
-export function Preview({ children, className }: PreviewProps) {
-  return (
-    <div
-      className={cn(
-        `p-4 h-[330px] justify-items-center content-center rounded-lg border border-border bg-muted text-card-foreground`,
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-}
+Preview.displayName = 'Preview';
 
 export default Preview;

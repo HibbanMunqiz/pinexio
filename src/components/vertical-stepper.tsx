@@ -8,10 +8,9 @@ export interface StepProps {
   content: React.ReactNode;
 }
 
-export interface StepperProps {
+export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   steps: StepProps[];
   mode?: 'vertical' | 'horizontal';
-  className?: string;
   stepClassName?: string;
   titleClassName?: string;
   contentClassName?: string;
@@ -28,6 +27,7 @@ export default function Stepper({
   contentClassName,
   lineClassName,
   numberClassName,
+  ...props
 }: StepperProps) {
   const isHorizontal = mode === 'horizontal';
 
@@ -40,6 +40,7 @@ export default function Stepper({
           : 'flex flex-col',
         className
       )}
+      {...props}
     >
       {steps.map((step, index) => (
         <div
